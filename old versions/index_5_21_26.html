@@ -166,7 +166,6 @@ nav{height:72px;padding:0 48px;display:flex;align-items:center;justify-content:s
   .nav-links{display:none}
   .nav-brand-name{font-size:12px;letter-spacing:.1em}
   .nav-logo{width:36px;height:36px;font-size:15px}
-  .nav-logo-img{height:36px}
   .hero{padding:32px 20px 0}
   .hero-h1{font-size:clamp(32px,8vw,42px)}
   .stats-bar{padding:32px 20px 0}
@@ -419,41 +418,21 @@ nav{height:72px;padding:0 48px;display:flex;align-items:center;justify-content:s
 .nav-btn-secondary:hover{border-color:var(--teal);background:var(--ice)}
 
 .nav-logo-img{height:44px;width:auto;object-fit:contain}
-.nav-menu{display:flex;align-items:center;gap:32px}
-.nav-toggle{display:none;width:42px;height:42px;border:1.5px solid var(--border);border-radius:10px;background:var(--white);align-items:center;justify-content:center;flex-direction:column;gap:5px;cursor:pointer}
-.nav-toggle span{display:block;width:18px;height:2px;background:var(--navy);border-radius:2px;transition:all .2s}
-nav.open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-nav.open .nav-toggle span:nth-child(2){opacity:0}
-nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-@media(max-width:900px){
-  nav{position:relative}
-  .nav-toggle{display:flex}
-  .nav-menu{display:flex;position:absolute;top:calc(100% + 8px);left:20px;right:20px;z-index:1000;flex-direction:column;align-items:stretch;gap:14px;max-height:0;padding:0 18px;overflow:hidden;background:var(--white);border:1px solid transparent;border-radius:16px;box-shadow:0 16px 40px rgba(11,31,51,0);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-8px) scale(.98);transform-origin:top center;transition:max-height .28s ease,padding .28s ease,opacity .2s ease,transform .28s ease,visibility .28s ease,border-color .28s ease,box-shadow .28s ease}
-  nav.open .nav-menu{max-height:360px;padding:18px;border-color:var(--border);box-shadow:0 16px 40px rgba(11,31,51,.12);opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0) scale(1)}
-  nav.open .nav-links{display:flex}
-  .nav-links{flex-direction:column;gap:4px}
-  .nav-link{justify-content:center;padding:10px 0}
-  .nav-right{flex-direction:column;width:100%;gap:10px}
-  .nav-right a{width:100%;text-align:center;box-sizing:border-box}
-}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-brand"><picture><source media="(max-width: 600px)" srcset="assets/Patient%20Focused%20Logomark.png"><img src="assets/Patient Focused_transparent.png" alt="Patient Focused" class="nav-logo-img"></picture></a>
-  <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" onclick="var n=this.closest('nav');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))"><span></span><span></span><span></span></button>
-  <div class="nav-menu">
-    <div class="nav-links">
-      <a href="solutions.html" class="nav-link ">Solutions</a>
-      <a href="who-we-serve.html" class="nav-link ">Who We Serve</a>
-      <a href="results.html" class="nav-link ">Results</a>
-    </div>
-    <div class="nav-right">
-      <a href="calculator.html" class="nav-btn-secondary">See Your Impact</a>
-      <a href="#" onclick="openForm();return false" class="nav-cta">Inquire</a>
-    </div>
+  <a href="index.html" class="nav-brand"><img src="assets/Patient Focused_transparent.png" alt="Patient Focused" class="nav-logo-img"></a>
+  <div class="nav-links">
+    <a href="solutions.html" class="nav-link ">Solutions</a>
+    <a href="who-we-serve.html" class="nav-link ">Who We Serve</a>
+    <a href="results.html" class="nav-link ">Results</a>
+  </div>
+  <div class="nav-right">
+    <a href="calculator.html" class="nav-btn-secondary">See Your Impact</a>
+    <a href="#" onclick="openForm();return false" class="nav-cta">Inquire</a>
   </div>
 </nav>
 
@@ -463,10 +442,10 @@ nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
 
     <!-- LEFT -->
     <div class="hero-text">
-      <div class="hero-eyebrow">Backed by Peer Reviewed Data</div>
+      <div class="hero-eyebrow">From Search to Trust</div>
       <h1 class="hero-h1">Building stronger patient-provider relationships<span class="dot">.</span></h1>
       <div class="hero-rule"></div>
-      <p class="hero-sub">Reduce cancellations, strengthen informed consent, and grow your bottom line with physician-on-camera video education delivered at the right time in the patient journey. Built for private procedural practices. Backed by peer reviewed data.</p>
+      <p class="hero-sub">Physician-on-camera video education and consent documentation for private procedural practices.</p>
       <div class="hero-ctas">
         <a href="#" onclick="openForm();return false" class="btn-fill">Let’s Scope Your Library <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         <a href="#" class="btn-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg> See Your Estimated Impact</a>
@@ -843,11 +822,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <button class="modal-close" onclick="closeForm()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   <div class="modal-title">Let’s scope your library</div>
   <div class="modal-sub">15 minutes. We’ll map your service lines and walk through what your library would look like.</div>
-  <form action="https://formsubmit.co/hello@im-patient-focused.com" method="POST">
-    <input type="hidden" name="_subject" value="New Inquiry from Patient Focused">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_captcha" value="false">
-    <div class="m-field"><label>Your name</label><input type="text" name="name" placeholder="First and last name" required></div>
+  <form action="https://formsubmit.co/hello@im-patient-focused.com" method="POST">    <div class="m-field"><label>Your name</label><input type="text" name="name" placeholder="First and last name" required></div>
     <div class="m-field"><label>Practice name</label><input type="text" name="practice" placeholder="Your practice" required></div>
     <div class="m-field"><label>Email</label><input type="email" name="email" placeholder="you@practice.com" required></div>
     <div class="m-field"><label>Your role</label><select name="role" required><option value="">Select...</option><option>Practice Owner / Partner</option><option>Physician</option><option>Practice Manager</option><option>Office Manager</option><option>Marketing Director</option><option>Administrator</option><option>Other</option></select></div>
