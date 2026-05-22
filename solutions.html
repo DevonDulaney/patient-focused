@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solutions — Patient Focused</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0B1F33;--navy-mid:#1A3450;--slate:#334155;--muted:#64748B;
+  --teal:#0E6F8F;--teal-light:#67D6E8;--border:#D8E3EC;
+  --soft-blue:#EEF6FB;--ice:#F4F9FC;--white:#FFFFFF;
+  --serif:'Source Serif 4',Georgia,serif;--sans:'Inter',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace;
+}
+body{font-family:var(--sans);color:var(--navy);background:var(--white);overflow-x:hidden}
+nav{position:sticky;top:0;z-index:1000;height:72px;padding:0 56px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--navy)}
+.nav-logo{width:44px;height:44px;border:2px solid var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:18px;font-style:italic}
+.nav-brand-name{font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.nav-links{display:flex;gap:32px}
+.nav-link{font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--slate);text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:4px}
+.nav-link:hover,.nav-link.active{color:var(--teal)}
+.nav-link svg{width:10px;height:10px}
+.nav-cta{padding:10px 20px;border:1.5px solid var(--navy);border-radius:8px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);text-decoration:none;transition:all .2s}
+.nav-cta:hover{background:var(--navy);color:var(--white)}
+
+/* HERO */
+.page-hero{padding:140px 0 80px;background:linear-gradient(180deg,var(--ice),var(--white));text-align:center}
+.page-hero-inner{max-width:680px;margin:0 auto;padding:0 2rem}
+
+/* TWO CARDS */
+.solutions-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1100px;margin:0 auto;padding:0 2rem}
+.sol-card{border-radius:24px;padding:40px;display:flex;flex-direction:column}
+.sol-card.entry{background:var(--white);border:1px solid var(--border)}
+.sol-card.core{background:var(--white);border:2px solid var(--teal);box-shadow:0 8px 40px rgba(14,111,143,.08);position:relative}
+.sol-card.core::before{content:'Recommended';position:absolute;top:-12px;left:40px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;background:var(--teal);color:var(--white);padding:4px 12px;border-radius:6px}
+.sol-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+.sol-name{font-family:var(--serif);font-size:clamp(24px,3vw,32px);font-weight:400;color:var(--navy);margin-bottom:8px;line-height:1.2}
+.sol-name em{font-style:italic;color:var(--teal)}
+.sol-desc{font-size:15px;color:var(--slate);line-height:1.7;margin-bottom:24px}
+.sol-includes{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px;flex:1}
+.sol-includes li{display:flex;gap:10px;font-size:14px;color:var(--slate);line-height:1.5;align-items:start}
+.sol-includes li svg{width:16px;height:16px;color:var(--teal);flex-shrink:0;margin-top:2px}
+.sol-price{padding-top:20px;border-top:1px solid var(--border);margin-bottom:20px}
+.sol-price-num{font-family:var(--serif);font-size:clamp(28px,4vw,40px);color:var(--navy);line-height:1}
+.sol-price-note{font-size:13px;color:var(--muted);margin-top:4px}
+.sol-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px;border-radius:10px;font-size:15px;font-weight:500;text-decoration:none;transition:all .3s}
+.sol-btn.primary{background:var(--navy);color:var(--white);box-shadow:0 4px 16px rgba(11,31,51,.15)}
+.sol-btn.primary:hover{background:var(--navy-mid);transform:translateY(-2px);box-shadow:0 8px 24px rgba(11,31,51,.2)}
+.sol-btn.secondary{background:var(--white);color:var(--slate);border:1.5px solid var(--border)}
+.sol-btn.secondary:hover{border-color:var(--teal);color:var(--teal)}
+.sol-btn svg{width:16px;height:16px}
+
+/* BRIDGE */
+.bridge{padding:60px 0;text-align:center}
+.bridge p{font-family:var(--serif);font-size:clamp(18px,2.5vw,24px);font-weight:300;font-style:italic;color:var(--muted);line-height:1.5;max-width:600px;margin:0 auto}
+.bridge p strong{color:var(--navy);font-weight:400}
+
+/* COMPARISON */
+.compare{padding:80px 0;background:var(--soft-blue)}
+.compare-inner{max-width:900px;margin:0 auto;padding:0 2rem}
+.compare-table{background:var(--white);border:1px solid var(--border);border-radius:20px;overflow:hidden}
+.compare-row{display:grid;grid-template-columns:1.4fr 1fr 1fr;border-bottom:1px solid var(--border)}
+.compare-row:last-child{border-bottom:none}
+.compare-row.header{background:var(--ice)}
+.compare-cell{padding:14px 24px;font-size:14px;color:var(--slate);display:flex;align-items:center}
+.compare-row.header .compare-cell{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.compare-cell.feature{font-weight:500;color:var(--navy)}
+.compare-check{width:20px;height:20px;background:var(--ice);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.compare-check svg{width:12px;height:12px;color:var(--teal)}
+.compare-dash{color:var(--border);font-size:18px}
+
+/* CTA */
+.page-cta{padding:100px 0;background:var(--white);text-align:center}
+
+/* FOOTER */
+footer{padding:32px 2rem;border-top:1px solid var(--border)}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+
+@media(max-width:900px){[style*="grid-template-columns:1fr 1fr"][style*="gap:48px"]{grid-template-columns:1fr !important;gap:32px !important}
+  nav{padding:0 20px}.nav-links{display:none}
+  .page-hero{padding:110px 0 60px}
+  .solutions-grid{grid-template-columns:1fr}
+  .sol-card.core::before{left:24px}
+  .compare-row{grid-template-columns:1.2fr 1fr 1fr}
+  .compare-cell{padding:10px 16px;font-size:13px}
+}
+@media(max-width:600px){
+  nav{height:60px}.nav-logo{width:36px;height:36px;font-size:15px}
+  .compare-row{grid-template-columns:1fr}
+  .compare-row.header{display:none}
+  .compare-cell{padding:8px 16px}
+}
+
+/* MODAL FORM */
+.modal-overlay{position:fixed;inset:0;background:rgba(11,31,51,.5);backdrop-filter:blur(6px);z-index:9999;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-card{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.95);z-index:10000;background:var(--white);border:1px solid var(--border);border-radius:24px;padding:40px;width:90%;max-width:480px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(11,31,51,.2);opacity:0;pointer-events:none;transition:all .35s cubic-bezier(.22,1,.36,1)}
+.modal-card.open{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border:none;background:var(--ice);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .2s}
+.modal-close:hover{background:var(--border);color:var(--navy)}
+.modal-close svg{width:16px;height:16px}
+.modal-title{font-family:var(--serif);font-size:24px;color:var(--navy);margin-bottom:6px}
+.modal-sub{font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.5}
+.m-field{margin-bottom:14px}
+.m-field label{display:block;font-size:13px;font-weight:500;color:var(--slate);margin-bottom:5px}
+.m-field input,.m-field select{width:100%;padding:11px 14px;background:var(--ice);border:1px solid var(--border);border-radius:10px;font-family:var(--sans);font-size:14px;color:var(--navy);outline:none;transition:border-color .2s;appearance:none}
+.m-field input:focus,.m-field select:focus{border-color:var(--teal)}
+.m-field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.m-submit{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px;margin-top:6px;background:var(--navy);color:var(--white);border:none;border-radius:12px;font-family:var(--sans);font-size:15px;font-weight:600;cursor:pointer;transition:all .3s;box-shadow:0 4px 16px rgba(11,31,51,.15)}
+.m-submit:hover{background:var(--navy-mid);transform:translateY(-1px);box-shadow:0 8px 24px rgba(11,31,51,.2)}
+.m-submit svg{width:16px;height:16px}
+.m-note{text-align:center;font-size:12px;color:var(--muted);margin-top:10px}
+.m-note a{color:var(--teal);text-decoration:none}
+
+
+.nav-right{display:flex;gap:10px;align-items:center}
+.nav-btn-secondary{padding:10px 18px;border-radius:8px;font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--teal);text-decoration:none;transition:all .2s;border:1.5px solid var(--border)}
+.nav-btn-secondary:hover{border-color:var(--teal);background:var(--ice)}
+
+.nav-logo-img{height:44px;width:auto;object-fit:contain}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand"><img src="assets/Patient Focused_transparent.png" alt="Patient Focused" class="nav-logo-img"></a>
+  <div class="nav-links">
+    <a href="solutions.html" class="nav-link active">Solutions</a>
+    <a href="who-we-serve.html" class="nav-link ">Who We Serve</a>
+    <a href="results.html" class="nav-link ">Results</a>
+  </div>
+  <div class="nav-right">
+    <a href="calculator.html" class="nav-btn-secondary">See Your Impact</a>
+    <a href="#" onclick="openForm();return false" class="nav-cta">Inquire</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div style="font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:16px">Solutions</div>
+    <h1 style="font-family:var(--serif);font-size:clamp(34px,5vw,52px);font-weight:400;line-height:1.1;letter-spacing:-.03em;color:var(--navy);margin-bottom:20px">Two ways to <em style="font-style:italic;color:var(--teal)">work together</em></h1>
+    <p style="font-size:18px;color:var(--slate);line-height:1.7;max-width:520px;margin:0 auto;font-weight:300">Start with your visual identity or go straight to the full education library. Most practices begin with one and add the other.</p>
+  </div>
+</section>
+
+<!-- TWO CARDS -->
+<section style="padding:0 0 40px">
+  <div class="solutions-grid">
+
+    <div class="sol-card entry">
+      <div class="sol-eyebrow">The Entry Point</div>
+      <div class="sol-name">Visual <em>Identity</em></div>
+      <p class="sol-desc">Professional physician portraits, facility photography, and brand images. The fastest way to work together and experience the production quality firsthand.</p>
+      <ul class="sol-includes">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Physician headshots (up to 4 physicians)</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Environmental portraits</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Interior + exterior facility photography</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Website-ready files, all formats</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>On-site session at your practice</li>
+      </ul>
+      <div class="sol-price">
+        <div class="sol-price-num">$2,500 – $5,000</div>
+        <div class="sol-price-note">One-time &middot; Three packages available</div>
+      </div>
+      <a href="visual-identity.html" class="sol-btn secondary">Explore Visual Identity <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+
+    <div class="sol-card core">
+      <div class="sol-eyebrow">The Core Product</div>
+      <div class="sol-name">Education <em>Library</em></div>
+      <p class="sol-desc">A complete library of physician-on-camera videos for every service line you treat. We research, script, film, edit, and deploy. Your physician steps in for under an hour.</p>
+      <ul class="sol-includes">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Five core videos per service line</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Pre-production research + custom scripting</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>On-site documentary-grade production</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Full post-production + deployment</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>YouTube SEO optimization</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Distribution protocol + staff training</li>
+      </ul>
+      <div class="sol-price">
+        <div class="sol-price-num" style="font-size:clamp(22px,3vw,28px)">Custom Quote</div>
+        <div class="sol-price-note">Pricing based on your service lines &middot; Under 1 hour physician time</div>
+        <div style="font-size:13px;color:var(--teal);font-weight:500;margin-top:8px">Ask about our founding cohort offer. Limited openings available.</div>
+      </div>
+      <a href="#" onclick="openForm();return false" class="sol-btn primary">Let&rsquo;s Scope Your Library <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+
+  </div>
+</section>
+
+<!-- BRIDGE -->
+<section class="bridge">
+  <p><strong>Most practices start with visual identity</strong> and move to the education library within 60 days. The trust is already built. The production quality is already proven.</p>
+</section>
+
+
+<!-- DELIVERY PROTOCOL -->
+<section style="padding:80px 0;background:var(--white);border-top:1px solid var(--border)">
+  <div style="max-width:1100px;margin:0 auto;padding:0 2rem">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start">
+      <div>
+        <div style="font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:12px">Beyond Production</div>
+        <h2 style="font-family:var(--serif);font-size:clamp(26px,3.5vw,38px);font-weight:400;color:var(--navy);line-height:1.15;margin-bottom:16px">We don&rsquo;t just produce the videos. We advise on <em style="font-style:italic;color:var(--teal)">how to use them.</em></h2>
+        <p style="font-size:16px;color:var(--slate);line-height:1.7;max-width:480px;margin-bottom:16px">The video is only valuable if the right patient sees it at the right moment. After production, we work with your team to build a <strong style="color:var(--navy)">delivery protocol</strong> &mdash; which videos go to which patients, through which channels, at which points in their care journey.</p>
+        <p style="font-size:16px;color:var(--slate);line-height:1.7;max-width:480px">Your staff executes it using the systems you already have. No new software. No platform dependency.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="background:var(--ice);border:1px solid var(--border);border-radius:16px;padding:24px">
+          <div style="font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:8px">At Scheduling</div>
+          <div style="font-family:var(--serif);font-size:17px;color:var(--navy);margin-bottom:4px"><em style="font-style:italic">Condition explainer</em></div>
+          <p style="font-size:13px;color:var(--muted);line-height:1.5">Patient books a procedure. Staff sends the condition education video. The patient understands what they have before the consultation.</p>
+        </div>
+        <div style="background:var(--ice);border:1px solid var(--border);border-radius:16px;padding:24px">
+          <div style="font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:8px">7 Days Before</div>
+          <div style="font-family:var(--serif);font-size:17px;color:var(--navy);margin-bottom:4px"><em style="font-style:italic">Procedure &amp; consent video</em></div>
+          <p style="font-size:13px;color:var(--muted);line-height:1.5">Risks, alternatives, and what to expect. The patient watches on their own time, with family, as many times as they need.</p>
+        </div>
+        <div style="background:var(--ice);border:1px solid var(--border);border-radius:16px;padding:24px">
+          <div style="font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:8px">1 Day Before</div>
+          <div style="font-family:var(--serif);font-size:17px;color:var(--navy);margin-bottom:4px"><em style="font-style:italic">Pre-procedure prep video</em></div>
+          <p style="font-size:13px;color:var(--muted);line-height:1.5">NPO instructions, medications, what to bring. The video that prevents day-of cancellations.</p>
+        </div>
+        <div style="background:var(--ice);border:1px solid var(--border);border-radius:16px;padding:24px">
+          <div style="font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:8px">Day After</div>
+          <div style="font-family:var(--serif);font-size:17px;color:var(--navy);margin-bottom:4px"><em style="font-style:italic">Recovery &amp; aftercare video</em></div>
+          <p style="font-size:13px;color:var(--muted);line-height:1.5">Activity restrictions, warning signs, when to call. Reduces post-procedure phone calls and anxiety.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="compare">
+  <div class="compare-inner">
+    <div style="text-align:center;margin-bottom:40px">
+      <div style="font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:12px">Side by Side</div>
+      <h2 style="font-family:var(--serif);font-size:clamp(24px,3vw,34px);font-weight:400;color:var(--navy)">What&rsquo;s included in <em style="font-style:italic;color:var(--teal)">each</em></h2>
+    </div>
+    <div class="compare-table">
+      <div class="compare-row header">
+        <div class="compare-cell"></div>
+        <div class="compare-cell">Visual Identity</div>
+        <div class="compare-cell">Education Library</div>
+      </div>
+      <div class="compare-row"><div class="compare-cell feature">Physician portraits</div><div class="compare-cell"><div class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div></div><div class="compare-cell"><span class="compare-dash">&mdash;</span></div></div>
+      <div class="compare-row"><div class="compare-cell feature">Facility photography</div><div class="compare-cell"><div class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div></div><div class="compare-cell"><span class="compare-dash">&mdash;</span></div></div>
+      <div class="compare-row"><div class="compare-cell feature">Environmental portraits</div><div class="compare-cell"><div class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div></div><div class="compare-cell"><span class="compare-dash">&mdash;</span></div></div>
+      <div class="compare-row"><div class="compare-cell feature">Brand video (60 sec)</div><div class="compare-cell"><span style="font-size:12px;color:var(--muted)">Complete pkg only</span></div><div class="compare-cell"><span class="compare-dash">&mdash;</span></div></div>
+      <div class="compare-row"><div class="compare-cell feature">Condition explainer videos</div><div class="compare-cell"><span class="compare-dash">&mdash;</span></div><div class="compare-cell"><div class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div></div></div>
+      <div class="compare-row"><div class="compare-cell feature">Procedure &amp; consent videos</div><div class="compare-cell"><span class="compare-dash">&mdash;</span></div><div class="compare-cell"><div class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div></div></div>
+      <div class="compare-row"><div class="compare-cell feature">Pre-procedure prep videos</div><div class="compare-cell"><span class="compare-dash">&mdash;</span></div><div class="compare-cell"><div class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div></div></div>
+      <div class="compare-row"><div class="compare-cell feature">Recovery videos</div><div class="compare-cell"><span class="compare-dash">&mdash;</span></div><div class="compare-cell"><div class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div></div></div>
+      <div class="compare-row"><div class="compare-cell feature">Patient Q&amp;A videos</div><div class="compare-cell"><span class="compare-dash">&mdash;</span></div><div class="compare-cell"><div class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div></div></div>
+      <div class="compare-row"><div class="compare-cell feature">Custom scripting</div><div class="compare-cell"><span class="compare-dash">&mdash;</span></div><div class="compare-cell"><div class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div></div></div>
+      <div class="compare-row"><div class="compare-cell feature">YouTube SEO optimization</div><div class="compare-cell"><span class="compare-dash">&mdash;</span></div><div class="compare-cell"><div class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div></div></div>
+      <div class="compare-row"><div class="compare-cell feature">Distribution protocol + training</div><div class="compare-cell"><span class="compare-dash">&mdash;</span></div><div class="compare-cell"><div class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div></div></div>
+      <div class="compare-row"><div class="compare-cell feature">On-site production</div><div class="compare-cell"><div class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div></div><div class="compare-cell"><div class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div></div></div>
+      <div class="compare-row"><div class="compare-cell feature">Physician time required</div><div class="compare-cell"><span style="font-size:13px;color:var(--navy)">1&ndash;2 hours</span></div><div class="compare-cell"><span style="font-size:13px;color:var(--navy)">Under 1 hour / service line</span></div></div>
+      <div class="compare-row"><div class="compare-cell feature">Starting price</div><div class="compare-cell"><span style="font-family:var(--serif);font-size:18px;color:var(--navy)">$2,500</span></div><div class="compare-cell"><span style="font-size:14px;color:var(--navy);font-weight:500">Custom quote</span></div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CALCULATOR CTA -->
+<section style="padding:60px 0;background:var(--soft-blue);border-top:1px solid var(--border)">
+  <div style="max-width:880px;margin:0 auto;padding:0 2rem">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;padding:32px 40px;background:var(--white);border:1px solid var(--border);border-radius:20px;box-shadow:0 4px 20px rgba(15,42,68,.04)">
+      <div>
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:8px">Impact Calculator</div>
+        <div style="font-family:var(--serif);font-size:22px;color:var(--navy);margin-bottom:4px">What is your practice leaving on the table?</div>
+        <p style="font-size:14px;color:var(--muted)">Input your numbers. See the impact in real time.</p>
+      </div>
+      <a href="calculator.html" style="display:inline-flex;align-items:center;gap:10px;padding:14px 24px;background:var(--navy);color:var(--white);border-radius:10px;font-size:14px;font-weight:500;text-decoration:none;transition:all .3s;box-shadow:0 4px 16px rgba(11,31,51,.15);white-space:nowrap">See Your Impact <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="page-cta">
+  <div style="max-width:560px;margin:0 auto;padding:0 2rem">
+    <h2 style="font-family:var(--serif);font-size:clamp(28px,4vw,42px);font-weight:400;color:var(--navy);margin-bottom:16px">Not sure where to start? <em style="font-style:italic;color:var(--teal)">Let&rsquo;s talk.</em></h2>
+    <p style="font-size:16px;color:var(--slate);line-height:1.7;max-width:480px;margin:0 auto 28px">15 minutes. We&rsquo;ll look at your practice, your service lines, and recommend the right starting point.</p>
+    <a href="#" onclick="openForm();return false" style="display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:var(--navy);color:var(--white);border-radius:12px;font-size:16px;font-weight:500;text-decoration:none;transition:all .3s;box-shadow:0 4px 20px rgba(11,31,51,.15)">Let&rsquo;s Scope Your Library <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="padding:32px 2rem;border-top:1px solid var(--border);background:var(--white)">
+  <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+    <div style="font-family:var(--serif);font-style:italic;color:var(--muted);font-size:15px">Patient Focused</div>
+    <div style="display:flex;gap:24px"><a href="solutions.html" style="color:var(--muted);text-decoration:none;font-size:13px">Solutions</a><a href="who-we-serve.html" style="color:var(--muted);text-decoration:none;font-size:13px">Who We Serve</a><a href="results.html" style="color:var(--muted);text-decoration:none;font-size:13px">Results</a><a href="calculator.html" style="color:var(--muted);text-decoration:none;font-size:13px">Impact Calculator</a><a href="about.html" style="color:var(--muted);text-decoration:none;font-size:13px">About</a></div>
+    <div style="font-size:12px;color:var(--muted)">&copy; 2026 Patient Focused</div>
+  </div>
+</footer>
+
+
+<!-- INQUIRY FORM MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeForm()"></div>
+<div class="modal-card" id="modalCard">
+  <button class="modal-close" onclick="closeForm()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <div class="modal-title">Let’s scope your library</div>
+  <div class="modal-sub">15 minutes. We’ll map your service lines and walk through what your library would look like.</div>
+  <!-- REPLACE the action URL below with your Formspree endpoint: https://formspree.io/f/YOUR_FORM_ID -->
+  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <div class="m-field"><label>Your name</label><input type="text" name="name" placeholder="First and last name" required></div>
+    <div class="m-field"><label>Practice name</label><input type="text" name="practice" placeholder="Your practice" required></div>
+    <div class="m-field"><label>Email</label><input type="email" name="email" placeholder="you@practice.com" required></div>
+    <div class="m-field"><label>Your role</label><select name="role" required><option value="">Select...</option><option>Practice Owner / Partner</option><option>Physician</option><option>Practice Manager</option><option>Office Manager</option><option>Marketing Director</option><option>Administrator</option><option>Other</option></select></div>
+    <div class="m-field"><label>What type of practice?</label><select name="practice_type" required><option value="">Select...</option><option>Vascular / Vein</option><option>Orthopedic</option><option>Dermatology / Mohs</option><option>Ophthalmology</option><option>Urology</option><option>Plastic Surgery</option><option>Pain Management</option><option>GI / Endoscopy</option><option>Fertility / IVF</option><option>Other</option></select></div>
+    <div class="m-field"><label>How many service lines?</label><select name="service_lines" required><option value="">Select...</option><option>1–2 procedures</option><option>3–5 procedures</option><option>6–10 procedures</option><option>10+</option></select></div>
+    <button type="submit" class="m-submit">Let’s Scope Your Library <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+  </form>
+  <div class="m-note">Or email directly: <a href="mailto:hello@im-patient-focused.com">hello@im-patient-focused.com</a></div>
+</div>
+
+
+<script>
+function openForm(){document.getElementById("modalOverlay").classList.add("open");document.getElementById("modalCard").classList.add("open");document.body.style.overflow="hidden"}
+function closeForm(){document.getElementById("modalOverlay").classList.remove("open");document.getElementById("modalCard").classList.remove("open");document.body.style.overflow=""}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeForm()});
+</script>
+
+</body>
+</html>

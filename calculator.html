@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impact Calculator — Patient Focused</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#0B1F33;--navy-mid:#1A3450;--slate:#334155;--muted:#64748B;--teal:#0E6F8F;--teal-light:#67D6E8;--border:#D8E3EC;--soft-blue:#EEF6FB;--ice:#F4F9FC;--white:#FFFFFF;--green:#10B981;--red:#EF4444;--serif:'Source Serif 4',Georgia,serif;--sans:'Inter',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+body{font-family:var(--sans);color:var(--navy);background:var(--white);overflow-x:hidden}
+nav{position:sticky;top:0;z-index:1000;height:72px;padding:0 56px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--navy)}.nav-logo{width:44px;height:44px;border:2px solid var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:18px;font-style:italic}.nav-brand-name{font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}.nav-links{display:flex;gap:32px}.nav-link{font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--slate);text-decoration:none}.nav-link:hover{color:var(--teal)}.nav-cta{padding:10px 20px;border:1.5px solid var(--navy);border-radius:8px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);text-decoration:none;transition:all .2s}.nav-cta:hover{background:var(--navy);color:var(--white)}
+.calc-hero{padding:130px 0 48px;background:linear-gradient(180deg,var(--ice),var(--white));text-align:center}
+.calc-hero h1{font-family:var(--serif);font-size:clamp(32px,5vw,48px);font-weight:400;line-height:1.1;letter-spacing:-.03em;color:var(--navy);margin-bottom:12px}
+.calc-hero h1 em{font-style:italic;color:var(--teal)}
+.calc-hero p{font-size:17px;color:var(--slate);line-height:1.7;max-width:480px;margin:0 auto;font-weight:300}
+.calc-wrap{max-width:1100px;margin:0 auto;padding:0 2rem 80px}
+.toggle-section{padding:32px 0 40px;text-align:center}
+.toggle-label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
+.toggle-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.toggle-btn{padding:16px 28px;border-radius:14px;font-size:15px;font-weight:500;cursor:pointer;transition:all .3s;border:2px solid var(--border);background:var(--white);color:var(--slate);display:flex;align-items:center;gap:10px;line-height:1.3;text-align:left;max-width:340px}
+.toggle-btn svg{width:24px;height:24px;flex-shrink:0;color:var(--muted);transition:color .3s}
+.toggle-btn.active{border-color:var(--teal);background:var(--ice);color:var(--navy)}
+.toggle-btn.active svg{color:var(--teal)}
+.toggle-btn:hover{border-color:var(--teal)}
+.calc-panel{display:none;animation:fadeUp .4s ease}.calc-panel.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.inputs-card{background:var(--white);border:1px solid var(--border);border-radius:24px;padding:40px;margin-bottom:32px;box-shadow:0 4px 24px rgba(15,42,68,.04)}
+.inputs-title{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:24px}
+.inputs-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.input-group{display:flex;flex-direction:column;gap:8px}
+.input-label{display:flex;justify-content:space-between;align-items:baseline}
+.input-label span:first-child{font-size:14px;font-weight:500;color:var(--navy)}
+.input-val{font-family:var(--serif);font-size:22px;color:var(--teal);font-weight:500;min-width:80px;text-align:right}
+.input-range{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;background:var(--border);outline:none;cursor:pointer}
+.input-range::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--teal);cursor:pointer;box-shadow:0 2px 8px rgba(14,111,143,.3)}
+.input-range::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--teal);cursor:pointer;border:none}
+.input-hint{font-size:11px;color:var(--muted)}
+.results-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px}
+.result-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:32px;box-shadow:0 4px 24px rgba(15,42,68,.04);position:relative;overflow:hidden}
+.result-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--teal);opacity:0;transition:opacity .3s}
+.result-card:hover::before{opacity:1}
+.r-eye{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
+.r-label{font-size:13px;color:var(--muted);margin-bottom:4px}
+.r-bad{font-family:var(--serif);font-size:28px;color:var(--red);line-height:1;margin-bottom:14px;opacity:.7}
+.r-good{font-family:var(--serif);font-size:28px;color:var(--green);line-height:1;margin-bottom:12px}
+.r-neutral{font-family:var(--serif);font-size:28px;color:var(--teal);line-height:1;margin-bottom:12px}
+.r-arrow{font-size:11px;color:var(--muted);margin-bottom:4px}
+.r-delta{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:8px;font-size:13px;font-weight:600;color:var(--green)}
+.r-delta.teal{background:rgba(14,111,143,.06);border-color:rgba(14,111,143,.15);color:var(--teal)}
+.r-delta svg{width:14px;height:14px}
+.r-cite{font-size:10px;color:var(--muted);font-style:italic;margin-top:16px;padding-top:12px;border-top:1px solid var(--border);line-height:1.5}
+.r-cite a{color:var(--teal);text-decoration:none}
+.r-cite a:hover{text-decoration:underline}
+.total-card{background:var(--navy);border-radius:24px;padding:48px;text-align:center;margin-bottom:32px;position:relative;overflow:hidden}
+.total-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(79,175,201,.06),transparent 50%);pointer-events:none}
+.t-eye{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal-light);margin-bottom:16px}
+.t-label{font-size:16px;color:rgba(255,255,255,.5);margin-bottom:8px}
+.t-num{font-family:var(--serif);font-size:clamp(48px,8vw,80px);font-weight:400;color:var(--white);line-height:1;margin-bottom:8px}
+.t-sub{font-size:14px;color:rgba(255,255,255,.4)}
+.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px;padding-top:32px;border-top:1px solid rgba(255,255,255,.1)}
+.t-item{text-align:center}.t-item-num{font-family:var(--serif);font-size:20px;color:var(--white);margin-bottom:4px}.t-item-label{font-size:11px;color:rgba(255,255,255,.4);line-height:1.3}
+.try-other{text-align:center;padding:24px 0;margin-bottom:32px}
+.try-other a{color:var(--teal);font-size:14px;font-weight:500;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.try-other a:hover{opacity:.7}
+.try-other a svg{width:14px;height:14px}
+.save-card{background:var(--soft-blue);border:1px solid var(--border);border-radius:20px;padding:40px;text-align:center}
+.save-title{font-family:var(--serif);font-size:24px;color:var(--navy);margin-bottom:8px}
+.save-sub{font-size:14px;color:var(--muted);margin-bottom:24px;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.6}
+.save-form{display:flex;gap:10px;max-width:500px;margin:0 auto;flex-wrap:wrap}
+.save-input{flex:1;min-width:160px;padding:12px 16px;background:var(--white);border:1px solid var(--border);border-radius:10px;font-family:var(--sans);font-size:14px;color:var(--navy);outline:none}
+.save-input:focus{border-color:var(--teal)}
+.save-btn{padding:12px 24px;background:var(--navy);color:var(--white);border:none;border-radius:10px;font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;transition:all .3s;white-space:nowrap}
+.save-btn:hover{background:var(--navy-mid)}
+.save-note{font-size:11px;color:var(--muted);margin-top:12px}
+.calc-cta{padding:80px 0;background:var(--white);text-align:center;border-top:1px solid var(--border)}
+footer{padding:32px 2rem;border-top:1px solid var(--border)}.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+@media(max-width:900px){nav{padding:0 20px}.nav-links{display:none}.inputs-grid{grid-template-columns:1fr}.results-grid{grid-template-columns:1fr}.t-grid{grid-template-columns:1fr}}
+@media(max-width:600px){nav{height:60px}.nav-logo{width:36px;height:36px;font-size:15px}.calc-hero{padding:100px 0 40px}.inputs-card{padding:24px}.total-card{padding:32px 24px}.toggle-row{flex-direction:column;align-items:stretch}.toggle-btn{max-width:100%}.save-form{flex-direction:column}}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(11,31,51,.5);backdrop-filter:blur(6px);z-index:9999;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-card{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.95);z-index:10000;background:var(--white);border:1px solid var(--border);border-radius:24px;padding:40px;width:90%;max-width:480px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(11,31,51,.2);opacity:0;pointer-events:none;transition:all .35s cubic-bezier(.22,1,.36,1)}
+.modal-card.open{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border:none;background:var(--ice);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .2s}
+.modal-close:hover{background:var(--border);color:var(--navy)}
+.modal-close svg{width:16px;height:16px}
+.modal-title{font-family:var(--serif);font-size:24px;color:var(--navy);margin-bottom:6px}
+.modal-sub{font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.5}
+.m-field{margin-bottom:14px}
+.m-field label{display:block;font-size:13px;font-weight:500;color:var(--slate);margin-bottom:5px}
+.m-field input,.m-field select{width:100%;padding:11px 14px;background:var(--ice);border:1px solid var(--border);border-radius:10px;font-family:var(--sans);font-size:14px;color:var(--navy);outline:none;transition:border-color .2s;appearance:none}
+.m-field input:focus,.m-field select:focus{border-color:var(--teal)}
+.m-field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.m-submit{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px;margin-top:6px;background:var(--navy);color:var(--white);border:none;border-radius:12px;font-family:var(--sans);font-size:15px;font-weight:600;cursor:pointer;transition:all .3s;box-shadow:0 4px 16px rgba(11,31,51,.15)}
+.m-submit:hover{background:var(--navy-mid)}
+.m-submit svg{width:16px;height:16px}
+.m-note{text-align:center;font-size:12px;color:var(--muted);margin-top:10px}
+.m-note a{color:var(--teal);text-decoration:none}
+
+
+.nav-right{display:flex;gap:10px;align-items:center}
+.nav-btn-secondary{padding:10px 18px;border-radius:8px;font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--teal);text-decoration:none;transition:all .2s;border:1.5px solid var(--border)}
+.nav-btn-secondary:hover{border-color:var(--teal);background:var(--ice)}
+
+.nav-logo-img{height:44px;width:auto;object-fit:contain}
+</style>
+</head>
+<body>
+<nav><a href="index.html" class="nav-brand"><img src="assets/Patient Focused_transparent.png" alt="Patient Focused" class="nav-logo-img"></a><div class="nav-links"><a href="solutions.html" class="nav-link">Solutions</a><a href="who-we-serve.html" class="nav-link">Who We Serve</a><a href="results.html" class="nav-link">Results</a></div><div class="nav-right">
+    <a href="#" class="nav-btn-secondary" style="opacity:.4;pointer-events:none">See Your Impact</a>
+    <a href="#" onclick="openForm();return false" class="nav-cta">Inquire</a>
+  </div>
+</nav>
+
+<section class="calc-hero"><div style="max-width:680px;margin:0 auto;padding:0 2rem"><div style="font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:16px">Impact Calculator</div><h1>What is your practice <em>leaving on the table?</em></h1><p>Adjust the sliders. Watch the numbers update in real time.</p></div></section>
+
+<div class="calc-wrap">
+<div class="toggle-section"><div class="toggle-label">What challenge are you facing?</div><div class="toggle-row">
+<div class="toggle-btn active" onclick="setMode('cancel')" id="tC"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="9" y1="15" x2="15" y2="15" stroke-width="2"/></svg><span>Patients are cancelling or<br>showing up unprepared</span></div>
+<div class="toggle-btn" onclick="setMode('acquire')" id="tA"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><path d="M11 8v6M8 11h6"/></svg><span>We need more qualified<br>patients finding us</span></div>
+</div></div>
+
+<!-- PANEL A: CANCELLATIONS -->
+<div class="calc-panel active" id="pC">
+<div class="inputs-card"><div class="inputs-title">Your Practice Numbers</div><div class="inputs-grid">
+<div class="input-group"><div class="input-label"><span>Procedures per week</span><span class="input-val" id="cP">20</span></div><input type="range" class="input-range" id="cPR" min="5" max="60" value="20" oninput="cCalc()"><div class="input-hint">All scheduled procedural encounters</div></div>
+<div class="input-group"><div class="input-label"><span>Average revenue per procedure</span><span class="input-val" id="cR">$5,000</span></div><input type="range" class="input-range" id="cRR" min="1000" max="15000" step="500" value="5000" oninput="cCalc()"></div>
+<div class="input-group"><div class="input-label"><span>Day-of cancellation rate</span><span class="input-val" id="cC">10%</span></div><input type="range" class="input-range" id="cCR" min="2" max="25" value="10" oninput="cCalc()"><div class="input-hint">National average: 5–14%</div></div>
+<div class="input-group"><div class="input-label"><span>Consent encounters per week</span><span class="input-val" id="cN">20</span></div><input type="range" class="input-range" id="cNR" min="5" max="60" value="20" oninput="cCalc()"></div>
+</div></div>
+<div class="results-grid">
+<div class="result-card"><div class="r-eye">Cancellation Recovery</div><div class="r-label">Currently losing annually</div><div class="r-bad" id="cL">$520,000</div><div class="r-arrow">With 65% reduction ↓</div><div class="r-good" id="cS">$338,000</div><div class="r-delta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg><span id="cD">$338,000 recovered</span></div><div class="r-cite"><a href="https://journals.sagepub.com/doi/10.1177/1557988319893568">Ballon-Landa et al. (2019): 37.6% → 13.2% across 14 practices, 516 patients.</a></div></div>
+<div class="result-card"><div class="r-eye">Consent Protection</div><div class="r-label">Comprehension improvement</div><div class="r-neutral">65.4% → 78.5%</div><div class="r-arrow">Inadequate consent payout risk ↓</div><div class="r-good">114% lower</div><div class="r-delta teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Avg claim prevented: $295K</div><div class="r-cite"><a href="https://www.candello.com/Candello-Blog/Patient-Safety-Informed-Consent">Folcarelli (2023): ~500,000 MPL cases. Schaffer data: inadequate consent = 114% higher payout odds.</a> Rossi (2005): 78.5% vs 65.4%.</div></div>
+<div class="result-card"><div class="r-eye">Time Recovery</div><div class="r-label">Saved per consent encounter</div><div class="r-neutral">6.7 min</div><div class="r-arrow">Annual physician time recovered ↓</div><div class="r-good" id="cTH">115 hrs</div><div class="r-delta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span id="cTD">$46,000 recovered capacity</span></div><div class="r-cite"><a href="https://doi.org/10.1155/2017/9593631">Zhang et al. (2017): 12.3 → 5.6 min. Satisfaction 65% → 86%.</a></div></div>
+<div class="result-card"><div class="r-eye">Search Visibility</div><div class="r-label">Patients researching before booking</div><div class="r-neutral">86%</div><div class="r-arrow">Video is 53× more likely to rank ↓</div><div class="r-good" id="cSP">12–20</div><div class="r-delta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>additional patients/month</div><div class="r-cite"><a href="https://pubmed.ncbi.nlm.nih.gov/38414727/">Javidan (2024): 53% of vascular YouTube poor.</a> Forrester: 53× ranking lift.</div></div>
+</div>
+<div class="total-card"><div class="t-eye">Your Estimated Annual Impact</div><div class="t-label">Combined recoverable value</div><div class="t-num" id="cT">$500,000+</div><div class="t-sub">Based on your inputs and peer-reviewed research</div><div class="t-grid"><div class="t-item"><div class="t-item-num" id="cT1">$338K</div><div class="t-item-label">Cancellation<br>recovery</div></div><div class="t-item"><div class="t-item-num" id="cT2">$46K</div><div class="t-item-label">Recovered<br>capacity</div></div><div class="t-item"><div class="t-item-num" id="cT3">$295K</div><div class="t-item-label">Claim<br>prevention</div></div></div></div>
+<div class="try-other"><a href="#" onclick="setMode('acquire');window.scrollTo({top:document.querySelector('.toggle-section').offsetTop-100,behavior:'smooth'});return false">Also curious about patient acquisition? Try that calculator <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+</div>
+
+<!-- PANEL B: ACQUISITION -->
+<div class="calc-panel" id="pA">
+<div class="inputs-card"><div class="inputs-title">Your Practice Numbers</div><div class="inputs-grid">
+<div class="input-group"><div class="input-label"><span>Consultations per month</span><span class="input-val" id="aQ">40</span></div><input type="range" class="input-range" id="aQR" min="10" max="120" value="40" oninput="aCalc()"><div class="input-hint">Total new patient consultations</div></div>
+<div class="input-group"><div class="input-label"><span>Average revenue per procedure</span><span class="input-val" id="aR">$5,000</span></div><input type="range" class="input-range" id="aRR" min="1000" max="20000" step="500" value="5000" oninput="aCalc()"></div>
+<div class="input-group"><div class="input-label"><span>Consultation-to-booking rate</span><span class="input-val" id="aV">55%</span></div><input type="range" class="input-range" id="aVR" min="20" max="90" value="55" oninput="aCalc()"><div class="input-hint">% that convert to booked procedures</div></div>
+<div class="input-group"><div class="input-label"><span>Monthly marketing spend</span><span class="input-val" id="aM">$5,000</span></div><input type="range" class="input-range" id="aMR" min="0" max="25000" step="500" value="5000" oninput="aCalc()"><div class="input-hint">Total monthly ad / SEO budget</div></div>
+</div></div>
+<div class="results-grid">
+<div class="result-card"><div class="r-eye">Conversion Improvement</div><div class="r-label">Current conversion rate</div><div class="r-bad" id="aCC">55%</div><div class="r-arrow">With pre-consultation video ↓</div><div class="r-good" id="aCI">70%</div><div class="r-delta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg><span id="aCDelta">+6 procedures/month</span></div><div class="r-cite">Patients who watch physician video arrive pre-informed. Healthcare video converts 4.8% vs 2.9% (Forrester).</div></div>
+<div class="result-card"><div class="r-eye">Organic Patient Growth</div><div class="r-label">New patients from video SEO</div><div class="r-good" id="aNP">12–20</div><div class="r-arrow">Monthly value of organic patients ↓</div><div class="r-good" id="aOR">$80,000</div><div class="r-delta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg><span id="aODelta">patients you didn't pay to acquire</span></div><div class="r-cite">86% research before booking. Video pages 53× more likely to rank (Forrester). 44% of mobile researchers book.</div></div>
+<div class="result-card"><div class="r-eye">Cost Per Acquisition</div><div class="r-label">Current CPA</div><div class="r-bad" id="aCPA1">$227</div><div class="r-arrow">With organic supplementing paid ↓</div><div class="r-good" id="aCPA2">$156</div><div class="r-delta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg><span id="aCPAD">31% lower acquisition cost</span></div><div class="r-cite">Organic video has zero marginal cost per view. Each ranking video compounds.</div></div>
+<div class="result-card"><div class="r-eye">Consent Protection</div><div class="r-label">Comprehension improvement</div><div class="r-neutral">65.4% → 78.5%</div><div class="r-arrow">Cosmetic malpractice claims rising ↓</div><div class="r-good">114% lower</div><div class="r-delta teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Avg claim prevented: $295K</div><div class="r-cite"><a href="https://www.candello.com/Candello-Blog/Patient-Safety-Informed-Consent">Folcarelli (2023): inadequate consent = 114% higher payout odds.</a> Applies to elective procedures.</div></div>
+</div>
+<div class="total-card"><div class="t-eye">Your Estimated Annual Impact</div><div class="t-label">Combined additional revenue opportunity</div><div class="t-num" id="aT">$500,000+</div><div class="t-sub">Based on your inputs and peer-reviewed research</div><div class="t-grid"><div class="t-item"><div class="t-item-num" id="aT1">$360K</div><div class="t-item-label">Conversion<br>improvement</div></div><div class="t-item"><div class="t-item-num" id="aT2">$960K</div><div class="t-item-label">Organic patient<br>revenue</div></div><div class="t-item"><div class="t-item-num" id="aT3">$20K</div><div class="t-item-label">Marketing<br>savings</div></div></div></div>
+<div class="try-other"><a href="#" onclick="setMode('cancel');window.scrollTo({top:document.querySelector('.toggle-section').offsetTop-100,behavior:'smooth'});return false">Also dealing with cancellations? Try that calculator <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+</div>
+
+<!-- SAVE -->
+<div class="save-card"><div class="save-title">Save your personalized report</div><div class="save-sub">We'll email you a PDF with your numbers, the research behind them, and what your library would look like.</div>
+<form class="save-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST"><input type="hidden" name="calculator_results" id="calcR"><input type="hidden" name="calculator_mode" id="calcM" value="cancellations"><input type="text" class="save-input" name="name" placeholder="Your name" required><input type="email" class="save-input" name="email" placeholder="you@practice.com" required><button type="submit" class="save-btn">Send My Report →</button></form>
+<div class="save-note">Your specific numbers and citations, delivered to your inbox.</div></div>
+</div>
+
+<section class="calc-cta"><div style="max-width:520px;margin:0 auto;padding:0 2rem"><h2 style="font-family:var(--serif);font-size:clamp(24px,3vw,36px);font-weight:400;color:var(--navy);margin-bottom:12px">Ready to close the gap?</h2><p style="font-size:15px;color:var(--slate);line-height:1.7;max-width:440px;margin:0 auto 24px">15 minutes. We'll map your service lines and walk through what your library would look like.</p><a href="#" onclick="openForm();return false" style="display:inline-flex;align-items:center;gap:10px;padding:14px 28px;background:var(--navy);color:var(--white);border-radius:12px;font-size:15px;font-weight:500;text-decoration:none;box-shadow:0 4px 16px rgba(11,31,51,.15)">Let's Scope Your Library <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div></section>
+<footer><div class="footer-inner"><div style="font-family:var(--serif);font-style:italic;color:var(--muted);font-size:15px">Patient Focused</div><div style="display:flex;gap:24px"><a href="solutions.html" style="color:var(--muted);text-decoration:none;font-size:13px">Solutions</a><a href="who-we-serve.html" style="color:var(--muted);text-decoration:none;font-size:13px">Who We Serve</a><a href="results.html" style="color:var(--muted);text-decoration:none;font-size:13px">Results</a><a href="about.html" style="color:var(--muted);text-decoration:none;font-size:13px">About</a></div><div style="font-size:12px;color:var(--muted)">© 2026 Patient Focused</div></div></footer>
+
+<script>
+function fmt(n){if(n>=1e6)return '$'+(n/1e6).toFixed(1)+'M';if(n>=1e3)return '$'+Math.round(n/1e3)+'K';return '$'+Math.round(n)}
+function ff(n){return '$'+n.toLocaleString('en-US',{maximumFractionDigits:0})}
+function setMode(m){document.getElementById('pC').classList.toggle('active',m==='cancel');document.getElementById('pA').classList.toggle('active',m==='acquire');document.getElementById('tC').classList.toggle('active',m==='cancel');document.getElementById('tA').classList.toggle('active',m==='acquire');document.getElementById('calcM').value=m==='cancel'?'cancellations':'acquisition';if(m==='cancel')cCalc();else aCalc()}
+function cCalc(){
+  var p=+document.getElementById('cPR').value,r=+document.getElementById('cRR').value,c=+document.getElementById('cCR').value,n=+document.getElementById('cNR').value;
+  document.getElementById('cP').textContent=p;document.getElementById('cR').textContent='$'+r.toLocaleString();document.getElementById('cC').textContent=c+'%';document.getElementById('cN').textContent=n;
+  var loss=p*(c/100)*r*52,save=loss*.65;
+  document.getElementById('cL').textContent=ff(Math.round(loss));document.getElementById('cS').textContent=ff(Math.round(save));document.getElementById('cD').textContent=ff(Math.round(save))+' recovered';
+  var hrs=Math.round(n*6.7*52/60),tv=hrs*400;
+  document.getElementById('cTH').textContent=hrs+' hrs';document.getElementById('cTD').textContent=ff(tv)+' recovered capacity';
+  var bm=p*4.3,lo=Math.max(3,Math.min(40,Math.round(bm*.3))),hi=Math.max(5,Math.min(60,Math.round(bm*.5)));
+  document.getElementById('cSP').textContent=lo+'–'+hi;
+  var tot=save+295000+tv;
+  document.getElementById('cT').textContent=ff(Math.round(tot));document.getElementById('cT1').textContent=fmt(save);document.getElementById('cT2').textContent=fmt(tv);document.getElementById('cT3').textContent='$295K';
+  store('cancel',{procedures_per_week:p,avg_revenue:r,cancellation_rate:c,consent_encounters:n,cancellation_recovery:Math.round(save),time_value:tv,total:Math.round(tot)})
+}
+function aCalc(){
+  var q=+document.getElementById('aQR').value,r=+document.getElementById('aRR').value,v=+document.getElementById('aVR').value,m=+document.getElementById('aMR').value;
+  document.getElementById('aQ').textContent=q;document.getElementById('aR').textContent='$'+r.toLocaleString();document.getElementById('aV').textContent=v+'%';document.getElementById('aM').textContent='$'+m.toLocaleString();
+  var iv=Math.min(90,v+15),cp=Math.round(q*(v/100)),ip=Math.round(q*(iv/100)),ap=ip-cp,cr=ap*r*12;
+  document.getElementById('aCC').textContent=v+'%';document.getElementById('aCI').textContent=iv+'%';document.getElementById('aCDelta').textContent='+'+ap+' procedures/month';
+  var lo=Math.max(3,Math.min(40,Math.round(q*.3))),hi=Math.max(5,Math.min(60,Math.round(q*.5))),avg=(lo+hi)/2,or_=avg*r*12;
+  document.getElementById('aNP').textContent=lo+'–'+hi;document.getElementById('aOR').textContent=ff(Math.round(avg*r));document.getElementById('aODelta').textContent="patients you didn't pay to acquire";
+  var cc=m>0?Math.round(m/cp):0,tp=ip+Math.round(avg),ic=m>0?Math.round(m/tp):0,rd=cc>0?Math.round((1-ic/cc)*100):0;
+  document.getElementById('aCPA1').textContent=m>0?'$'+cc:'N/A';document.getElementById('aCPA2').textContent=m>0?'$'+ic:'N/A';document.getElementById('aCPAD').textContent=m>0?rd+'% lower acquisition cost':'Add spend to calculate';
+  var ms=m>0?Math.max(0,(cc-ic)*tp*12):0,tot=cr+or_+ms;
+  document.getElementById('aT').textContent=ff(Math.round(tot));document.getElementById('aT1').textContent=fmt(cr);document.getElementById('aT2').textContent=fmt(or_);document.getElementById('aT3').textContent=fmt(ms);
+  store('acquire',{consultations:q,avg_revenue:r,conversion_rate:v,marketing_spend:m,conversion_revenue:cr,organic_revenue:or_,total:Math.round(tot)})
+}
+function store(mode,d){d.mode=mode;document.getElementById('calcR').value=JSON.stringify(d)}
+cCalc();
+</script>
+
+<!-- INQUIRY FORM MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeForm()"></div>
+<div class="modal-card" id="modalCard">
+  <button class="modal-close" onclick="closeForm()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <div class="modal-title">Let’s scope your library</div>
+  <div class="modal-sub">15 minutes. We’ll map your service lines and walk through what your library would look like.</div>
+  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <div class="m-field"><label>Your name</label><input type="text" name="name" placeholder="First and last name" required></div>
+    <div class="m-field"><label>Practice name</label><input type="text" name="practice" placeholder="Your practice" required></div>
+    <div class="m-field"><label>Email</label><input type="email" name="email" placeholder="you@practice.com" required></div>
+    <div class="m-field"><label>Your role</label><select name="role" required><option value="">Select...</option><option>Practice Owner / Partner</option><option>Physician</option><option>Practice Manager</option><option>Office Manager</option><option>Marketing Director</option><option>Administrator</option><option>Other</option></select></div>
+    <div class="m-field"><label>What type of practice?</label><select name="practice_type" required><option value="">Select...</option><option>Vascular / Vein</option><option>Orthopedic</option><option>Dermatology / Mohs</option><option>Ophthalmology</option><option>Urology</option><option>Plastic Surgery</option><option>Pain Management</option><option>GI / Endoscopy</option><option>Fertility / IVF</option><option>Other</option></select></div>
+    <div class="m-field"><label>How many service lines?</label><select name="service_lines" required><option value="">Select...</option><option>1–2 procedures</option><option>3–5 procedures</option><option>6–10 procedures</option><option>10+</option></select></div>
+    <button type="submit" class="m-submit">Let’s Scope Your Library <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+  </form>
+  <div class="m-note">Or email directly: <a href="mailto:hello@im-patient-focused.com">hello@im-patient-focused.com</a></div>
+</div>
+<script>
+function openForm(){document.getElementById("modalOverlay").classList.add("open");document.getElementById("modalCard").classList.add("open");document.body.style.overflow="hidden"}
+function closeForm(){document.getElementById("modalOverlay").classList.remove("open");document.getElementById("modalCard").classList.remove("open");document.body.style.overflow=""}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeForm()});
+</script>
+
+</body>
+</html>

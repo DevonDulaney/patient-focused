@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Estimated Impact — Patient Focused</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0B1F33;--navy-mid:#1A3450;--slate:#334155;--muted:#64748B;
+  --teal:#0E6F8F;--teal-light:#67D6E8;--border:#D8E3EC;
+  --soft-blue:#EEF6FB;--ice:#F4F9FC;--white:#FFFFFF;
+  --serif:'Source Serif 4',Georgia,serif;--sans:'Inter',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace;
+}
+body{font-family:var(--sans);color:var(--navy);background:var(--white)}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:1000;height:72px;padding:0 56px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--navy)}
+.nav-logo{width:44px;height:44px;border:2px solid var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:18px;font-style:italic}
+.nav-brand-name{font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.nav-right{display:flex;gap:12px;align-items:center}
+.nav-btn{padding:10px 20px;border-radius:8px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:all .2s}
+.nav-btn.outline{border:1.5px solid var(--navy);color:var(--navy)}
+.nav-btn.outline:hover{background:var(--navy);color:var(--white)}
+.nav-btn.fill{background:var(--navy);color:var(--white)}
+.nav-btn.fill:hover{background:var(--navy-mid)}
+
+/* COVER */
+.cover{padding:140px 0 80px;background:linear-gradient(180deg,var(--ice),var(--white));text-align:center}
+.cover-inner{max-width:720px;margin:0 auto;padding:0 2rem}
+.cover-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:20px}
+.cover h1{font-family:var(--serif);font-size:clamp(34px,5vw,52px);font-weight:400;line-height:1.1;letter-spacing:-.03em;color:var(--navy);margin-bottom:20px}
+.cover h1 em{font-style:italic;color:var(--teal)}
+.cover-sub{font-size:18px;color:var(--slate);line-height:1.7;max-width:560px;margin:0 auto 32px;font-weight:300}
+.cover-dl{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--white);border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-weight:500;color:var(--slate);cursor:pointer;transition:all .2s;text-decoration:none}
+.cover-dl:hover{border-color:var(--teal);color:var(--teal)}
+.cover-dl svg{width:16px;height:16px}
+
+/* CONTAINER */
+.container{max-width:880px;margin:0 auto;padding:0 2rem}
+
+/* IMPACT SECTIONS */
+.impact{padding:80px 0;border-top:1px solid var(--border)}
+.impact:first-of-type{border-top:none}
+.impact-header{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start;margin-bottom:32px}
+.impact-num-badge{width:56px;height:56px;background:var(--ice);border:2px solid var(--teal);border-radius:16px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:22px;color:var(--teal);flex-shrink:0}
+.impact-title{font-family:var(--serif);font-size:clamp(24px,3vw,32px);font-weight:400;color:var(--navy);line-height:1.2;margin-bottom:6px}
+.impact-title em{font-style:italic;color:var(--teal)}
+.impact-subtitle{font-size:15px;color:var(--muted)}
+
+/* BIG STAT */
+.big-stat{text-align:center;padding:40px;background:var(--soft-blue);border-radius:20px;margin-bottom:32px}
+.big-stat-num{font-family:var(--serif);font-size:clamp(48px,8vw,80px);font-weight:400;color:var(--navy);line-height:1}
+.big-stat-num span{font-size:.4em;color:var(--muted);font-family:var(--sans)}
+.big-stat-label{font-family:var(--serif);font-size:18px;font-style:italic;color:var(--muted);margin-top:8px}
+
+/* CALC BLOCK */
+.calc{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:24px}
+.calc-header{padding:16px 24px;background:var(--ice);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.calc-body{padding:24px}
+.calc-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(216,227,236,.5)}
+.calc-row:last-child{border-bottom:none}
+.calc-label{font-size:15px;color:var(--slate)}
+.calc-value{font-family:var(--serif);font-size:18px;color:var(--navy);font-weight:500}
+.calc-value.highlight{color:var(--teal);font-size:22px}
+.calc-row.total{border-top:2px solid var(--navy);border-bottom:none;padding-top:16px;margin-top:8px}
+.calc-row.total .calc-label{font-weight:600;color:var(--navy)}
+.calc-row.total .calc-value{font-size:24px;color:var(--navy)}
+
+/* PROSE */
+.impact-prose{font-size:16px;color:var(--slate);line-height:1.8;margin-bottom:16px}
+.impact-prose strong{color:var(--navy);font-weight:500}
+
+/* CITATION */
+.cite{font-size:12px;color:var(--muted);font-style:italic;padding-top:16px;border-top:1px solid var(--border);margin-top:24px}
+.cite a,.impact-prose a{color:var(--teal);text-decoration:none}
+.cite a:hover,.impact-prose a:hover{text-decoration:underline}
+
+/* TOTAL IMPACT */
+.total-section{padding:80px 0;background:var(--navy);text-align:center}
+.total-section h2{font-family:var(--serif);font-size:clamp(28px,4vw,42px);font-weight:400;color:rgba(255,255,255,.9);margin-bottom:8px}
+.total-section h2 em{font-style:italic;color:var(--teal-light)}
+.total-sub{font-size:15px;color:rgba(255,255,255,.5);margin-bottom:48px}
+.total-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:880px;margin:0 auto 40px;padding:0 2rem}
+.total-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:28px 20px}
+.total-card-num{font-family:var(--serif);font-size:clamp(28px,4vw,40px);font-weight:400;color:var(--white);line-height:1;margin-bottom:6px}
+.total-card-label{font-size:12px;color:rgba(255,255,255,.5);line-height:1.4}
+.total-combined{padding:32px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:24px;max-width:480px;margin:0 auto}
+.total-combined-label{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:8px}
+.total-combined-num{font-family:var(--serif);font-size:clamp(48px,8vw,72px);font-weight:400;color:var(--white);line-height:1}
+.total-combined-note{font-size:13px;color:rgba(255,255,255,.3);margin-top:8px;font-style:italic}
+
+/* CTA */
+.guide-cta{padding:100px 0;background:linear-gradient(180deg,var(--ice),var(--white));text-align:center}
+.guide-cta h2{font-family:var(--serif);font-size:clamp(28px,4vw,42px);font-weight:400;color:var(--navy);margin-bottom:16px}
+.guide-cta h2 em{font-style:italic;color:var(--teal)}
+.guide-cta p{font-size:16px;color:var(--slate);max-width:480px;margin:0 auto 28px;line-height:1.7}
+.guide-cta-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:var(--navy);color:var(--white);border-radius:12px;font-size:16px;font-weight:500;text-decoration:none;transition:all .3s;box-shadow:0 4px 20px rgba(11,31,51,.15)}
+.guide-cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(11,31,51,.2)}
+.guide-cta-btn svg{width:16px;height:16px}
+
+/* FOOTER */
+footer{padding:32px 2rem;border-top:1px solid var(--border)}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+
+/* PRINT */
+@media print{
+  nav,.cover-dl,.guide-cta,footer{display:none}
+  .cover{padding:60px 0 40px}
+  .impact{padding:40px 0}
+  .total-section{background:var(--navy) !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .total-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  nav{height:60px}
+  .nav-brand-name{font-size:12px}
+  .cover{padding:110px 0 60px}
+  .impact{padding:56px 0}
+  .impact-header{grid-template-columns:1fr}
+  .total-grid{grid-template-columns:1fr}
+  .calc-row{flex-direction:column;align-items:flex-start;gap:4px}
+}
+
+/* MODAL FORM */
+.modal-overlay{position:fixed;inset:0;background:rgba(11,31,51,.5);backdrop-filter:blur(6px);z-index:9999;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-card{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.95);z-index:10000;background:var(--white);border:1px solid var(--border);border-radius:24px;padding:40px;width:90%;max-width:480px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(11,31,51,.2);opacity:0;pointer-events:none;transition:all .35s cubic-bezier(.22,1,.36,1)}
+.modal-card.open{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border:none;background:var(--ice);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .2s}
+.modal-close:hover{background:var(--border);color:var(--navy)}
+.modal-close svg{width:16px;height:16px}
+.modal-title{font-family:var(--serif);font-size:24px;color:var(--navy);margin-bottom:6px}
+.modal-sub{font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.5}
+.m-field{margin-bottom:14px}
+.m-field label{display:block;font-size:13px;font-weight:500;color:var(--slate);margin-bottom:5px}
+.m-field input,.m-field select{width:100%;padding:11px 14px;background:var(--ice);border:1px solid var(--border);border-radius:10px;font-family:var(--sans);font-size:14px;color:var(--navy);outline:none;transition:border-color .2s;appearance:none}
+.m-field input:focus,.m-field select:focus{border-color:var(--teal)}
+.m-field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.m-submit{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px;margin-top:6px;background:var(--navy);color:var(--white);border:none;border-radius:12px;font-family:var(--sans);font-size:15px;font-weight:600;cursor:pointer;transition:all .3s;box-shadow:0 4px 16px rgba(11,31,51,.15)}
+.m-submit:hover{background:var(--navy-mid);transform:translateY(-1px);box-shadow:0 8px 24px rgba(11,31,51,.2)}
+.m-submit svg{width:16px;height:16px}
+.m-note{text-align:center;font-size:12px;color:var(--muted);margin-top:10px}
+.m-note a{color:var(--teal);text-decoration:none}
+
+
+.nav-right{display:flex;gap:10px;align-items:center}
+.nav-btn-secondary{padding:10px 18px;border-radius:8px;font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--teal);text-decoration:none;transition:all .2s;border:1.5px solid var(--border)}
+.nav-btn-secondary:hover{border-color:var(--teal);background:var(--ice)}
+
+.nav-logo-img{height:44px;width:auto;object-fit:contain}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand"><img src="assets/Patient Focused_transparent.png" alt="Patient Focused" class="nav-logo-img"></a>
+  <div class="nav-links">
+    <a href="solutions.html" class="nav-link ">Solutions</a>
+    <a href="who-we-serve.html" class="nav-link ">Who We Serve</a>
+    <a href="results.html" class="nav-link ">Results</a>
+  </div>
+  <div class="nav-right">
+    <a href="calculator.html" class="nav-btn-secondary">See Your Impact</a>
+    <a href="#" onclick="openForm();return false" class="nav-cta">Inquire</a>
+  </div>
+</nav>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">Impact Report</div>
+    <h1>Your Estimated <em>Impact</em></h1>
+    <p class="cover-sub">What a physician-on-camera education library means for your practice — in dollars, time, and risk reduction.</p>
+    <a href="#" class="cover-dl" onclick="window.print();return false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg> Download as PDF</a>
+  </div>
+</section>
+
+<!-- 1. CANCELLATION RECOVERY -->
+<section class="impact">
+  <div class="container">
+    <div class="impact-header">
+      <div class="impact-num-badge">1</div>
+      <div>
+        <div class="impact-title">Cancellation <em>Recovery</em></div>
+        <div class="impact-subtitle">Preventable cancellations are the most expensive problem no one is measuring.</div>
+      </div>
+    </div>
+
+    <div class="big-stat">
+      <div class="big-stat-num">65%</div>
+      <div class="big-stat-label">reduction in surgical non-completion with pre-procedure video</div>
+    </div>
+
+    <p class="impact-prose">Day-of surgical cancellations cost <strong>$2,000–$10,000 per case</strong>. National rates run 5–14%, and approximately 59.7% are preventable — NPO violations, missing labs, medication non-compliance, and patients who got scared the night before because they didn't understand what to expect.</p>
+
+    <p class="impact-prose">In the largest private-practice study of its kind, pre-procedure video education delivered via text <strong>cut non-completion from 37.6% to 13.2%</strong> across 14 practices and 516 patients.</p>
+
+    <div class="calc">
+      <div class="calc-header">Estimated impact for your practice</div>
+      <div class="calc-body">
+        <div class="calc-row"><span class="calc-label">Procedures per week</span><span class="calc-value">20</span></div>
+        <div class="calc-row"><span class="calc-label">Current cancellation rate</span><span class="calc-value">10%</span></div>
+        <div class="calc-row"><span class="calc-label">Cancelled procedures per week</span><span class="calc-value">2.0</span></div>
+        <div class="calc-row"><span class="calc-label">Average revenue per procedure</span><span class="calc-value">$5,000</span></div>
+        <div class="calc-row"><span class="calc-label">Weekly lost revenue</span><span class="calc-value">$10,000</span></div>
+        <div class="calc-row"><span class="calc-label">With 65% reduction</span><span class="calc-value highlight">0.7 cancellations/week</span></div>
+        <div class="calc-row total"><span class="calc-label">Estimated annual recovery</span><span class="calc-value">$338,000</span></div>
+      </div>
+    </div>
+
+    <p class="impact-prose">Even at half this reduction rate, a practice performing 20 procedures per week recovers <strong>over $150,000 annually</strong> in revenue that was previously walking out the door.</p>
+
+    <div class="cite"><a href="https://journals.sagepub.com/doi/10.1177/1557988319893568">Ballon-Landa E, Clavijo R, Gross M, et al. A novel video-based patient education program to reduce surgical cancellations. <em>Am J Mens Health.</em> 2019;13(6):1557988319892738.</a></div>
+  </div>
+</section>
+
+<!-- 2. CONSENT PROTECTION -->
+<section class="impact" style="background:var(--ice)">
+  <div class="container">
+    <div class="impact-header">
+      <div class="impact-num-badge">2</div>
+      <div>
+        <div class="impact-title">Consent <em>Protection</em></div>
+        <div class="impact-subtitle">The signed form proves a signature was obtained. It does not prove understanding.</div>
+      </div>
+    </div>
+
+    <div class="big-stat" style="background:var(--white)">
+      <div class="big-stat-num">114%</div>
+      <div class="big-stat-label">higher odds of payout when claims cite inadequate informed consent for procedures</div>
+    </div>
+
+    <p class="impact-prose">In Candello&rsquo;s database of approximately <strong>500,000 MPL cases</strong>, claims citing inadequate informed consent for procedures had <a href="https://www.candello.com/Candello-Blog/Patient-Safety-Informed-Consent">114% higher odds of closing with payment</a> (Adam Schaffer, MD, MPH, Candello Annual Community Summit, Sept 12, 2023).</p>
+
+    <p class="impact-prose">In vascular surgery, <strong>18.5% of active surgeons</strong> are named in a suit within any two-year window. 25% of venous and lymphatic disease claims specifically allege lack of informed consent. Only <strong>14% of vascular patients</strong> meet the threshold for adequate consent comprehension after standard verbal discussion.</p>
+
+    <div class="calc">
+      <div class="calc-header">What documented consent changes</div>
+      <div class="calc-body">
+        <div class="calc-row"><span class="calc-label">Average consent-related settlement</span><span class="calc-value">$295,000</span></div>
+        <div class="calc-row"><span class="calc-label">Video consent comprehension</span><span class="calc-value">78.5%</span></div>
+        <div class="calc-row"><span class="calc-label">Verbal-only comprehension</span><span class="calc-value">65.4%</span></div>
+        <div class="calc-row"><span class="calc-label">Comprehension improvement</span><span class="calc-value highlight">+13.1 points</span></div>
+        <div class="calc-row total"><span class="calc-label">One prevented claim saves</span><span class="calc-value">$295,000+</span></div>
+      </div>
+    </div>
+
+    <p class="impact-prose">A single prevented consent-related claim pays for <strong>the education library many times over</strong>. The documentation doesn't just improve outcomes — it creates the audit trail that transforms "he said / she said" into a verifiable record.</p>
+
+    <div class="cite">
+      <a href="https://www.candello.com/Candello-Blog/Patient-Safety-Informed-Consent">Folcarelli P. &ldquo;How a Robust Informed Consent Process Enhances Patient Safety.&rdquo; Candello Blog, Nov 16, 2023. Data attributed to Adam Schaffer, MD, MPH, Candello Annual Community Summit, Sept 12, 2023. Approximately 500,000 MPL cases in the Candello database.</a><br>
+      Dua A, Defined RA, Desai SS, et al. National assessment of malpractice claims involving vascular surgeons. <em>J Vasc Surg.</em> 2022;75(1):330-336.<br>
+      Rossi MJ, Guttmann D, MacLennan MJ, Lubowitz JH. Video informed consent improves knee arthroscopy comprehension. <em>Arthroscopy.</em> 2005;21(6):739-743.
+    </div>
+  </div>
+</section>
+
+<!-- 3. SEARCH VISIBILITY -->
+<section class="impact">
+  <div class="container">
+    <div class="impact-header">
+      <div class="impact-num-badge">3</div>
+      <div>
+        <div class="impact-title">Search <em>Visibility</em></div>
+        <div class="impact-subtitle">Your patients are searching. The question is whether they find you or a stranger.</div>
+      </div>
+    </div>
+
+    <div class="big-stat">
+      <div class="big-stat-num">53<span>&times;</span></div>
+      <div class="big-stat-label">more likely to reach Google page one with video content</div>
+    </div>
+
+    <p class="impact-prose"><strong>86% of patients research providers online before booking.</strong> A systematic review of 3,221 vascular surgery YouTube videos found that 53% were rated poor quality — and the worst videos averaged 27,348 views, more than double the views of fair-quality content. Your patients are watching the worst material available.</p>
+
+    <p class="impact-prose">Google classifies health content under its highest quality standards. A board-certified physician on camera is the <strong>strongest possible quality signal</strong> for health search results.</p>
+
+    <div class="calc">
+      <div class="calc-header">What search visibility means for bookings</div>
+      <div class="calc-body">
+        <div class="calc-row"><span class="calc-label">Patients researching providers before booking</span><span class="calc-value">86%</span></div>
+        <div class="calc-row"><span class="calc-label">Mobile health researchers who book</span><span class="calc-value">44%</span></div>
+        <div class="calc-row"><span class="calc-label">Additional organic traffic with video (est.)</span><span class="calc-value">+30–50%</span></div>
+        <div class="calc-row"><span class="calc-label">Current new patients per month</span><span class="calc-value">40</span></div>
+        <div class="calc-row total"><span class="calc-label">Estimated additional patients/month</span><span class="calc-value highlight">12–20</span></div>
+      </div>
+    </div>
+
+    <p class="impact-prose">At $3,000–$7,000 per procedure, each new patient represents significant lifetime value. <strong>The practice whose physician answers the question on camera wins the patient</strong> before a competitor knows they were searching.</p>
+
+    <div class="cite">
+      <a href="https://pubmed.ncbi.nlm.nih.gov/38414727/">Javidan A, Vignarajah M, Nelms MW, et al. YouTube as a source of patient and trainee education in vascular surgery: a systematic review. <em>EJVES Vasc Forum.</em> 2024;61:62-76.</a><br>
+      Forrester Research / Wyzowl. Video Marketing Statistics. 2023.
+    </div>
+  </div>
+</section>
+
+<!-- 4. TIME RECOVERY -->
+<section class="impact" style="background:var(--ice)">
+  <div class="container">
+    <div class="impact-header">
+      <div class="impact-num-badge">4</div>
+      <div>
+        <div class="impact-title">Time <em>Recovery</em></div>
+        <div class="impact-subtitle">The physician spends less time. The patient understands more.</div>
+      </div>
+    </div>
+
+    <div class="big-stat" style="background:var(--white)">
+      <div class="big-stat-num">6.7<span> min</span></div>
+      <div class="big-stat-label">saved per consent encounter with video education</div>
+    </div>
+
+    <p class="impact-prose"><a href="https://doi.org/10.1155/2017/9593631">Video-assisted consent</a> reduced the consent conversation from <strong>12.3 minutes to 5.6 minutes</strong> while simultaneously raising patient satisfaction from 65% to 86%. A separate study demonstrated a <strong>33% reduction in physician time</strong> per consent encounter.</p>
+
+    <p class="impact-prose">The physician doesn't spend less time because they're rushing. They spend less time because the patient arrives informed. The conversation shifts from education to Q&A — which is faster, more productive, and more satisfying for both sides.</p>
+
+    <div class="calc">
+      <div class="calc-header">What time recovery looks like weekly</div>
+      <div class="calc-body">
+        <div class="calc-row"><span class="calc-label">Consent encounters per week</span><span class="calc-value">20</span></div>
+        <div class="calc-row"><span class="calc-label">Time saved per encounter</span><span class="calc-value">6.7 min</span></div>
+        <div class="calc-row"><span class="calc-label">Weekly physician time recovered</span><span class="calc-value highlight">2.2 hours</span></div>
+        <div class="calc-row"><span class="calc-label">Annual physician time recovered</span><span class="calc-value">115 hours</span></div>
+        <div class="calc-row"><span class="calc-label">At $400/hour physician value</span><span class="calc-value">$46,000</span></div>
+        <div class="calc-row total"><span class="calc-label">Estimated annual time value</span><span class="calc-value">$46,000</span></div>
+      </div>
+    </div>
+
+    <p class="impact-prose">115 hours per year is <strong>nearly three full clinic weeks</strong> returned to the physician's schedule — available for additional patients, procedures, or the work-life balance that keeps physicians from burning out.</p>
+
+    <div class="cite">
+      <a href="https://doi.org/10.1155/2017/9593631">Zhang Y, Ruan X, Tang H, Yang W, Xian Z, Lu M. &ldquo;Video-Assisted Informed Consent for Cataract Surgery: A Randomized Controlled Trial.&rdquo; <em>J Ophthalmol.</em> 2017;2017:9593631. Published Jan 16, 2017.</a><br>
+      Haack M, Lutze B, Gerhards C, et al. Video-based informed consent for radical prostatectomy (DICon). <em>Prostate Cancer Prostatic Dis.</em> 2023;26(4):726-731.
+    </div>
+  </div>
+</section>
+
+<!-- TOTAL IMPACT -->
+<section class="total-section">
+  <div style="padding:0 2rem">
+    <h2>Total Estimated <em>Annual Impact</em></h2>
+    <div class="total-sub">Based on a practice performing 20 procedures per week</div>
+    <div class="total-grid">
+      <div class="total-card"><div class="total-card-num">$338K</div><div class="total-card-label">Cancellation revenue recovered</div></div>
+      <div class="total-card"><div class="total-card-num">$295K</div><div class="total-card-label">Potential claim prevented</div></div>
+      <div class="total-card"><div class="total-card-num">12–20</div><div class="total-card-label">Additional patients per month from search</div></div>
+      <div class="total-card"><div class="total-card-num">115 hrs</div><div class="total-card-label">Physician time recovered annually</div></div>
+    </div>
+    <div class="total-combined">
+      <div class="total-combined-label">Estimated combined annual impact</div>
+      <div class="total-combined-num">$500K+</div>
+      <div class="total-combined-note">Conservative estimate at 20 procedures/week and $5,000 average per case</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="guide-cta">
+  <div style="max-width:600px;margin:0 auto;padding:0 2rem">
+    <h2>Let&rsquo;s see what the numbers look like <em>for your practice</em></h2>
+    <p>15 minutes. We&rsquo;ll map your service lines, estimate your library scope, and calculate the projected impact based on your specific procedure volume.</p>
+    <a href="#" onclick="openForm();return false" class="guide-cta-btn">Let&rsquo;s Scope Your Library <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="padding:32px 2rem;border-top:1px solid var(--border);background:var(--white)">
+  <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+    <div style="font-family:var(--serif);font-style:italic;color:var(--muted);font-size:15px">Patient Focused</div>
+    <div style="display:flex;gap:24px"><a href="solutions.html" style="color:var(--muted);text-decoration:none;font-size:13px">Solutions</a><a href="who-we-serve.html" style="color:var(--muted);text-decoration:none;font-size:13px">Who We Serve</a><a href="results.html" style="color:var(--muted);text-decoration:none;font-size:13px">Results</a><a href="calculator.html" style="color:var(--muted);text-decoration:none;font-size:13px">Impact Calculator</a><a href="about.html" style="color:var(--muted);text-decoration:none;font-size:13px">About</a></div>
+    <div style="font-size:12px;color:var(--muted)">&copy; 2026 Patient Focused</div>
+  </div>
+</footer>
+
+
+<!-- INQUIRY FORM MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeForm()"></div>
+<div class="modal-card" id="modalCard">
+  <button class="modal-close" onclick="closeForm()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <div class="modal-title">Let’s scope your library</div>
+  <div class="modal-sub">15 minutes. We’ll map your service lines and walk through what your library would look like.</div>
+  <!-- REPLACE the action URL below with your Formspree endpoint: https://formspree.io/f/YOUR_FORM_ID -->
+  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <div class="m-field"><label>Your name</label><input type="text" name="name" placeholder="First and last name" required></div>
+    <div class="m-field"><label>Practice name</label><input type="text" name="practice" placeholder="Your practice" required></div>
+    <div class="m-field"><label>Email</label><input type="email" name="email" placeholder="you@practice.com" required></div>
+    <div class="m-field"><label>Your role</label><select name="role" required><option value="">Select...</option><option>Practice Owner / Partner</option><option>Physician</option><option>Practice Manager</option><option>Office Manager</option><option>Marketing Director</option><option>Administrator</option><option>Other</option></select></div>
+    <div class="m-field"><label>What type of practice?</label><select name="practice_type" required><option value="">Select...</option><option>Vascular / Vein</option><option>Orthopedic</option><option>Dermatology / Mohs</option><option>Ophthalmology</option><option>Urology</option><option>Plastic Surgery</option><option>Pain Management</option><option>GI / Endoscopy</option><option>Fertility / IVF</option><option>Other</option></select></div>
+    <div class="m-field"><label>How many service lines?</label><select name="service_lines" required><option value="">Select...</option><option>1–2 procedures</option><option>3–5 procedures</option><option>6–10 procedures</option><option>10+</option></select></div>
+    <button type="submit" class="m-submit">Let’s Scope Your Library <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+  </form>
+  <div class="m-note">Or email directly: <a href="mailto:hello@im-patient-focused.com">hello@im-patient-focused.com</a></div>
+</div>
+
+
+<script>
+function openForm(){document.getElementById("modalOverlay").classList.add("open");document.getElementById("modalCard").classList.add("open");document.body.style.overflow="hidden"}
+function closeForm(){document.getElementById("modalOverlay").classList.remove("open");document.getElementById("modalCard").classList.remove("open");document.body.style.overflow=""}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeForm()});
+</script>
+
+</body>
+</html>

@@ -4,1428 +4,840 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Patient Focused — Building stronger patient-provider relationships</title>
-<meta name="description" content="The Patient Focused Education Library — documentary-quality patient education videos for private practices. Building stronger patient-provider relationships.">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
-:root{
-  /* Patient Focused — Path A · Bone + Deep Teal · Editorial Medical */
-  --paper:#F4F1EA;             /* Page — bone, not cream. Less yellow. */
-  --paper-warm:#EFEAE0;         /* Slightly warmer panel surface */
-  --ink:#1A1A1A;                /* Body ink */
-  --ink-soft:#3A3A3A;           /* Body prose color (softer than ink) */
-  --ink-muted:#5C5751;          /* Secondary text */
-  --ink-quiet:#8A8378;          /* Tertiary, captions, eyebrows */
-  --rule:#E0DAC8;               /* Hairline dividers */
-  --rule-bright:#D4CDB8;        /* Slightly brighter rule for hover */
-  --primary:#2D5048;            /* Deep editorial teal — the spine color */
-  --primary-soft:#3F6A60;       /* Hover/lighter */
-  --primary-faint:rgba(45,80,72,0.06);
-  --accent:#A8895C;             /* Brass, used sparingly for warmth */
-  --accent-soft:rgba(168,137,92,0.10);
-}
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-section[id]{scroll-margin-top:88px}
-body{
-  font-family:'Inter',sans-serif;
-  background:var(--paper);
-  color:var(--ink);
-  line-height:1.65;
-  overflow-x:hidden;
-  font-feature-settings:"ss01","cv11";
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
+:root{
+  --navy:#0B1F33;--navy-mid:#1A3450;--slate:#334155;--muted:#64748B;
+  --teal:#0E6F8F;--teal-light:#67D6E8;--teal-bright:#4FC9E0;
+  --border:#D8E3EC;--soft-blue:#EEF6FB;--ice:#F4F9FC;--white:#FFFFFF;
+  --serif:'Source Serif 4',Georgia,serif;--sans:'Inter',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace;
 }
-
-/* PAPER GRAIN — subtle fractal noise, multiplied at low opacity */
-body::before{
-  content:'';
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:1;
-  opacity:.32;
-  mix-blend-mode:multiply;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 0.4  0 0 0 0 0.35  0 0 0 0 0.25  0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.18'/%3E%3C/svg%3E");
-}
-/* AMBIENT GRADIENT — barely-there tonal warmth from page top to bottom */
-body::after{
-  content:'';
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:1;
-  background:linear-gradient(180deg,rgba(45,80,72,0.035) 0%,transparent 40%,transparent 60%,rgba(168,137,92,0.04) 100%);
-}
-
-.container{max-width:1200px;margin:0 auto;padding:0 2rem;position:relative;z-index:2}
+body{font-family:var(--sans);color:var(--navy);background:var(--white);overflow-x:hidden}
 
 /* NAV */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  height:72px;padding:0 2rem;
-  display:flex;align-items:center;justify-content:space-between;
-  background:rgba(244,241,234,0.92);
-  backdrop-filter:blur(20px);
-  border-bottom:0.5px solid var(--rule);
-}
-.logo{display:flex;align-items:center;gap:.85rem;text-decoration:none;color:var(--ink)}
-.logo-mark{
-  width:36px;height:36px;
-  background:var(--paper-warm);
-  border:0.5px solid var(--rule-bright);
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  position:relative;
-}
-.logo-mark svg{width:16px;height:16px;color:var(--primary)}
-.logo-text{
-  font-family:'Source Serif 4',serif;
-  font-size:1.25rem;
-  letter-spacing:-.005em;
-  font-weight:400;
-}
-.nav-links{display:flex;gap:2.5rem}
-.nav-link{
-  color:var(--ink-muted);text-decoration:none;font-size:.875rem;
-  transition:color .2s;
-}
-.nav-link:hover{color:var(--ink)}
-.nav-cta{
-  display:inline-flex;align-items:center;gap:.5rem;
-  padding:.6rem 1.25rem;
-  background:var(--ink);
-  color:var(--paper);
-  border-radius:999px;
-  text-decoration:none;
-  font-weight:500;
-  font-size:.85rem;
-  transition:all .25s;
-  border:0.5px solid var(--ink);
-}
-.nav-cta:hover{background:var(--primary);border-color:var(--primary)}
+nav{height:72px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.nav-brand{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--navy)}
+.nav-logo{width:44px;height:44px;border:2px solid var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:18px;font-style:italic;color:var(--navy)}
+.nav-brand-name{font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.nav-links{display:flex;gap:32px}
+.nav-link{font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--slate);text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:4px}
+.nav-link:hover{color:var(--teal)}
+.nav-link svg{width:10px;height:10px}
+.nav-cta{padding:12px 24px;border:1.5px solid var(--navy);border-radius:8px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);text-decoration:none;transition:all .2s}
+.nav-cta:hover{background:var(--navy);color:var(--white)}
 
 /* HERO */
-.hero{padding:160px 0 100px;position:relative}
-.hero-content{position:relative;z-index:2;max-width:920px;margin:0 auto;text-align:center}
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:.6rem;
-  margin-bottom:2rem;
-  font-family:'Source Serif 4',serif;
-  font-style:italic;
-  font-size:.95rem;
-  color:var(--ink-muted);
-}
-.hero-eyebrow .pulse{
-  width:7px;height:7px;border-radius:50%;
-  background:var(--primary);
-  position:relative;
-}
-.hero-eyebrow .pulse::after{
-  content:'';position:absolute;inset:-3px;
-  border-radius:50%;
-  background:var(--primary);
-  opacity:.3;
-  animation:pulse 2.4s ease-out infinite;
-}
-@keyframes pulse{
-  0%{opacity:.3;transform:scale(1)}
-  100%{opacity:0;transform:scale(2.2)}
-}
-.hero h1{
-  font-family:'Source Serif 4',serif;
-  font-size:clamp(2.75rem,6vw,5rem);
-  font-weight:400;
-  line-height:1.04;
-  margin-bottom:1.75rem;
-  letter-spacing:-.025em;
-  color:var(--ink);
-}
-.hero h1 em{font-style:italic;color:var(--primary)}
-.hero-sub{
-  font-family:'Source Serif 4',serif;
-  font-size:1.2rem;
-  color:var(--ink-muted);
-  max-width:660px;
-  margin:0 auto 2.75rem;
-  line-height:1.65;
-  font-weight:400;
-}
-.hero-sub strong{color:var(--ink);font-weight:500}
-.hero-sub em{font-style:italic;color:var(--primary)}
-.hero-ctas{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:4.5rem}
+.hero{padding:56px 48px 0;background:linear-gradient(180deg,var(--white) 0%,var(--ice) 100%);overflow:hidden;position:relative}
+.hero-grid{display:grid;grid-template-columns:.78fr 1.22fr;gap:32px;align-items:start;max-width:1440px;margin:0 auto}
 
-/* PILL CTAs — Ro-inspired. Always pills, never rectangles. */
-.cta-pill{
-  display:inline-flex;align-items:center;gap:.55rem;
-  padding:.95rem 1.85rem;
-  border-radius:999px;
-  font-size:.95rem;
-  font-weight:500;
-  text-decoration:none;
-  letter-spacing:.005em;
-  transition:all .25s;
-  border:0.5px solid transparent;
-}
-.cta-pill svg{width:14px;height:14px;transition:transform .3s}
-.cta-pill:hover svg{transform:translateX(3px)}
-.cta-pill.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.cta-pill.primary:hover{background:var(--primary);border-color:var(--primary)}
-.cta-pill.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
-.cta-pill.ghost:hover{background:var(--ink);color:var(--paper)}
-.cta-pill.brand{background:var(--primary);color:var(--paper);border-color:var(--primary)}
-.cta-pill.brand:hover{background:var(--primary-soft);border-color:var(--primary-soft)}
+/* LEFT */
+.hero-text{padding-top:24px;max-width:500px}
+.hero-eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:20px}
+.hero-h1{font-family:var(--serif);font-size:clamp(42px,4.5vw,72px);font-weight:400;line-height:.98;letter-spacing:-.04em;color:var(--navy);margin-bottom:12px}
+.hero-h1 .dot{color:var(--teal)}
+.hero-rule{width:40px;height:3px;background:var(--teal);border-radius:2px;margin:24px 0}
+.hero-sub{font-size:18px;line-height:1.65;color:var(--slate);max-width:400px;margin-bottom:32px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.btn-fill{display:inline-flex;align-items:center;gap:10px;padding:15px 24px;background:var(--navy);color:var(--white);border-radius:10px;font-size:14px;font-weight:500;text-decoration:none;transition:all .3s;box-shadow:0 4px 16px rgba(11,31,51,.15)}
+.btn-fill:hover{background:var(--navy-mid);transform:translateY(-2px);box-shadow:0 8px 24px rgba(11,31,51,.2)}
+.btn-fill svg{width:16px;height:16px}
+.btn-ghost{display:inline-flex;align-items:center;gap:10px;padding:15px 24px;background:var(--white);color:var(--slate);border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-weight:500;text-decoration:none;transition:all .3s}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+.btn-ghost svg{width:16px;height:16px;color:var(--muted)}
 
-/* CREDIBILITY STRIP */
-.cred-strip{
-  display:flex;justify-content:center;gap:3rem;
-  flex-wrap:wrap;align-items:center;
-  padding-top:2.5rem;
-  border-top:0.5px solid var(--rule);
-}
-.cred-item{
-  display:flex;align-items:center;gap:.65rem;
-  color:var(--ink-muted);font-size:.85rem;
-  font-family:'Source Serif 4',serif;
-  font-style:italic;
-}
-.cred-item svg{width:16px;height:16px;color:var(--primary)}
-.cred-divider{width:1px;height:14px;background:var(--rule)}
+/* RIGHT: 3-STEP JOURNEY */
+.journey{position:relative;padding:0 0 20px}
 
-/* FOUNDING OFFER BLOCK — benefit-first reveal */
-.founding-offer-section{padding:90px 0;border-top:0.5px solid var(--rule);position:relative}
-.founding-offer{max-width:880px;margin:0 auto;text-align:center;position:relative;z-index:2}
-.founding-eyebrow{
-  font-family:'Source Serif 4',serif;
-  font-style:italic;
-  font-size:.95rem;
-  color:var(--ink-muted);
-  margin-bottom:1.25rem;
-  display:inline-flex;align-items:center;gap:.6rem;
-}
-.founding-eyebrow .pulse{
-  width:6px;height:6px;border-radius:50%;
-  background:var(--primary);position:relative;
-}
-.founding-eyebrow .pulse::after{
-  content:'';position:absolute;inset:-3px;border-radius:50%;
-  background:var(--primary);opacity:.3;
-  animation:pulse 2.4s ease-out infinite;
-}
-.founding-headline{
-  font-family:'Source Serif 4',serif;
-  font-size:clamp(2.25rem,5vw,4rem);
-  font-weight:400;
-  line-height:1.05;
-  letter-spacing:-.025em;
-  margin-bottom:1.5rem;
-}
-.founding-headline em{font-style:italic;color:var(--primary)}
-.founding-explainer{
-  font-family:'Source Serif 4',serif;
-  font-size:1.2rem;
-  color:var(--ink-muted);
-  max-width:680px;
-  margin:0 auto 2.5rem;
-  line-height:1.6;
-}
-.founding-explainer strong{color:var(--ink);font-weight:500}
-.founding-explainer .price-amount{
-  font-family:'Source Serif 4',serif;
-  font-style:italic;
-  color:var(--primary);
-  font-size:1.4rem;
-  font-weight:400;
-}
+/* Step journey */
+.journey-content{position:relative;display:grid;grid-template-columns:236px minmax(0,1fr) minmax(0,1.2fr);grid-template-rows:auto auto;gap:16px;align-items:start}
+.journey-content::after{content:'';grid-column:1/-1;grid-row:1;align-self:center;height:0;border-top:2px dashed var(--border);margin:0 12%;z-index:0;pointer-events:none;transform:scaleX(0);transform-origin:left;transition:transform 1.2s cubic-bezier(.22,1,.36,1) .3s}
+.journey-content.steps-visible::after{transform:scaleX(1)}
+.journey-step{display:contents}
+.step-header{display:flex;align-items:center;gap:10px;position:relative;z-index:1}
+.journey-step:nth-child(1) .step-header{grid-column:1;grid-row:1}
+.journey-step:nth-child(2) .step-header{grid-column:2;grid-row:1}
+.journey-step:nth-child(3) .step-header{grid-column:3;grid-row:1}
+.journey-step:nth-child(1) .phone-frame{grid-column:1;grid-row:2}
+.journey-step:nth-child(2) .video-card{grid-column:2;grid-row:2}
+.journey-step:nth-child(3) .trust-stack{grid-column:3;grid-row:2}
+.step-num{width:32px;height:32px;border-radius:50%;background:var(--soft-blue);border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:14px;font-weight:600;color:var(--teal);flex-shrink:0}
+.step-label{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);line-height:1.2}
 
-/* MECHANICS GRID — hairline-bordered, paper-typeset */
-.founding-mechanics{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  max-width:680px;margin:0 auto 2.5rem;
-  border-top:0.5px solid var(--rule);
-  border-bottom:0.5px solid var(--rule);
-}
-.founding-mech{
-  padding:1.25rem 1rem;text-align:center;
-  border-right:0.5px solid var(--rule);
-}
-.founding-mech:last-child{border-right:none}
-.founding-mech-label{
-  font-family:'Source Serif 4',serif;
-  font-style:italic;
-  font-size:.85rem;
-  color:var(--ink-muted);
-  margin-bottom:.5rem;
-}
-.founding-mech-value{
-  font-family:'Source Serif 4',serif;
-  font-size:1.5rem;
-  color:var(--ink);
-  line-height:1;letter-spacing:-.01em;
-}
-.founding-mech-value em{font-style:italic;color:var(--primary)}
-.founding-mech-value.deadline{font-size:1.1rem;letter-spacing:0}
+/* STEP 1: iPhone SMS */
+.phone-frame{background:var(--white);border:1px solid var(--border);border-radius:28px;padding:0;box-shadow:0 8px 40px rgba(15,42,68,.1);overflow:hidden;position:relative;width:100%;max-width:236px;margin-inline:auto}
+.phone-notch{width:120px;height:24px;background:var(--white);border-radius:0 0 16px 16px;margin:0 auto;position:relative;z-index:1}
+.phone-status{display:flex;justify-content:center;padding:0 20px 4px;font-size:12px;font-weight:600;color:var(--navy)}
+.phone-header{display:flex;align-items:center;gap:8px;padding:8px 16px 12px;border-bottom:1px solid var(--border)}
+.phone-header-center{display:flex;align-items:center;gap:10px}
+.phone-avatar{width:28px;height:28px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:11px;color:var(--white);font-style:italic}
+.phone-contact{font-size:13px;font-weight:600;color:var(--navy)}
+.phone-meta{font-size:9px;color:var(--muted);line-height:1.3}
+.phone-body{padding:16px;min-height:200px}
+.sms-bubble{background:var(--ice);border:1px solid var(--border);border-radius:16px 16px 16px 4px;padding:14px 16px;font-size:12.5px;color:var(--slate);line-height:1.55}
+.sms-sender{font-weight:600;color:var(--navy);margin-bottom:4px}
+.sms-link{color:var(--teal);text-decoration:none;font-weight:500}
+.phone-input{display:flex;align-items:center;gap:10px;padding:10px 16px;border-top:1px solid var(--border)}
+.phone-input-plus{width:28px;height:28px;border-radius:50%;background:var(--ice);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--muted)}
+.phone-input-field{flex:1;padding:8px 14px;background:var(--ice);border:1px solid var(--border);border-radius:20px;font-size:12px;color:var(--muted)}
 
-/* OFFER TICKER — only engages on scroll past founding offer */
-.offer-ribbon-section{
-  position:sticky;top:72px;z-index:900;
-  border-top:0.5px solid var(--rule);
-  border-bottom:0.5px solid var(--rule);
-  background:rgba(244,241,234,0.95);
-  backdrop-filter:blur(20px);
-  overflow:hidden;
-  display:none;
-}
-.offer-ribbon-section.is-active{display:block}
-.offer-ribbon-ticker{
-  display:flex;align-items:center;
-  height:42px;width:100%;
-  position:relative;z-index:2;
-}
-.ticker-track{
-  display:flex;align-items:center;
-  animation:ticker-scroll 50s linear infinite;
-  white-space:nowrap;flex-shrink:0;
-}
-.ticker-item{
-  display:inline-flex;align-items:center;gap:.6rem;
-  padding:0 1.5rem;
-  font-family:'Source Serif 4',serif;
-  font-style:italic;
-  font-size:.85rem;
-  color:var(--ink-muted);
-  flex-shrink:0;
-}
-.ticker-item strong{color:var(--ink);font-style:normal;font-weight:500}
-.ticker-item .price{
-  font-family:'Source Serif 4',serif;
-  font-style:italic;
-  color:var(--primary);
-  font-size:1rem;
-  font-weight:400;
-}
-.ticker-item .pulse{
-  width:5px;height:5px;border-radius:50%;
-  background:var(--primary);
-}
-.ticker-divider{
-  width:3px;height:3px;border-radius:50%;
-  background:var(--ink-quiet);
-  flex-shrink:0;margin:0 .25rem;opacity:.5;
-}
-.ticker-cta-link{
-  font-family:'Source Serif 4',serif;
-  font-style:italic;
-  font-size:.85rem;
-  color:var(--primary);
-  text-decoration:none;
-  font-weight:500;
-  display:inline-flex;align-items:center;gap:.4rem;
-}
-.ticker-cta-link:hover{color:var(--primary-soft);text-decoration:underline}
-.ticker-cta-link svg{width:11px;height:11px}
-@keyframes ticker-scroll{
-  0%{transform:translateX(0)}
-  100%{transform:translateX(-50%)}
-}
-.offer-ribbon-section:hover .ticker-track{animation-play-state:paused}
 
-/* MANIFESTO — pull-quote section */
-.manifesto{
-  padding:120px 0;
-  border-top:0.5px solid var(--rule);
-  position:relative;
-}
-.manifesto-content{max-width:820px;margin:0 auto;text-align:center;position:relative}
-.manifesto-mark{
-  font-family:'Source Serif 4',serif;font-style:italic;
-  font-size:7rem;line-height:1;
-  color:var(--primary);opacity:.18;
-  position:absolute;top:-2.5rem;left:-1rem;
-}
-.manifesto-text{
-  font-family:'Source Serif 4',serif;
-  font-size:clamp(1.55rem,2.8vw,2.2rem);
-  line-height:1.4;font-weight:400;
-  letter-spacing:-.01em;
-  position:relative;z-index:1;
-  color:var(--ink);
-}
-.manifesto-text em{font-style:italic;color:var(--primary)}
-.manifesto-attribution{
-  margin-top:2.5rem;
-  font-family:'Source Serif 4',serif;
-  font-style:italic;
-  font-size:.85rem;
-  color:var(--ink-quiet);
-}
+/* STEP 2: Video card */
+.video-card{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(15,42,68,.08)}
+.video-player{aspect-ratio:16/10;background:linear-gradient(135deg,#2A4060,#1A3050);position:relative;display:flex;align-items:center;justify-content:center}
+.video-play-btn{width:56px;height:56px;background:rgba(255,255,255,.2);backdrop-filter:blur(8px);border:2px solid rgba(255,255,255,.4);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.video-play-btn svg{width:22px;height:22px;color:var(--white);margin-left:3px}
+.video-dr-label{position:absolute;bottom:40px;left:16px;color:rgba(255,255,255,.8);font-size:11px;line-height:1.3}
+.video-dr-label strong{display:block;color:var(--white);font-size:13px}
+.video-controls{display:flex;align-items:center;gap:8px;padding:8px 12px;background:rgba(0,0,0,.7);position:absolute;bottom:0;left:0;right:0}
+.video-controls svg{width:14px;height:14px;color:var(--white)}
+.video-time{font-size:10px;color:rgba(255,255,255,.7);flex:1}
+.video-progress{flex:3;height:3px;background:rgba(255,255,255,.2);border-radius:2px;position:relative}
+.video-progress::after{content:'';position:absolute;left:0;top:0;width:0%;height:100%;background:var(--teal-light);border-radius:2px}
+.video-meta{padding:12px 16px}
+.video-meta-title{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:8px}
+.video-tags{display:flex;gap:6px;flex-wrap:wrap}
+.video-tag{padding:4px 10px;background:var(--ice);border:1px solid var(--border);border-radius:20px;font-size:10px;color:var(--muted);font-weight:500}
 
-/* SECTIONS */
-.section{padding:110px 0;border-top:0.5px solid var(--rule);position:relative}
-.section-header{margin-bottom:4rem;max-width:780px}
-.section-header.center{margin-left:auto;margin-right:auto;text-align:center}
-.section-eyebrow{
-  font-family:'Source Serif 4',serif;
-  font-style:italic;
-  font-size:.95rem;
-  color:var(--ink-muted);
-  margin-bottom:1rem;
-}
-.section-title{
-  font-family:'Source Serif 4',serif;
-  font-size:clamp(2rem,4vw,3rem);
-  font-weight:400;
-  margin-bottom:1.25rem;
-  line-height:1.1;
-  letter-spacing:-.025em;
-}
-.section-title em{font-style:italic;color:var(--primary)}
-.section-desc{
-  font-family:'Source Serif 4',serif;
-  font-size:1.15rem;
-  color:var(--ink-muted);
-  line-height:1.7;
-  font-weight:400;
-}
-.section-desc strong{color:var(--ink);font-weight:500}
-.section-desc em{font-style:italic;color:var(--primary)}
+/* STEP 3: Trust cards */
+.trust-stack{display:flex;flex-direction:column;gap:10px;min-width:0;width:100%}
+.trust-card{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--white);border:1px solid var(--border);border-radius:14px;box-shadow:0 2px 8px rgba(15,42,68,.04);transition:all .2s}
+.trust-card:hover{box-shadow:0 6px 16px rgba(15,42,68,.07)}
+.trust-icon{width:40px;height:40px;background:var(--ice);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.trust-icon svg{width:18px;height:18px;color:var(--teal)}
+.trust-card-text{flex:1;min-width:0}
+.trust-card-title{font-size:12px;font-weight:600;color:var(--navy)}
+.trust-card-desc{font-size:10px;color:var(--muted);line-height:1.4;margin-top:2px}
+.trust-card-arrow{color:var(--border);flex-shrink:0}
+.trust-card-arrow svg{width:14px;height:14px}
+.trust-quote{padding:14px 16px;background:var(--ice);border:1px solid var(--border);border-radius:14px;margin-top:2px}
+.trust-quote-mark{font-family:var(--serif);font-size:24px;color:var(--teal);line-height:1;margin-bottom:4px}
+.trust-quote-text{font-size:11px;color:var(--slate);line-height:1.5;font-style:italic}
+.trust-quote-attr{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.trust-quote-name{font-size:10px;color:var(--muted)}
+.trust-stars{display:flex;gap:2px}
+.trust-stars svg{width:12px;height:12px;fill:#F59E0B;stroke:none}
 
-/* PROBLEM BLOCK */
-.problem-block{
-  background:var(--paper-warm);
-  border:0.5px solid var(--rule);
-  border-left:2px solid var(--primary);
-  border-radius:14px;
-  padding:2.25rem 2.5rem;
-  margin-bottom:4.5rem;
-  position:relative;
-}
-.problem-block .label{
-  font-family:'Source Serif 4',serif;
-  font-style:italic;
-  font-size:.85rem;
-  color:var(--ink-muted);
-  margin-bottom:.85rem;
-}
-.problem-block h3{
-  font-family:'Source Serif 4',serif;
-  font-size:1.7rem;
-  margin-bottom:1rem;line-height:1.25;
-  font-weight:400;letter-spacing:-.01em;
-}
-.problem-block h3 em{font-style:italic;color:var(--primary)}
-.problem-block p{
-  font-family:'Source Serif 4',serif;
-  font-size:1.05rem;
-  color:var(--ink-soft);
-  line-height:1.7;
-  margin-bottom:.85rem;
-}
-.problem-block p:last-child{margin-bottom:0}
-.problem-block strong{color:var(--ink);font-weight:500}
-.problem-search{
-  display:inline-block;
-  font-family:'JetBrains Mono',monospace;
-  font-size:.85rem;
-  color:var(--primary);
-  background:transparent;
-  border:0.5px solid var(--primary);
-  padding:.18rem .55rem;
-  border-radius:4px;
-  margin:.15rem .25rem .15rem 0;
-}
+/* STATS BAR */
+.stats-bar{padding:40px 48px 0;max-width:1440px;margin:0 auto}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center;padding-bottom:24px}
+.stat-icon{margin:0 auto 10px;color:var(--teal)}
+.stat-icon svg{width:28px;height:28px;stroke-width:1.5}
+.stat-num{font-family:var(--serif);font-size:clamp(32px,4vw,48px);font-weight:400;color:var(--navy);line-height:1}
+.stat-num span{font-size:.45em;color:var(--muted);font-family:var(--sans)}
+.stat-label{font-size:12px;color:var(--muted);line-height:1.4;margin-top:6px}
+.stats-source{text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);padding:16px 0;border-top:1px solid var(--border)}
 
-/* TWO COLUMN */
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
-
-/* VIDEO MOCKUP */
-.video-mockup{
-  background:var(--paper-warm);
-  border:0.5px solid var(--rule);
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 2px 16px rgba(45,80,72,.04);
-}
-.video-player{
-  aspect-ratio:16/9;
-  background:linear-gradient(145deg,#E5DECE,#D4CDB8);
-  display:flex;align-items:center;justify-content:center;position:relative;
-}
-.video-badge{
-  position:absolute;top:14px;left:14px;
-  background:var(--ink);color:var(--paper);
-  font-family:'Source Serif 4',serif;
-  font-style:italic;
-  font-size:.7rem;
-  padding:5px 12px;
-  border-radius:999px;
-  z-index:2;
-}
-.video-play{
-  width:74px;height:74px;
-  background:var(--ink);
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;position:relative;z-index:2;
-  transition:all .25s;
-}
-.video-play:hover{background:var(--primary);transform:scale(1.05)}
-.video-play svg{width:28px;height:28px;color:var(--paper);margin-left:3px}
-.video-duration{
-  position:absolute;bottom:14px;right:14px;
-  background:rgba(26,26,26,0.85);color:var(--paper);
-  padding:5px 10px;border-radius:999px;
-  font-family:'JetBrains Mono',monospace;
-  font-size:.72rem;z-index:2;
-}
-.video-info{padding:1.25rem 1.5rem;border-top:0.5px solid var(--rule)}
-.video-title{
-  font-family:'Source Serif 4',serif;
-  font-size:1.15rem;
-  font-style:italic;
-  margin-bottom:.3rem;
-  color:var(--ink);
-}
-.video-meta{
-  font-size:.8rem;color:var(--ink-quiet);
-  font-family:'Source Serif 4',serif;font-style:italic;
-}
-
-/* DELIVERABLES */
-.deliverables{
-  background:var(--paper-warm);
-  border:0.5px solid var(--rule);
-  border-radius:12px;
-  padding:2rem 2.25rem;
-  box-shadow:0 2px 16px rgba(45,80,72,.04);
-}
-.deliverables-eyebrow{
-  font-family:'Source Serif 4',serif;
-  font-style:italic;
-  font-size:.85rem;
-  color:var(--ink-muted);
-  margin-bottom:1.25rem;
-  padding-bottom:1.1rem;
-  border-bottom:0.5px solid var(--rule);
-}
-.deliv-item{
-  display:flex;gap:1rem;
-  padding:.85rem 0;
-  border-bottom:0.5px solid var(--rule);
-}
-.deliv-item:last-child{border-bottom:none;padding-bottom:0}
-.deliv-check{
-  width:18px;height:18px;border-radius:50%;
-  background:var(--primary);
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;margin-top:3px;
-}
-.deliv-check svg{width:9px;height:9px;color:var(--paper)}
-.deliv-item-text strong{
-  display:block;font-size:.95rem;font-weight:500;
-  margin-bottom:.2rem;color:var(--ink);
-  font-family:'Inter',sans-serif;
-}
-.deliv-item-text span{
-  font-family:'Source Serif 4',serif;font-style:italic;
-  font-size:.9rem;color:var(--ink-muted);
-  line-height:1.55;
-}
-
-/* TRUST BLOCK */
-.trust-block{
-  background:var(--paper-warm);
-  border:0.5px solid var(--rule);
-  border-left:2px solid var(--accent);
-  border-radius:14px;
-  padding:2.25rem 2.5rem;
-  margin-top:4.5rem;
-}
-.trust-block .label{
-  font-family:'Source Serif 4',serif;
-  font-style:italic;
-  font-size:.85rem;
-  color:var(--ink-muted);
-  margin-bottom:.85rem;
-}
-.trust-block h3{
-  font-family:'Source Serif 4',serif;
-  font-size:1.85rem;
-  margin-bottom:1rem;line-height:1.25;
-  font-weight:400;letter-spacing:-.01em;
-}
-.trust-block h3 em{font-style:italic;color:var(--primary)}
-.trust-block p{
-  font-family:'Source Serif 4',serif;
-  font-size:1.05rem;
-  color:var(--ink-soft);line-height:1.7;
-}
-.trust-block strong{color:var(--ink);font-weight:500}
-
-/* HOW PATIENTS USE IT */
-.use-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);
-  gap:1.25rem;margin-top:2.5rem;
-}
-.use-card{
-  background:var(--paper-warm);
-  border:0.5px solid var(--rule);
-  border-radius:14px;
-  padding:2rem 2.25rem;
-  position:relative;
-  transition:all .3s;
-  box-shadow:0 2px 16px rgba(45,80,72,.04);
-}
-.use-card:hover{
-  border-color:var(--rule-bright);
-  transform:translateY(-2px);
-  box-shadow:0 8px 28px rgba(45,80,72,.08);
-}
-.use-header{
-  display:flex;align-items:center;gap:1.1rem;
-  margin-bottom:1.1rem;
-}
-.use-num{
-  width:38px;height:38px;
-  background:var(--paper);
-  border:0.5px solid var(--primary);
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Source Serif 4',serif;font-style:italic;
-  font-size:.95rem;
-  color:var(--primary);
-  flex-shrink:0;
-}
-.use-title{
-  font-family:'Source Serif 4',serif;
-  font-size:1.4rem;line-height:1.2;
-  font-weight:400;letter-spacing:-.01em;
-}
-.use-title em{font-style:italic;color:var(--primary)}
-.use-desc{
-  font-family:'Source Serif 4',serif;
-  font-size:.95rem;color:var(--ink-soft);
-  line-height:1.7;
-}
-.use-desc strong{color:var(--ink);font-weight:500}
-.use-tag{
-  display:inline-block;
-  font-family:'Source Serif 4',serif;
-  font-style:italic;
-  font-size:.78rem;
-  color:var(--ink-quiet);
-  margin-top:1rem;
-  padding-top:.85rem;
-  border-top:0.5px solid var(--rule);
-}
-
-/* PRICING TABLE */
-.offer{
-  background:var(--paper-warm);
-  border:0.5px solid var(--rule);
-  border-radius:14px;
-  overflow:hidden;
-  box-shadow:0 2px 20px rgba(45,80,72,.05);
-}
-.offer-pricing{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  background:var(--paper);
-}
-.price-tier{
-  padding:1.65rem 1.25rem;
-  border-right:0.5px solid var(--rule);
-  text-align:left;
-}
-.price-tier:last-child{border-right:none}
-.price-tier.highlight{background:var(--primary-faint);position:relative}
-.price-tier.highlight::before{
-  content:'POPULAR';position:absolute;top:8px;right:10px;
-  font-family:'Source Serif 4',serif;font-style:italic;
-  font-size:.62rem;letter-spacing:.04em;
-  color:var(--primary);
-  font-weight:400;
-}
-.price-label{
-  font-family:'Source Serif 4',serif;font-style:italic;
-  font-size:.82rem;
-  color:var(--ink-muted);
-  margin-bottom:.7rem;
-}
-.price-amount{
-  font-family:'Source Serif 4',serif;
-  font-size:1.7rem;
-  color:var(--ink);
-  margin-bottom:.2rem;
-  letter-spacing:-.01em;
-  line-height:1;
-}
-.price-amount.featured{color:var(--primary)}
-.price-strike{
-  font-size:.78rem;color:var(--ink-quiet);
-  text-decoration:line-through;
-  font-family:'Source Serif 4',serif;font-style:italic;
-}
-.price-savings{
-  font-size:.72rem;
-  color:var(--accent);
-  margin-top:.45rem;font-weight:500;
-}
-
-.founding{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:0;
-  background:var(--paper-warm);
-  border-top:0.5px solid var(--rule);
-}
-.founding-cell{
-  padding:1.5rem 1.5rem;
-  display:flex;align-items:center;gap:1rem;
-  border-right:0.5px solid var(--rule);
-}
-.founding-cell:last-child{border-right:none}
-.founding-cell-icon{
-  width:36px;height:36px;
-  background:var(--paper);
-  border:0.5px solid var(--primary);
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-}
-.founding-cell-icon svg{width:15px;height:15px;color:var(--primary)}
-.founding-cell-text strong{
-  display:block;font-family:'Source Serif 4',serif;
-  font-size:.95rem;margin-bottom:.15rem;
-  color:var(--ink);font-weight:500;
-}
-.founding-cell-text span{
-  font-size:.78rem;color:var(--ink-muted);
-  font-family:'Source Serif 4',serif;font-style:italic;
-  line-height:1.5;display:block;
-}
-.founding-cell.deadline{justify-content:center;text-align:center;flex-direction:column;gap:.15rem}
-.founding-cell.deadline strong{
-  font-family:'Inter',sans-serif;letter-spacing:.06em;
-  font-size:.75rem;color:var(--primary);font-weight:600;
-  margin-bottom:.2rem;
-}
-.founding-cell.deadline span{
-  font-size:.85rem;color:var(--ink);font-style:normal;
-  font-family:'Source Serif 4',serif;
-}
-
-/* TRADE */
-.trade{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
-.trade-item{
-  background:var(--paper-warm);
-  border:0.5px solid var(--rule);
-  border-radius:14px;
-  padding:1.85rem 2rem;
-  position:relative;
-  transition:all .25s;
-  box-shadow:0 2px 16px rgba(45,80,72,.04);
-}
-.trade-item:hover{
-  border-color:var(--rule-bright);
-  transform:translateY(-2px);
-  box-shadow:0 8px 28px rgba(45,80,72,.08);
-}
-.trade-num{
-  font-family:'Source Serif 4',serif;font-style:italic;
-  font-size:.78rem;
-  color:var(--primary);
-  margin-bottom:1rem;
-}
-.trade-title{
-  font-family:'Source Serif 4',serif;
-  font-size:1.2rem;margin-bottom:.7rem;line-height:1.25;
-  font-weight:400;letter-spacing:-.01em;
-}
-.trade-desc{
-  font-family:'Source Serif 4',serif;font-style:italic;
-  font-size:.92rem;color:var(--ink-soft);
-  line-height:1.65;
-}
-
-/* CROSS-PRODUCT MENTION — quiet block introducing Stories near pricing */
-.crossmention{
-  padding:80px 0;
-  border-top:0.5px solid var(--rule);
-  position:relative;
-}
-.crossmention-inner{
-  max-width:780px;margin:0 auto;
-  display:grid;grid-template-columns:auto 1fr auto;
-  gap:2rem;align-items:center;
-  padding:2rem 2.5rem;
-  background:var(--paper-warm);
-  border:0.5px solid var(--rule);
-  border-radius:14px;
-  position:relative;
-}
-.crossmention-mark{
-  width:56px;height:56px;
-  border:0.5px solid var(--accent);
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  background:var(--paper);
-  position:relative;
-  flex-shrink:0;
-}
-.crossmention-mark::before{
-  content:'';position:absolute;inset:-4px;
-  border:0.5px dashed var(--accent);
-  border-radius:50%;opacity:.45;
-}
-.crossmention-mark svg{width:22px;height:22px;color:var(--accent)}
-.crossmention-text{flex:1;min-width:0}
-.crossmention-eyebrow{
-  font-family:'Source Serif 4',serif;font-style:italic;
-  font-size:.85rem;color:var(--ink-muted);margin-bottom:.4rem;
-}
-.crossmention-title{
-  font-family:'Source Serif 4',serif;
-  font-size:1.4rem;font-weight:400;line-height:1.25;
-  letter-spacing:-.01em;margin-bottom:.5rem;
-}
-.crossmention-title em{font-style:italic;color:var(--accent)}
-.crossmention-desc{
-  font-family:'Source Serif 4',serif;
-  font-size:.95rem;color:var(--ink-soft);line-height:1.65;
-}
-.crossmention-cta{
-  font-family:'Source Serif 4',serif;font-style:italic;
-  font-size:.95rem;color:var(--accent);
-  text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;
-  flex-shrink:0;white-space:nowrap;
-  padding-bottom:2px;border-bottom:0.5px solid var(--accent);
-  transition:color .25s,border-color .25s;
-}
-.crossmention-cta:hover{color:var(--ink);border-color:var(--ink)}
-.crossmention-cta svg{width:13px;height:13px;transition:transform .25s}
-.crossmention-cta:hover svg{transform:translateX(3px)}
-@media(max-width:768px){
-  .crossmention-inner{grid-template-columns:1fr;text-align:center;gap:1.25rem;padding:1.75rem}
-  .crossmention-mark{margin:0 auto}
-  .crossmention-cta{justify-content:center}
-}
-
-/* GUARANTEE */
-.guarantee-section{
-  padding:90px 0;
-  border-top:0.5px solid var(--rule);
-  background:var(--paper-warm);
-}
-.guarantee{max-width:760px;margin:0 auto;text-align:center;position:relative}
-.guarantee-seal{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:58px;height:58px;
-  background:var(--paper);
-  border:0.5px solid var(--primary);
-  border-radius:50%;
-  margin-bottom:1.5rem;
-  position:relative;
-}
-.guarantee-seal::before{
-  content:'';position:absolute;inset:-5px;
-  border:0.5px dashed var(--primary);border-radius:50%;
-  opacity:.45;
-}
-.guarantee-seal svg{width:24px;height:24px;color:var(--primary)}
-.guarantee-eyebrow{
-  font-family:'Source Serif 4',serif;font-style:italic;
-  font-size:.95rem;
-  color:var(--ink-muted);margin-bottom:.85rem;
-}
-.guarantee-title{
-  font-family:'Source Serif 4',serif;
-  font-size:clamp(1.85rem,3.2vw,2.5rem);
-  line-height:1.2;letter-spacing:-.02em;
-  margin-bottom:1.25rem;font-weight:400;
-}
-.guarantee-title em{font-style:italic;color:var(--primary)}
-.guarantee-text{
-  font-family:'Source Serif 4',serif;
-  font-size:1.1rem;
-  color:var(--ink-muted);line-height:1.7;
-  max-width:600px;margin:0 auto 1.25rem;
-}
-.guarantee-text strong{color:var(--ink);font-weight:500}
-.guarantee-signoff{
-  font-family:'Source Serif 4',serif;font-style:italic;
-  font-size:.85rem;color:var(--ink-quiet);
-  margin-top:1.5rem;padding-top:1.5rem;
-  border-top:0.5px solid var(--rule);display:inline-block;
-}
-
-/* CTA SECTION */
-.cta{padding:120px 0;text-align:center;position:relative}
-.cta-content{position:relative;z-index:2;max-width:740px;margin:0 auto}
-.cta h2{
-  font-family:'Source Serif 4',serif;
-  font-size:clamp(2.25rem,4.5vw,3.5rem);
-  line-height:1.15;margin-bottom:1.5rem;
-  letter-spacing:-.025em;font-weight:400;
-}
-.cta h2 em{font-style:italic;color:var(--primary)}
-.cta-sub{
-  font-family:'Source Serif 4',serif;
-  font-size:1.15rem;
-  color:var(--ink-muted);
-  margin-bottom:2.5rem;line-height:1.65;
-}
-.cta-meta{
-  margin-top:2.25rem;
-  display:flex;justify-content:center;gap:2rem;
-  flex-wrap:wrap;
-  font-family:'Source Serif 4',serif;font-style:italic;
-  font-size:.85rem;color:var(--ink-quiet);
-}
-.cta-meta span{display:flex;align-items:center;gap:.5rem}
-.cta-meta .dot{
-  width:4px;height:4px;background:var(--primary);
-  border-radius:50%;
-}
-
-/* FOOTER */
-footer{
-  padding:2.5rem 0;
-  border-top:0.5px solid var(--rule);
-  background:var(--paper-warm);
-}
-.footer-inner{
-  display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:1.5rem;
-}
-.footer-brand{display:flex;align-items:center;gap:.75rem}
-.footer-brand .logo-mark{width:30px;height:30px}
-.footer-brand .logo-mark svg{width:14px;height:14px}
-.footer-brand-text{
-  font-family:'Source Serif 4',serif;
-  font-size:1.05rem;
-}
-.footer-tagline{
-  font-size:.82rem;color:var(--ink-quiet);
-  font-family:'Source Serif 4',serif;font-style:italic;
-}
-.footer-meta{
-  font-family:'Source Serif 4',serif;font-style:italic;
-  font-size:.8rem;color:var(--ink-quiet);
-}
+/* TRUST BAR */
+.trust-bar{margin:0 48px;padding:16px 24px;background:var(--ice);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:48px}
+.trust-bar svg{width:16px;height:16px;color:var(--muted)}
+.trust-bar span{font-size:12px;color:var(--muted);font-weight:500}
+.trust-bar .sep{color:var(--border)} 
 
 /* RESPONSIVE */
-@media(max-width:1000px){
-  .two-col,.use-grid{grid-template-columns:1fr;gap:1.25rem}
-  .trade{grid-template-columns:1fr}
-  .offer-pricing{grid-template-columns:repeat(2,1fr)}
-  .price-tier{border-right:none;border-bottom:0.5px solid var(--rule)}
-  .price-tier:nth-child(2n){border-right:none}
-  .founding{grid-template-columns:1fr}
-  .founding-cell{border-right:none;border-bottom:0.5px solid var(--rule)}
-  .founding-cell:last-child{border-bottom:none}
-  .founding-mechanics{grid-template-columns:1fr}
-  .founding-mech{border-right:none;border-bottom:0.5px solid var(--rule)}
-  .founding-mech:last-child{border-bottom:none}
+@media(max-width:1100px){
+  .hero{padding:40px 32px 0}
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .hero-text{max-width:100%;text-align:center;padding-top:0}
+  .hero-h1{font-size:clamp(36px,7vw,52px)}
+  .hero-rule{margin:20px auto}
+  .hero-sub{margin:0 auto 28px;text-align:center;max-width:480px}
+  .hero-ctas{justify-content:center}
+  .journey-content{display:flex;flex-direction:column;align-items:center;gap:0;max-width:400px;margin:0 auto}
+  .journey-content::after{display:none}
+  .journey-step{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;position:relative;padding-bottom:28px;margin-bottom:28px}
+  .journey-step:last-child{padding-bottom:0;margin-bottom:0}
+  .journey-step:not(:last-child)::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:28px;border-left:2px dashed var(--border)}
+  .journey-step .step-header{flex-direction:column;text-align:center;gap:8px}
+  .journey-step .step-label{font-size:10px}
+  .journey-content .video-card,.journey-content .trust-stack{width:100%;max-width:400px}
+  .stats-bar{padding:40px 24px 0}
+  .trust-bar{margin:0 24px 40px}
+  nav{padding:0 24px}
 }
 @media(max-width:768px){
-  nav{padding:0 1rem}
-  .container{padding:0 1.25rem}
-  .nav-links{display:none}
-  .hero{padding:130px 0 70px}
-  .section,.manifesto,.cta,.founding-offer-section,.guarantee-section{padding:70px 0}
-  .use-grid,.trade,.offer-pricing{grid-template-columns:1fr}
-  .price-tier{border-right:none}
-  .cred-strip{gap:1.25rem}
-  .cred-divider{display:none}
-  .offer-ribbon-section{position:relative;top:auto}
+  .stats-grid{grid-template-columns:1fr 1fr;gap:24px}
+  .hero-ctas{flex-direction:column;align-items:stretch}
+  .btn-fill,.btn-ghost{width:100%;justify-content:center}
+  .trust-bar{flex-wrap:wrap;gap:4px 8px}
 }
-@media(max-width:500px){
-  .hero-ctas{flex-direction:column}
-  .cta-pill{width:100%;justify-content:center}
+@media(max-width:600px){
+  nav{height:60px}
+  .nav-links{display:none}
+  .nav-brand-name{font-size:12px;letter-spacing:.1em}
+  .nav-logo{width:36px;height:36px;font-size:15px}
+  .hero{padding:32px 20px 0}
+  .hero-h1{font-size:clamp(32px,8vw,42px)}
+  .stats-bar{padding:32px 20px 0}
+  .trust-bar{margin:0 20px 32px}
 }
 
+/* STEP ANIMATIONS */
+.step-header{opacity:0;transform:translateY(12px);transition:all .6s cubic-bezier(.22,1,.36,1)}
+.step-header.visible{opacity:1;transform:translateY(0)}
+
+.phone-frame{opacity:0;transform:translateY(24px) scale(.97);transition:all .7s cubic-bezier(.22,1,.36,1)}
+.phone-frame.visible{opacity:1;transform:translateY(0) scale(1)}
+
+.video-card{opacity:0;transform:translateY(24px) scale(.97);transition:all .7s cubic-bezier(.22,1,.36,1) .15s}
+.video-card.visible{opacity:1;transform:translateY(0) scale(1)}
+
+.trust-stack .trust-card,.trust-stack .trust-quote{opacity:0;transform:translateX(16px);transition:all .5s cubic-bezier(.22,1,.36,1)}
+.trust-stack .trust-card.visible,.trust-stack .trust-quote.visible{opacity:1;transform:translateX(0)}
+
+/* Stagger trust cards */
+.trust-stack .trust-card:nth-child(1){transition-delay:.2s}
+.trust-stack .trust-card:nth-child(2){transition-delay:.35s}
+.trust-stack .trust-card:nth-child(3){transition-delay:.5s}
+.trust-stack .trust-quote{transition-delay:.65s}
+
+/* SMS bubble typing effect */
+.sms-bubble{opacity:0;transform:translateY(8px) scale(.98);transition:all .5s cubic-bezier(.22,1,.36,1) .4s}
+.sms-bubble.visible{opacity:1;transform:translateY(0) scale(1)}
+
+/* Video play button pulse */
+.video-play-btn{animation:none}
+.video-card.visible .video-play-btn{animation:pulse-play 2.5s ease-in-out infinite 1s}
+@keyframes pulse-play{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.3)}50%{box-shadow:0 0 0 12px rgba(255,255,255,0)}}
+
+/* Step number pop */
+.step-num{transform:scale(0);transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+.step-header.visible .step-num{transform:scale(1)}
+.journey-step:nth-child(1) .step-num{transition-delay:.1s}
+.journey-step:nth-child(2) .step-num{transition-delay:.3s}
+.journey-step:nth-child(3) .step-num{transition-delay:.5s}
+
+/* Subtle float on cards after animation */
+.phone-frame.visible{animation:gentle-float 6s ease-in-out infinite 1.5s}
+.video-card.visible{animation:gentle-float 7s ease-in-out infinite 2s}
+@keyframes gentle-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+
+/* EVIDENCE GRID */
+.evidence-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.evidence-card{padding:40px;background:var(--white);position:relative}
+.evidence-card:nth-child(1){border-right:1px solid var(--border);border-bottom:1px solid var(--border);border-radius:20px 0 0 0}
+.evidence-card:nth-child(2){border-bottom:1px solid var(--border);border-radius:0 20px 0 0}
+.evidence-card:nth-child(3){border-right:1px solid var(--border);border-radius:0 0 0 20px}
+.evidence-card:nth-child(4){border-radius:0 0 20px 0}
+.evidence-num{font-family:var(--serif);font-size:clamp(40px,5vw,56px);font-weight:400;color:var(--navy);line-height:1;margin-bottom:8px}
+.evidence-num span{font-size:.4em;color:var(--muted);font-family:var(--sans);margin-left:2px}
+.evidence-label{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--muted);margin-bottom:14px}
+.evidence-desc{font-size:14px;color:var(--slate);line-height:1.65;margin-bottom:12px}
+.evidence-cite{font-size:11px;color:var(--muted);font-style:italic}
+.evidence-cite a{color:var(--teal);text-decoration:none}
+.evidence-cite a:hover{text-decoration:underline}
+.ev-prose a{color:var(--teal);text-decoration:none}
+.ev-prose a:hover{text-decoration:underline}
+
+/* Evidence card animations */
+.evidence-card{opacity:0;transform:translateY(16px);transition:all .6s cubic-bezier(.22,1,.36,1)}
+.evidence-card.visible{opacity:1;transform:translateY(0)}
+.evidence-card:nth-child(1){transition-delay:.05s}
+.evidence-card:nth-child(2){transition-delay:.15s}
+.evidence-card:nth-child(3){transition-delay:.25s}
+.evidence-card:nth-child(4){transition-delay:.35s}
+
+@media(max-width:768px){
+  .evidence-grid{grid-template-columns:1fr}
+  .evidence-card{border-right:none !important;border-bottom:1px solid var(--border) !important;border-radius:0 !important}
+  .evidence-card:first-child{border-radius:20px 20px 0 0 !important}
+  .evidence-card:last-child{border-bottom:none !important;border-radius:0 0 20px 20px !important}
+}
+
+
+/* LIBRARY CATALOG */
+.lib-catalog{background:var(--white);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 4px 24px rgba(15,42,68,.06);opacity:0;transform:translateY(16px);transition:all .7s cubic-bezier(.22,1,.36,1)}
+.lib-catalog.visible{opacity:1;transform:translateY(0)}
+.lib-catalog-head{display:flex;justify-content:space-between;align-items:baseline;padding:16px 24px;background:var(--ice);border-bottom:1px solid var(--border)}
+.lib-catalog-head span:first-child{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--navy)}
+.lib-catalog-head span:last-child{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.lib-catalog-row{display:flex;justify-content:space-between;align-items:center;padding:12px 24px;border-bottom:1px solid rgba(216,227,236,.5);font-size:14px;color:var(--slate);transition:background .15s}
+.lib-catalog-row:last-of-type{border-bottom:none}
+.lib-catalog-row:hover{background:var(--ice)}
+.lib-catalog-row span:last-child{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.lib-catalog-foot{padding:12px 24px;background:var(--ice);font-size:12px;color:var(--muted);text-align:center;font-style:italic;border-top:1px solid var(--border)}
+
+/* VIDEO TYPES */
+.vid-types-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.vid-type-card{background:var(--ice);border:1px solid var(--border);border-radius:18px;padding:28px 20px;text-align:center;transition:all .3s;opacity:0;transform:translateY(12px)}
+.vid-type-card.visible{opacity:1;transform:translateY(0)}
+.vid-type-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(15,42,68,.06);background:var(--white)}
+.vid-type-num{font-family:var(--mono);font-size:10px;color:var(--teal);letter-spacing:.1em;margin-bottom:12px}
+.vid-type-icon{margin:0 auto 12px;width:44px;height:44px;background:var(--soft-blue);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center}
+.vid-type-name{font-family:var(--serif);font-size:15px;font-style:italic;color:var(--navy);margin-bottom:8px;line-height:1.25}
+.vid-type-desc{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:10px}
+.vid-type-meta{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.05em}
+
+/* Stagger video type cards */
+.vid-type-card:nth-child(1){transition-delay:.05s}
+.vid-type-card:nth-child(2){transition-delay:.12s}
+.vid-type-card:nth-child(3){transition-delay:.19s}
+.vid-type-card:nth-child(4){transition-delay:.26s}
+.vid-type-card:nth-child(5){transition-delay:.33s}
+
+/* THREE PATHS */
+.paths-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.path-card{background:var(--ice);border:1px solid var(--border);border-radius:20px;padding:32px;display:flex;flex-direction:column;transition:all .3s;opacity:0;transform:translateY(12px)}
+.path-card.visible{opacity:1;transform:translateY(0)}
+.path-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(15,42,68,.06)}
+.path-card.featured{background:var(--white);border:2px solid var(--teal);box-shadow:0 4px 24px rgba(14,111,143,.08)}
+.path-tag{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.path-card.featured .path-tag{color:var(--teal)}
+.path-name{font-family:var(--serif);font-size:20px;color:var(--navy);margin-bottom:12px;line-height:1.25}
+.path-name em{font-style:italic}
+.path-desc{font-size:14px;color:var(--slate);line-height:1.6;flex:1}
+.path-foot{margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-size:13px;color:var(--muted)}
+.path-foot strong{font-family:var(--serif);font-size:20px;color:var(--navy);font-weight:400}
+
+/* Stagger path cards */
+.path-card:nth-child(1){transition-delay:.05s}
+.path-card:nth-child(2){transition-delay:.15s}
+.path-card:nth-child(3){transition-delay:.25s}
+
+@media(max-width:1100px){
+  .vid-types-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:900px){
+  [style*="grid-template-columns:1fr 1fr"][style*="gap:64px"]{grid-template-columns:1fr !important;gap:32px !important}
+  .paths-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .vid-types-grid{grid-template-columns:1fr 1fr}
+}
+
+
+/* HOW IT WORKS */
+.how-block{padding-top:24px}
+.how-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:start}
+.how-steps{display:flex;flex-direction:column;gap:16px}
+.how-step{display:flex;gap:14px;align-items:start}
+.how-step-num{width:32px;height:32px;border-radius:50%;background:var(--ice);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:14px;color:var(--teal);flex-shrink:0;margin-top:2px}
+.how-step strong{font-size:14px;color:var(--navy)}
+.how-step span{font-size:13px;color:var(--muted);line-height:1.5}
+.how-pricing-card{background:var(--ice);border:2px solid var(--teal);border-radius:24px;padding:36px;box-shadow:0 8px 32px rgba(14,111,143,.06);opacity:0;transform:translateY(16px);transition:all .7s cubic-bezier(.22,1,.36,1)}
+.how-pricing-card.visible{opacity:1;transform:translateY(0)}
+.how-includes{display:flex;flex-direction:column;gap:10px}
+.how-include{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--slate)}
+
+@media(max-width:900px){
+  .how-inner{grid-template-columns:1fr;gap:32px}
+}
+
+
+/* EXPERIENCE CARDS */
+.exp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.exp-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:28px;box-shadow:0 2px 12px rgba(15,42,68,.04);transition:all .3s;opacity:0;transform:translateY(12px)}
+.exp-card.visible{opacity:1;transform:translateY(0)}
+.exp-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(15,42,68,.07)}
+.exp-card:nth-child(1){transition-delay:.05s}
+.exp-card:nth-child(2){transition-delay:.12s}
+.exp-card:nth-child(3){transition-delay:.19s}
+.exp-card:nth-child(4){transition-delay:.26s}
+.exp-tag{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.exp-desc{font-size:14px;color:var(--slate);line-height:1.6}
+.exp-desc strong{color:var(--navy)}
+
+/* VI SECTION */
+.vi-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center}
+.vi-visual{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.vi-cell{background:var(--soft-blue);border:1px solid var(--border);border-radius:16px;display:flex;align-items:center;justify-content:center}
+.vi-cell span{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+.vi-cell.portrait{aspect-ratio:3/4}
+.vi-cell.landscape{aspect-ratio:16/9;grid-column:span 2}
+
+/* FAQ */
+.faq-list .faq-item{border-bottom:1px solid var(--border);padding:20px 0;cursor:pointer}
+.faq-list .faq-item:first-child{border-top:1px solid var(--border)}
+.faq-q{display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:var(--serif);font-size:17px;font-weight:400;color:var(--navy)}
+.faq-q svg{width:18px;height:18px;flex-shrink:0;color:var(--muted);transition:transform .3s}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-a-inner{padding:14px 0 4px;font-size:15px;color:var(--slate);line-height:1.7}
+.faq-item.open .faq-q svg{transform:rotate(45deg)}
+.faq-item.open .faq-a{max-height:400px}
+
+/* PLAYBOOK */
+.playbook-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:56px;align-items:center}
+.playbook-cover{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:48px 32px;text-align:center}
+
+
+
+@media(max-width:900px){
+  .exp-grid{grid-template-columns:1fr 1fr}
+  .vi-grid,.playbook-grid,.scope-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .exp-grid{grid-template-columns:1fr}
+}
+
+
+/* IMPACT REPORT CTA */
+.impact-cta-card{display:flex;justify-content:space-between;gap:40px;align-items:center;flex-wrap:wrap;background:var(--white);border:1px solid var(--border);border-radius:24px;padding:40px 48px;box-shadow:0 4px 24px rgba(15,42,68,.06)}
+.impact-cta-left{display:flex;gap:20px;align-items:flex-start}
+.impact-cta-badge{width:56px;height:56px;background:var(--ice);border:1px solid var(--border);border-radius:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.impact-cta-preview{display:flex;flex-direction:column;gap:20px}
+.impact-cta-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.impact-cta-stats div{padding:12px 16px;background:var(--ice);border-radius:12px;font-size:12px;color:var(--muted);line-height:1.4}
+.impact-cta-stats div span{display:block;font-family:var(--serif);font-size:20px;color:var(--navy);margin-bottom:2px}
+.impact-cta-btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 24px;background:var(--navy);color:var(--white);border-radius:10px;font-size:14px;font-weight:500;text-decoration:none;transition:all .3s;box-shadow:0 4px 16px rgba(11,31,51,.15)}
+.impact-cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(11,31,51,.2)}
+
+@media(max-width:900px){
+  .impact-cta-card{grid-template-columns:1fr;padding:28px}
+  .impact-cta-left{flex-direction:column}
+}
+@media(max-width:600px){
+  .impact-cta-stats{grid-template-columns:1fr}
+}
+
+
+/* MODAL FORM */
+.modal-overlay{position:fixed;inset:0;background:rgba(11,31,51,.5);backdrop-filter:blur(6px);z-index:9999;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-card{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.95);z-index:10000;background:var(--white);border:1px solid var(--border);border-radius:24px;padding:40px;width:90%;max-width:480px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(11,31,51,.2);opacity:0;pointer-events:none;transition:all .35s cubic-bezier(.22,1,.36,1)}
+.modal-card.open{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border:none;background:var(--ice);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .2s}
+.modal-close:hover{background:var(--border);color:var(--navy)}
+.modal-close svg{width:16px;height:16px}
+.modal-title{font-family:var(--serif);font-size:24px;color:var(--navy);margin-bottom:6px}
+.modal-sub{font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.5}
+.m-field{margin-bottom:14px}
+.m-field label{display:block;font-size:13px;font-weight:500;color:var(--slate);margin-bottom:5px}
+.m-field input,.m-field select{width:100%;padding:11px 14px;background:var(--ice);border:1px solid var(--border);border-radius:10px;font-family:var(--sans);font-size:14px;color:var(--navy);outline:none;transition:border-color .2s;appearance:none}
+.m-field input:focus,.m-field select:focus{border-color:var(--teal)}
+.m-field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.m-submit{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px;margin-top:6px;background:var(--navy);color:var(--white);border:none;border-radius:12px;font-family:var(--sans);font-size:15px;font-weight:600;cursor:pointer;transition:all .3s;box-shadow:0 4px 16px rgba(11,31,51,.15)}
+.m-submit:hover{background:var(--navy-mid);transform:translateY(-1px);box-shadow:0 8px 24px rgba(11,31,51,.2)}
+.m-submit svg{width:16px;height:16px}
+.m-note{text-align:center;font-size:12px;color:var(--muted);margin-top:10px}
+.m-note a{color:var(--teal);text-decoration:none}
+
+
+.nav-right{display:flex;gap:10px;align-items:center}
+.nav-btn-secondary{padding:10px 18px;border-radius:8px;font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--teal);text-decoration:none;transition:all .2s;border:1.5px solid var(--border)}
+.nav-btn-secondary:hover{border-color:var(--teal);background:var(--ice)}
+
+.nav-logo-img{height:44px;width:auto;object-fit:contain}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="logo">
-    <div class="logo-mark">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s-7-5.5-7-11a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 5.5-7 11-7 11z"/></svg>
-    </div>
-    <span class="logo-text">Patient Focused</span>
-  </a>
+  <a href="index.html" class="nav-brand"><img src="assets/Patient Focused_transparent.png" alt="Patient Focused" class="nav-logo-img"></a>
   <div class="nav-links">
-    <a href="#offer-stack" class="nav-link">The Offer</a>
-    <a href="#offer" class="nav-link">What's Inside</a>
-    <a href="#use" class="nav-link">How It's Used</a>
-    <a href="#pricing" class="nav-link">Pricing</a>
+    <a href="solutions.html" class="nav-link ">Solutions</a>
+    <a href="who-we-serve.html" class="nav-link ">Who We Serve</a>
+    <a href="results.html" class="nav-link ">Results</a>
   </div>
-  <a href="#book" class="nav-cta">Apply for the Cohort</a>
+  <div class="nav-right">
+    <a href="calculator.html" class="nav-btn-secondary">See Your Impact</a>
+    <a href="#" onclick="openForm();return false" class="nav-cta">Inquire</a>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-eyebrow">
-        <span class="pulse"></span>
-        For the first 10 private medical practices · Founding rates locked forever
-      </div>
-      <h1>Building stronger<br/><em>patient-provider</em> relationships.</h1>
-      <p class="hero-sub">Documentary-quality video libraries for private practices. <strong>Every question your patients are afraid to ask, answered by the person they trust most: you.</strong></p>
+  <div class="hero-grid">
+
+    <!-- LEFT -->
+    <div class="hero-text">
+      <div class="hero-eyebrow">From Search to Trust</div>
+      <h1 class="hero-h1">Building stronger patient-provider relationships<span class="dot">.</span></h1>
+      <div class="hero-rule"></div>
+      <p class="hero-sub">Physician-on-camera video education and consent documentation for private procedural practices.</p>
       <div class="hero-ctas">
-        <a href="#book" class="cta-pill primary">
-          Lock one-third off forever
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-        <a href="#offer-stack" class="cta-pill ghost">
-          See the founding offer
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-        </a>
-      </div>
-      <div class="cred-strip">
-        <div class="cred-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          HIPAA-compliant production
-        </div>
-        <div class="cred-divider"></div>
-        <div class="cred-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 10v6m11-11h-6M7 12H1m16.24-7.24l-4.24 4.24M7 17l-4.24 4.24m0-16.48L7 9m10 0l4.24-4.24"/></svg>
-          Founder-led production
-        </div>
-        <div class="cred-divider"></div>
-        <div class="cred-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Captured at your practice
-        </div>
+        <a href="#" onclick="openForm();return false" class="btn-fill">Let’s Scope Your Library <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="#" class="btn-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg> See Your Estimated Impact</a>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- FOUNDING OFFER — benefit-first headline block -->
-<section class="founding-offer-section" id="offer-stack">
-  <div class="container">
-    <div class="founding-offer">
-      <div class="founding-eyebrow">
-        <span class="pulse"></span>
-        Founding Client Offer
-      </div>
-      <h2 class="founding-headline">Founding pricing.<br/><em>Locked for life.</em></h2>
-      <p class="founding-explainer">The first 10 private practices lock in <span class="price-amount">$12,000</span> per service line — <strong>one-third off, forever.</strong></p>
-      <p class="founding-explainer" style="font-size:.95rem;color:var(--ink-quiet);max-width:620px;margin-top:-1.25rem;margin-bottom:2.5rem">A service line is one clinical area of your practice — the patients, conditions, and questions that cluster around it (whether that's a procedure, a medication category, or a treatment focus).</p>
-      <div class="founding-mechanics">
-        <div class="founding-mech">
-          <div class="founding-mech-label">Founding Slots</div>
-          <div class="founding-mech-value"><em>10</em></div>
+    <!-- RIGHT: 3-STEP JOURNEY -->
+    <div class="journey">
+
+      <!-- Step journey -->
+      <div class="journey-content">
+
+        <div class="journey-step">
+        <div class="step-header"><div class="step-num">1</div><div class="step-label">Pre-Procedure<br>Video Delivery</div></div>
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-status"><span>9:41</span></div>
+          <div class="phone-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;color:var(--teal)"><path d="M15 18l-6-6 6-6"/></svg>
+            <div class="phone-header-center">
+              <div class="phone-avatar">P</div>
+              <div>
+                <div class="phone-contact">Summit Eye Institute <span style="font-size:10px;color:var(--muted)">&rsaquo;</span></div>
+                <div class="phone-meta">Text Message<br>Today 9:41 AM</div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-body">
+            <div class="sms-bubble">
+              <div class="sms-sender">Summit Eye Institute:</div>
+              Hi Maria, your upper eyelid blepharoplasty procedure is scheduled for 05/20.<br><br>
+              Watch your pre-procedure videos to know what to expect and feel prepared.<br><br>
+              View your videos:<br>
+              <a class="sms-link">patientfocused.com/abc123</a>
+            </div>
+          </div>
+          <div class="phone-input">
+            <span class="phone-input-plus">+</span>
+            <div class="phone-input-field">Text Message</div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--muted)"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
+          </div>
+
         </div>
-        <div class="founding-mech">
-          <div class="founding-mech-label">Locked</div>
-          <div class="founding-mech-value deadline">Forever</div>
         </div>
-        <div class="founding-mech">
-          <div class="founding-mech-label">Standard</div>
-          <div class="founding-mech-value deadline">$18,000</div>
-        </div>
-      </div>
-      <a href="#book" class="cta-pill brand">
-        Apply for the Cohort
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
 
-<!-- STICKY TICKER — engages on scroll past the founding offer block -->
-<section class="offer-ribbon-section">
-  <div class="offer-ribbon-ticker">
-    <div class="ticker-track" id="tickerTrack">
-      <!-- Ticker items rendered twice for seamless loop -->
-    </div>
-  </div>
-</section>
-
-<!-- MANIFESTO — your core thesis line as the centerpiece -->
-<section class="manifesto" id="manifesto">
-  <div class="container">
-    <div class="manifesto-content">
-      <div class="manifesto-mark">"</div>
-      <p class="manifesto-text">The world-class private practice is built on the relationship between patient and provider. The <em>relationship doesn't end</em> when the visit does.</p>
-      <div class="manifesto-attribution">— The Patient Focused Story System · Founding cohort, 2026</div>
-    </div>
-  </div>
-</section>
-
-<!-- THE OFFER -->
-<section class="section" id="offer">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-eyebrow">What's Inside</div>
-      <h2 class="section-title">Building stronger<br/><em>patient-provider</em> relationships.</h2>
-      <p class="section-desc">A searchable library of physician Q&A videos. <strong>Every condition you treat, answered by you.</strong></p>
-    </div>
-
-    <!-- PROBLEM BLOCK -->
-    <div class="problem-block">
-      <div class="label">The Problem</div>
-      <h3>Patients hear a diagnosis. Then they go home and <em>search.</em></h3>
-      <p><span class="problem-search">"Is PAD dangerous?"</span><span class="problem-search">"What does treatment feel like?"</span><span class="problem-search">"How long is recovery?"</span></p>
-      <p><strong>Right now, strangers are answering those questions.</strong> Your physician — the expert who will treat them — isn't in the conversation until the first appointment.</p>
-    </div>
-
-    <div class="two-col">
-      <div>
-        <div class="video-mockup">
+        <div class="journey-step">
+        <div class="step-header"><div class="step-num">2</div><div class="step-label">Physician<br>Video Answer</div></div>
+        <div class="video-card">
           <div class="video-player">
-            <div class="video-badge">Patient Focused Education Library</div>
-            <div class="video-play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
-            <div class="video-duration">2:14</div>
+            <div class="video-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg></div>
+            <div class="video-dr-label"><strong>A. Smith, MD</strong>Oculoplastic Surgery</div>
+            <div class="video-controls">
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="8,5 19,12 8,19"/></svg>
+              <span class="video-time">0:00 / 2:48</span>
+              <div class="video-progress"></div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2"/></svg>
+            </div>
           </div>
-          <div class="video-info">
-            <div class="video-title">"What should I know about this procedure?"</div>
-            <div class="video-meta">Patient Q&A · Built once · Working forever</div>
+          <div class="video-meta">
+            <div class="video-meta-title">Upper Eyelid Blepharoplasty: What to Expect</div>
+            <div class="video-tags">
+              <span class="video-tag">Procedure Overview</span>
+              <span class="video-tag">Benefits</span>
+              <span class="video-tag">Recovery</span>
+              <span class="video-tag">Risks</span>
+              <span class="video-tag">Results</span>
+            </div>
           </div>
         </div>
+        </div>
+
+        <div class="journey-step">
+        <div class="step-header"><div class="step-num">3</div><div class="step-label">Patient Understanding<br>&amp; Trust</div></div>
+        <div class="trust-stack">
+          <div class="trust-card">
+            <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+            <div class="trust-card-text"><div class="trust-card-title">Personalized Education</div><div class="trust-card-desc">Doctor-led answers tailored to your goals.</div></div>
+            <div class="trust-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+            <div class="trust-card-text"><div class="trust-card-title">Clear Expectations</div><div class="trust-card-desc">Understand the process, recovery, and outcomes.</div></div>
+            <div class="trust-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 15l2 2 4-4"/></svg></div>
+            <div class="trust-card-text"><div class="trust-card-title">Confident Decisions</div><div class="trust-card-desc">Digital consent and secure documentation.</div></div>
+            <div class="trust-card-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+          </div>
+          <div class="trust-quote">
+            <div class="trust-quote-mark">&ldquo;</div>
+            <div class="trust-quote-text">Everything was clear and professional. I felt confident in my decision.&rdquo;</div>
+            <div class="trust-quote-attr">
+              
+              <div class="trust-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            </div>
+          </div>
+        </div>
+        </div>
+
       </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-grid">
+    <div>
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div>
+      <div class="stat-num">65%</div>
+      <div class="stat-label">Increase in consults<br>from organic search</div>
+    </div>
+    <div>
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 16l2 2 4-4"/></svg></div>
+      <div class="stat-num">114%</div>
+      <div class="stat-label">Increase in show rate<br>with video education</div>
+    </div>
+    <div>
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div class="stat-num">53<span>&times;</span></div>
+      <div class="stat-label">More likely to convert<br>high-intent patients</div>
+    </div>
+    <div>
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <div class="stat-num">6.7<span> min</span></div>
+      <div class="stat-label">Average time spent<br>on education content</div>
+    </div>
+  </div>
+  <div class="stats-source">Based on Peer-Reviewed Clinical Research</div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <span>For Physician-Owned Practices</span>
+  <span class="sep">&middot;</span>
+  <span>Built for Private Practice</span>
+  <span class="sep">&middot;</span>
+  <span>Documentary-Quality Production</span>
+</div>
+
+
+
+
+<!-- WHAT WE DO -->
+<section style="padding:80px 0;background:var(--white);text-align:center">
+  <div style="max-width:740px;margin:0 auto;padding:0 2rem">
+    <p style="font-family:var(--serif);font-size:clamp(20px,2.5vw,26px);font-weight:300;color:var(--slate);line-height:1.75">Your patients have questions about their diagnosis, their procedure, and their recovery. Patient Focused puts <strong style="color:var(--navy);font-weight:500">your physician on camera to answer them&mdash;once.</strong> Then we help you deliver those answers to every patient, before every visit, at every stage of their care.</p>
+  </div>
+</section>
+
+<!-- WHY IT MATTERS -->
+<section style="padding:80px 0;background:var(--soft-blue)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 2rem">
+    <div style="text-align:center;margin-bottom:48px">
+      <div style="font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:12px">Why It Matters</div>
+      <h2 style="font-family:var(--serif);font-size:clamp(28px,4vw,42px);font-weight:400;color:var(--navy);line-height:1.15;letter-spacing:-.02em">Four problems your practice is paying for <em style="font-style:italic;color:var(--teal)">right now</em> <br>that you can solve</h2>
+    </div>
+    <div class="evidence-grid">
+      <div class="evidence-card">
+        <div class="evidence-num">65%</div>
+        <div class="evidence-label">fewer surgical cancellations</div>
+        <p class="evidence-desc">Pre-procedure video education delivered via text cut non-completion from 37.6% to 13.2% across 14 private practices. At $5,000 per cancelled case, the math is immediate.</p>
+        <p class="evidence-cite"><a href="https://journals.sagepub.com/doi/10.1177/1557988319893568">Ballon-Landa E, et al. <em>Am J Mens Health.</em> 2019;13(6):1557988319892738.</a></p>
+      </div>
+      <div class="evidence-card">
+        <div class="evidence-num">114%</div>
+        <div class="evidence-label">higher payout odds with inadequate consent</div>
+        <p class="evidence-desc">Claims citing inadequate informed consent for procedures had 114% higher odds of closing with payment in an analysis of ~500,000 MPL cases. A signed form proves a signature was obtained. It does not prove understanding.</p>
+        <p class="evidence-cite"><a href="https://www.candello.com/Candello-Blog/Patient-Safety-Informed-Consent">Folcarelli P. &ldquo;How a Robust Informed Consent Process Enhances Patient Safety.&rdquo; Candello Blog, Nov 16, 2023. Data: Adam Schaffer, MD, MPH, Candello Annual Community Summit, Sept 12, 2023.</a></p>
+      </div>
+      <div class="evidence-card">
+        <div class="evidence-num">53&times;</div>
+        <div class="evidence-label">more likely to reach Google page one</div>
+        <p class="evidence-desc">86% of patients research providers before booking. 53% of vascular YouTube videos are rated poor quality. Your physician on camera fills a gap no competitor in your market is filling.</p>
+        <p class="evidence-cite"><a href="https://pubmed.ncbi.nlm.nih.gov/38414727/">Javidan A, et al. <em>EJVES Vasc Forum.</em> 2024;61:62-76.</a></p>
+      </div>
+      <div class="evidence-card">
+        <div class="evidence-num">6.7<span>min</span></div>
+        <div class="evidence-label">saved per consent encounter</div>
+        <p class="evidence-desc">Video-assisted consent cuts conversation time from 12.3 to 5.6 minutes while raising satisfaction from 65% to 86%. Less time. More understanding.</p>
+        <p class="evidence-cite"><a href="https://doi.org/10.1155/2017/9593631">Zhang Y, Ruan X, Tang H, Yang W, Xian Z, Lu M. &ldquo;Video-Assisted Informed Consent for Cataract Surgery: A Randomized Controlled Trial.&rdquo; <em>J Ophthalmol.</em> 2017;2017:9593631. Published Jan 16, 2017.</a></p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:32px">
+      <a href="results.html" style="color:var(--teal);font-size:14px;font-weight:500;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:opacity .2s">Explore the full evidence base&mdash;50+ trials, 107,000 patients <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- THE EDUCATION LIBRARY -->
+<section style="padding:100px 0;background:var(--white)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 2rem">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;margin-bottom:72px">
       <div>
-        <div class="deliverables">
-          <div class="deliverables-eyebrow">What founding clients receive — per service line</div>
-          <div class="deliv-item">
-            <div class="deliv-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div class="deliv-item-text"><strong>A complete physician-led library</strong><span>Your trusted face on camera</span></div>
-          </div>
-          <div class="deliv-item">
-            <div class="deliv-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div class="deliv-item-text"><strong>Condition explainers</strong><span>Signs, symptoms, outcomes — in your words</span></div>
-          </div>
-          <div class="deliv-item">
-            <div class="deliv-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div class="deliv-item-text"><strong>Procedure guides</strong><span>What to expect before, during, and after</span></div>
-          </div>
-          <div class="deliv-item">
-            <div class="deliv-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div class="deliv-item-text"><strong>Discoverable, shareable, embeddable</strong><span>Built once, working everywhere</span></div>
-          </div>
-          <div class="deliv-item">
-            <div class="deliv-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
-            <div class="deliv-item-text"><strong>Captured at your practice</strong><span>Minimal interruption to your clinical day</span></div>
-          </div>
+        <div style="font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:12px">The Education Library</div>
+        <h2 style="font-family:var(--serif);font-size:clamp(28px,4vw,42px);font-weight:400;color:var(--navy);line-height:1.15;letter-spacing:-.02em;margin-bottom:16px">Your physician answering every question&mdash;<em style="font-style:italic;color:var(--teal)">built once, working forever</em></h2>
+        <p style="font-size:16px;color:var(--slate);line-height:1.7;margin-bottom:16px">For each service line, we build a library of physician-on-camera videos. Condition explainers, procedure guides, preparation and recovery instructions, and patient Q&amp;As.</p>
+        <p style="font-size:16px;color:var(--slate);line-height:1.7">Searchable on your website. Discoverable on YouTube. Deliverable directly to patients before every appointment.</p>
+      </div>
+      <div class="lib-catalog">
+        <div class="lib-catalog-head"><span>Peripheral Artery Disease (PAD)</span><span>24 videos &middot; Dr. Torres</span></div>
+        <div class="lib-catalog-row"><span>What is PAD?</span><span>2:14</span></div>
+        <div class="lib-catalog-row"><span>Recognizing PAD Symptoms</span><span>1:47</span></div>
+        <div class="lib-catalog-row"><span>Treatment Options for PAD</span><span>3:02</span></div>
+        <div class="lib-catalog-row"><span>Preparing for Your Procedure</span><span>1:38</span></div>
+        <div class="lib-catalog-row"><span>Recovery: What to Expect</span><span>2:05</span></div>
+        <div class="lib-catalog-row"><span>Living with PAD: Your Questions Answered</span><span>4:12</span></div>
+        <div class="lib-catalog-foot">Plus: Varicose Veins &middot; DVT &middot; Venous Insufficiency &middot; Sclerotherapy</div>
+      </div>
+    </div>
+
+    <!-- Five video types -->
+    <div style="margin-bottom:72px">
+      <div style="font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:20px">Five Core Videos Per Service Line</div>
+      <div class="vid-types-grid">
+        <div class="vid-type-card">
+          <div class="vid-type-num">01</div>
+          <div class="vid-type-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:24px;height:24px;color:var(--teal)"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div>
+          <div class="vid-type-name">Condition Explainer</div>
+          <p class="vid-type-desc">What it is, why it matters, what happens without treatment.</p>
+          <div class="vid-type-meta">1&ndash;2 min &middot; SEO anchor</div>
+        </div>
+        <div class="vid-type-card">
+          <div class="vid-type-num">02</div>
+          <div class="vid-type-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:24px;height:24px;color:var(--teal)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div class="vid-type-name">Procedure &amp; Consent</div>
+          <p class="vid-type-desc">What the procedure involves, the risks, the alternatives.</p>
+          <div class="vid-type-meta">3&ndash;5 min &middot; Consent layer</div>
+        </div>
+        <div class="vid-type-card">
+          <div class="vid-type-num">03</div>
+          <div class="vid-type-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:24px;height:24px;color:var(--teal)"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <div class="vid-type-name">Pre-Procedure Prep</div>
+          <p class="vid-type-desc">NPO, medications, what to bring. The cancellation prevention layer.</p>
+          <div class="vid-type-meta">1&ndash;2 min &middot; Day -7 / -1</div>
+        </div>
+        <div class="vid-type-card">
+          <div class="vid-type-num">04</div>
+          <div class="vid-type-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:24px;height:24px;color:var(--teal)"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <div class="vid-type-name">Recovery</div>
+          <p class="vid-type-desc">Activity, compression, warning signs, when to call back.</p>
+          <div class="vid-type-meta">1&ndash;2 min &middot; Day +1</div>
+        </div>
+        <div class="vid-type-card">
+          <div class="vid-type-num">05</div>
+          <div class="vid-type-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:24px;height:24px;color:var(--teal)"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div class="vid-type-name">Condition Q&amp;A</div>
+          <p class="vid-type-desc">The 5&ndash;10 most common questions, answered on camera.</p>
+          <div class="vid-type-meta">3&ndash;5 min &middot; Always-on</div>
         </div>
       </div>
     </div>
 
-    <!-- TRUST BLOCK -->
-    <div class="trust-block">
-      <div class="label">For Every Patient</div>
-      <h3>Give even your most anxious patients <em>a reason to feel secure.</em></h3>
-      <p>The fears they carry into the consult. The questions they're too embarrassed to ask. <strong>Each of them, answered by you, before the first visit.</strong></p>
-      <p style="margin-top:1.25rem;font-style:italic;color:var(--ink-quiet);font-size:.95rem">For the first ten private practices. <em style="color:var(--primary);font-style:italic">Founding rates locked forever.</em></p>
-    </div>
-  </div>
-</section>
-
-<!-- HOW PATIENTS USE IT -->
-<section class="section" id="use">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-eyebrow">How Patients Use It</div>
-      <h2 class="section-title">One library.<br/><em>Four ways</em> patients meet your practice.</h2>
-      <p class="section-desc">The library works wherever patients already are — your office, their living room, their search results, their referring physician's hands. <em style="color:var(--primary)">This is the work we'll build for ten founding practices before lifetime lock pricing closes.</em></p>
-    </div>
-    <div class="use-grid">
-      <div class="use-card">
-        <div class="use-header">
-          <div class="use-num">01</div>
-          <h3 class="use-title"><em>Post-Diagnosis</em></h3>
-        </div>
-        <p class="use-desc">Patient leaves your office with a QR card. That night, <strong>they watch your physician explain their condition</strong> — not a stranger on YouTube.</p>
-        <div class="use-tag">QR card · Same-day handoff</div>
-      </div>
-      <div class="use-card">
-        <div class="use-header">
-          <div class="use-num">02</div>
-          <h3 class="use-title"><em>Family Sharing</em></h3>
-        </div>
-        <p class="use-desc">They forward videos to a spouse, an adult child, a caregiver. <strong>Your physician educates the whole family.</strong></p>
-        <div class="use-tag">Forwarded link · Family decisions</div>
-      </div>
-      <div class="use-card">
-        <div class="use-header">
-          <div class="use-num">03</div>
-          <h3 class="use-title"><em>Search Discovery</em></h3>
-        </div>
-        <p class="use-desc">New patients find you on Google and YouTube. <strong>They watch three or four videos and call to book</strong> — already trusting you.</p>
-        <div class="use-tag">SEO · Direct patient pipeline</div>
-      </div>
-      <div class="use-card">
-        <div class="use-header">
-          <div class="use-num">04</div>
-          <h3 class="use-title"><em>Referral Support</em></h3>
-        </div>
-        <p class="use-desc">PCPs share your videos with patients they're referring. <strong>You become pre-positioned as the expert</strong> before the patient walks through your door.</p>
-        <div class="use-tag">Strengthens existing referrals</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CROSS-MENTION: Patient Focused Stories — Coming Soon -->
-<section class="crossmention">
-  <div class="container">
-    <div class="crossmention-inner">
-      <div class="crossmention-mark">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-      </div>
-      <div class="crossmention-text">
-        <div class="crossmention-eyebrow">Coming Late 2026 — Founding Clients First</div>
-        <h3 class="crossmention-title">Patient Focused <em>Stories.</em></h3>
-        <p class="crossmention-desc">Single-patient documentary films capturing the journey from diagnosis to outcome. <strong>Founding cohort clients lock one-third off every Patient Focused product we build</strong> — including Stories — for life.</p>
-      </div>
-      <span class="crossmention-cta" style="cursor:default;border-bottom-style:dashed">
-        Reserved for founding cohort
-      </span>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING SECTION -->
-<section class="section" id="pricing">
-  <div class="container">
-    <div class="section-header center">
-      <div class="section-eyebrow">Multi-Line Pricing</div>
-      <h2 class="section-title">Build the library<br/>across <em>your full practice</em>.</h2>
-      <p class="section-desc" style="margin:0 auto">Multiple service lines captured efficiently across the same production days. Build across as many clinical areas as your practice covers.</p>
-      <p class="section-desc" style="margin:1rem auto 0;font-style:italic;font-size:1.05rem;color:var(--ink-quiet);max-width:680px">These are the founding rates — locked forever for <em style="color:var(--primary)">the first ten practices.</em> Add a service line years from now and pay your founding rate, as if you'd committed today.</p>
-    </div>
-
-    <div class="offer">
-      <div class="offer-pricing">
-        <div class="price-tier highlight">
-          <div class="price-label">1 Service Line</div>
-          <div class="price-amount featured">$12,000</div>
-          <div class="price-strike">$18,000</div>
-          <div class="price-savings">Save $6,000</div>
-        </div>
-        <div class="price-tier">
-          <div class="price-label">2 Service Lines</div>
-          <div class="price-amount">$24,000</div>
-          <div class="price-strike">$36,000</div>
-          <div class="price-savings">Save $12,000</div>
-        </div>
-        <div class="price-tier">
-          <div class="price-label">3 Service Lines</div>
-          <div class="price-amount">$36,000</div>
-          <div class="price-strike">$54,000</div>
-          <div class="price-savings">Save $18,000</div>
-        </div>
-        <div class="price-tier">
-          <div class="price-label">5 Service Lines</div>
-          <div class="price-amount">$60,000</div>
-          <div class="price-strike">$90,000</div>
-          <div class="price-savings">Save $30,000</div>
-        </div>
-      </div>
-      <div class="founding">
-        <div class="founding-cell">
-          <div class="founding-cell-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <div class="founding-cell-text">
-            <strong>Payment plans built in</strong>
-            <span>Milestone-based or monthly. No financing fees.</span>
+    <!-- How it works -->
+    <div class="how-block">
+      <div class="how-inner">
+        <div>
+          <div style="font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:12px">How It Works</div>
+          <h3 style="font-family:var(--serif);font-size:clamp(24px,3vw,34px);font-weight:400;color:var(--navy);margin-bottom:16px;line-height:1.2">We come to you.<br><em style="font-style:italic;color:var(--teal)">Your physician never leaves the office.</em></h3>
+          <p style="font-size:16px;color:var(--slate);line-height:1.7;margin-bottom:24px">We set up in an underutilized space at your practice for the day. Your physician steps in, records, and steps out. Under an hour of their time for a single service line. Each additional service line adds about 30 minutes. We handle everything before, during, and after.</p>
+          <div class="how-steps">
+            <div class="how-step"><div class="how-step-num">1</div><div><strong>We research &amp; script</strong><br><span>Custom scripts for your service lines, your patients, your physician&rsquo;s voice</span></div></div>
+            <div class="how-step"><div class="how-step-num">2</div><div><strong>We film on-site</strong><br><span>We set up at your practice, your physician steps in for under an hour, and we&rsquo;re out</span></div></div>
+            <div class="how-step"><div class="how-step-num">3</div><div><strong>We edit &amp; deploy</strong><br><span>Full post-production, branding, YouTube optimization, and website integration</span></div></div>
           </div>
         </div>
-        <div class="founding-cell deadline">
-          <strong>10 FOUNDING SLOTS · LIFETIME LOCK</strong>
-          <span>Then 2026 Launch Year through Dec 31</span>
+        <div class="how-pricing-card">
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:16px">Full Production</div>
+          <div style="font-family:var(--serif);font-size:clamp(22px,3vw,28px);color:var(--navy);line-height:1.2;margin-bottom:4px">Custom Quote</div>
+          <div style="font-size:14px;color:var(--muted);margin-bottom:16px">Pricing based on your service lines</div>
+          <div style="font-size:13px;color:var(--teal);font-weight:500;margin-bottom:24px">Ask about our founding cohort offer. Limited openings available.</div>
+          <div class="how-includes">
+            <div class="how-include"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;color:var(--teal);flex-shrink:0"><polyline points="20 6 9 17 4 12"/></svg>Pre-production research + scripting</div>
+            <div class="how-include"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;color:var(--teal);flex-shrink:0"><polyline points="20 6 9 17 4 12"/></svg>On-site documentary production</div>
+            <div class="how-include"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;color:var(--teal);flex-shrink:0"><polyline points="20 6 9 17 4 12"/></svg>Full post-production + deployment</div>
+            <div class="how-include"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;color:var(--teal);flex-shrink:0"><polyline points="20 6 9 17 4 12"/></svg>YouTube SEO optimization</div>
+            <div class="how-include"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;color:var(--teal);flex-shrink:0"><polyline points="20 6 9 17 4 12"/></svg>Distribution protocol + staff training</div>
+          </div>
+          <a href="#" onclick="openForm();return false" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px;margin-top:24px;background:var(--navy);color:var(--white);border-radius:10px;font-size:15px;font-weight:500;text-decoration:none;transition:all .3s;box-shadow:0 4px 16px rgba(11,31,51,.15)">Let’s Scope Your Library <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- THE TRADE -->
-<section class="section" id="trade">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-eyebrow">What We Ask</div>
-      <h2 class="section-title">In exchange for founding pricing,<br/>we ask for <em>three things</em>.</h2>
-      <p class="section-desc">Founding clients become the proof that lets us serve more practices like yours.</p>
-    </div>
-    <div class="trade">
-      <div class="trade-item">
-        <div class="trade-num">01 / Capture</div>
-        <h3 class="trade-title">Case study participation</h3>
-        <p class="trade-desc">Three recorded Zoom conversations across the engagement. Permission for behind-the-scenes capture.</p>
-      </div>
-      <div class="trade-item">
-        <div class="trade-num">02 / Use</div>
-        <h3 class="trade-title">Use rights</h3>
-        <p class="trade-desc">Permission to use practice name, physician name, logo, and likeness in our case studies and portfolio.</p>
-      </div>
-      <div class="trade-item">
-        <div class="trade-num">03 / Network</div>
-        <h3 class="trade-title">Two warm introductions</h3>
-        <p class="trade-desc">Two intros to peer physicians. Connections only — no obligation beyond.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- FOUNDING COHORT BONUS — Integrated visual identity services -->
-<section class="section" style="padding:80px 0;border-top:0.5px solid var(--rule)">
-  <div class="container">
-    <div class="section-header center">
-      <div class="section-eyebrow">More from Patient Focused</div>
-      <h2 class="section-title" style="font-size:2rem">One brand.<br/><em>Every touchpoint.</em></h2>
-      <p class="section-desc" style="margin:0 auto;max-width:680px">Beyond the Library and Stories, Patient Focused offers a complete visual identity system — captured under one editorial brand for a coherent patient-facing experience.</p>
-    </div>
 
-    <div style="max-width:780px;margin:3rem auto 0;padding:2rem 2.5rem;background:var(--paper-warm);border-left:2px solid var(--primary);border-radius:0 8px 8px 0">
-      <div style="font-family:'Source Serif 4',serif;font-style:italic;font-size:.85rem;color:var(--primary);margin-bottom:1.25rem">The Founding Cohort Bonus</div>
-      <p style="font-family:'Source Serif 4',serif;font-size:1.05rem;color:var(--ink);line-height:1.55;margin:0 0 1.5rem 0;font-weight:500">Founding clients lock <em style="color:var(--primary);font-style:italic">one-third off</em> our complete visual identity services — forever.</p>
-      <ul style="list-style:none;padding:0;margin:0 0 1.5rem 0;font-family:'Source Serif 4',serif;font-size:.95rem;color:var(--ink-soft);line-height:1.5;display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem 1.5rem">
-        <li style="padding:.45rem 0;border-bottom:0.5px solid var(--rule)"><em style="color:var(--ink);font-style:italic;font-weight:500">Physician portraits</em></li>
-        <li style="padding:.45rem 0;border-bottom:0.5px solid var(--rule)"><em style="color:var(--ink);font-style:italic;font-weight:500">Facility interiors</em></li>
-        <li style="padding:.45rem 0;border-bottom:0.5px solid var(--rule)"><em style="color:var(--ink);font-style:italic;font-weight:500">Facility exteriors</em></li>
-        <li style="padding:.45rem 0;border-bottom:0.5px solid var(--rule)"><em style="color:var(--ink);font-style:italic;font-weight:500">Brand and identity videos</em></li>
-        <li style="padding:.45rem 0"><em style="color:var(--ink);font-style:italic;font-weight:500">Team and staff portraits</em></li>
-        <li style="padding:.45rem 0"><em style="color:var(--ink);font-style:italic;font-weight:500">Event and conference coverage</em></li>
-      </ul>
-      <p style="font-family:'Source Serif 4',serif;font-style:italic;font-size:.95rem;color:var(--ink-quiet);line-height:1.55;margin:0;padding-top:1.25rem;border-top:0.5px solid var(--rule)">A practice that hires three vendors gets three styles. <em style="color:var(--primary);font-style:italic">A practice that hires Patient Focused gets one.</em></p>
-    </div>
-  </div>
-</section>
 
-<!-- 2026 LAUNCH YEAR DISCLOSURE -->
-<section class="section" style="padding:60px 0;border-top:0.5px solid var(--rule)">
-  <div class="container">
-    <div style="max-width:680px;margin:0 auto;padding:1.5rem 1.75rem;background:var(--paper-warm);border-left:2px solid var(--accent);border-radius:0 6px 6px 0">
-      <div style="font-family:'Source Serif 4',serif;font-style:italic;font-size:.85rem;color:var(--accent);margin-bottom:.6rem">After the founding 10 fill</div>
-      <p style="font-family:'Source Serif 4',serif;font-size:1rem;color:var(--ink-soft);line-height:1.65;margin:0">2026 Launch Year pricing continues at <strong style="color:var(--ink)">$12,000 per service line through December 31, 2026</strong> — without the lifetime lock or the cross-product founding rate. <em style="font-style:italic;color:var(--ink-quiet)">Standard pricing of $18,000 begins January 1, 2027.</em></p>
-    </div>
-  </div>
-</section>
 
-<!-- GUARANTEE -->
-<section class="guarantee-section">
-  <div class="container">
-    <div class="guarantee">
-      <div class="guarantee-seal">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+<!-- IMPACT REPORT CTA -->
+<section style="padding:80px 0;background:var(--soft-blue)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 2rem">
+    <div class="impact-cta-card">
+      <div class="impact-cta-left">
+        <div class="impact-cta-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:28px;height:28px;color:var(--teal)"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+        </div>
+        <div>
+          <div style="font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:8px">Impact Report</div>
+          <div style="font-family:var(--serif);font-size:clamp(22px,3vw,30px);font-weight:400;color:var(--navy);line-height:1.2;margin-bottom:8px">Your Estimated Impact</div>
+          <p style="font-size:15px;color:var(--slate);line-height:1.6;max-width:440px">What a physician-on-camera education library means for your practice&mdash;in dollars, time, and risk reduction.</p>
+        </div>
       </div>
-      <div class="guarantee-eyebrow">The Founding Client Guarantee</div>
-      <h2 class="guarantee-title">If the work isn't right,<br/><em>we make it right.</em></h2>
-      <p class="guarantee-text">If any deliverable doesn't meet your standards, we re-shoot at no additional cost. <strong>Two rounds of revisions are included on every video.</strong></p>
-      <p class="guarantee-text">This isn't a money-back guarantee. It's a craftsmanship guarantee. We stand behind the work — and the relationship.</p>
-      <div class="guarantee-signoff">— Devon Dulaney · Founder</div>
+      <div style="display:flex;align-items:center">
+        <a href="calculator.html" class="impact-cta-btn">See Your Estimated Impact <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta" id="book">
-  <div class="container">
-    <div class="cta-content">
-      <h2>Lock founding pricing.<br/><em>Forever.</em></h2>
-      <p class="cta-sub">The first ten private practices. Once the founding cohort fills, the lifetime lock is gone — and so is everything that comes with it.</p>
-
-      <div style="max-width:580px;margin:0 auto 2rem;padding:1.75rem 2rem;background:var(--paper-warm);border-left:2px solid var(--accent);border-radius:0 8px 8px 0;text-align:left">
-        <div style="font-family:'Source Serif 4',serif;font-style:italic;font-size:.85rem;color:var(--accent);margin-bottom:1rem">What founding clients lock</div>
-        <ul style="list-style:none;padding:0;margin:0;font-family:'Source Serif 4',serif;font-size:1rem;color:var(--ink-soft);line-height:1.5">
-          <li style="padding:.55rem 0;border-bottom:0.5px solid var(--rule)"><strong style="color:var(--ink)">$12,000</strong> per service line — forever</li>
-          <li style="padding:.55rem 0;border-bottom:0.5px solid var(--rule)"><strong style="color:var(--ink)">One-third off</strong> every Patient Focused product, including <em style="color:var(--accent);font-style:italic">Stories</em></li>
-          <li style="padding:.55rem 0;border-bottom:0.5px solid var(--rule)"><strong style="color:var(--ink)">One-third off</strong> portraits, facility, brand video — every visual identity service, forever</li>
-          <li style="padding:.55rem 0"><strong style="color:var(--ink)">Payment plans</strong> built in — milestone-based or monthly, no fees</li>
-        </ul>
-      </div>
-
-      <p class="cta-sub" style="font-style:italic;font-size:1rem;color:var(--ink-quiet);margin-top:0;margin-bottom:2.5rem">When your practice grows, <em style="color:var(--primary)">your rate doesn't.</em></p>
-      <a href="mailto:devon@im-patient-focused.com?subject=Founding Cohort Inquiry" class="cta-pill primary">
-        Apply for the Cohort
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-      <div class="cta-meta">
-        <span><span class="dot"></span>10 founding slots</span>
-        <span><span class="dot"></span>Lifetime lock for the first 10</span>
-        <span><span class="dot"></span>2026 Launch Year through Dec 31</span>
-      </div>
-    </div>
+<section style="padding:100px 0;background:linear-gradient(180deg,var(--ice),var(--white));text-align:center">
+  <div style="max-width:560px;margin:0 auto;padding:0 2rem">
+    <div style="font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:12px">Start Here</div>
+    <h2 style="font-family:var(--serif);font-size:clamp(28px,4vw,42px);font-weight:400;color:var(--navy);margin-bottom:16px;line-height:1.15">Let’s scope <em style="font-style:italic;color:var(--teal)">your library</em></h2>
+    <p style="font-size:16px;color:var(--slate);line-height:1.7;max-width:480px;margin:0 auto 28px">15 minutes. We’ll map your service lines, estimate the scope, and walk through the production process.</p>
+    <a href="#" onclick="openForm();return false" style="display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:var(--navy);color:var(--white);border-radius:12px;font-size:16px;font-weight:500;text-decoration:none;transition:all .3s;box-shadow:0 4px 20px rgba(11,31,51,.15)">Let’s Scope Your Library <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <p style="margin-top:16px;font-size:13px;color:var(--muted)">Or email directly: <a href="mailto:hello@im-patient-focused.com" style="color:var(--teal);text-decoration:none">hello@im-patient-focused.com</a></p>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <div class="logo-mark">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s-7-5.5-7-11a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 5.5-7 11-7 11z"/></svg>
-        </div>
-        <div>
-          <div class="footer-brand-text">Patient Focused</div>
-          <div class="footer-tagline">Building stronger patient-provider relationships.</div>
-        </div>
-      </div>
-      <div class="footer-meta">Devon Dulaney · Founder &amp; Creative Director</div>
-    </div>
+<footer style="padding:32px 2rem;border-top:1px solid var(--border);background:var(--white)">
+  <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+    <div style="font-family:var(--serif);font-style:italic;color:var(--muted);font-size:15px">Patient Focused</div>
+    <div style="display:flex;gap:24px"><a href="solutions.html" style="color:var(--muted);text-decoration:none;font-size:13px">Solutions</a><a href="who-we-serve.html" style="color:var(--muted);text-decoration:none;font-size:13px">Who We Serve</a><a href="results.html" style="color:var(--muted);text-decoration:none;font-size:13px">Results</a><a href="calculator.html" style="color:var(--muted);text-decoration:none;font-size:13px">Impact Calculator</a></div>
+    <div style="font-size:12px;color:var(--muted)">&copy; 2026 Patient Focused</div>
   </div>
 </footer>
 
 <script>
-// Populate the ticker with looping content
-(function(){
-  const track = document.getElementById('tickerTrack');
-  if (!track) return;
+document.addEventListener('DOMContentLoaded', function() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // For steps-bar, also trigger children
+        if (entry.target.classList.contains('journey-content')) {
+          entry.target.classList.add('steps-visible');
+          entry.target.querySelectorAll('.step-header').forEach(function(h) {
+            h.classList.add('visible');
+          });
+        }
+        // For trust-stack, trigger children
+        if (entry.target.classList.contains('trust-stack')) {
+          entry.target.querySelectorAll('.trust-card, .trust-quote').forEach(function(c) {
+            c.classList.add('visible');
+          });
+        }
+        // For phone-frame, trigger sms bubble
+        if (entry.target.classList.contains('phone-frame')) {
+          var bubble = entry.target.querySelector('.sms-bubble');
+          if (bubble) bubble.classList.add('visible');
+        }
+      }
+    });
+  }, { threshold: 0.15 });
 
-  // The single sequence of items
-  const items = [
-    {type:'pulse'},
-    {type:'text', html:'<strong>Founding Offer</strong>'},
-    {type:'dot'},
-    {type:'text', html:'From <span class="price">$12,000</span>'},
-    {type:'dot'},
-    {type:'text', html:'<strong>10</strong> founding slots'},
-    {type:'dot'},
-    {type:'text', html:'<strong>One-third off forever</strong> for the first 10'},
-    {type:'dot'},
-    {type:'text', html:'Multi-line bundles to <strong>$60,000</strong>'},
-    {type:'dot'},
-    {type:'text', html:'Payment plans built in'},
-    {type:'dot'},
-    {type:'cta', href:'#book', text:'Apply for the Cohort'},
-    {type:'dot'},
-  ];
+  // Observe elements
+  document.querySelectorAll('.journey-content, .phone-frame, .video-card, .trust-stack, .evidence-card, .lib-catalog, .vid-type-card, .path-card, .how-pricing-card, .exp-card').forEach(function(el) {
+    observer.observe(el);
+  });
+});
+</script>
 
-  function buildItem(item){
-    if (item.type === 'pulse') return '<span class="ticker-item"><span class="pulse"></span></span>';
-    if (item.type === 'dot') return '<span class="ticker-divider"></span>';
-    if (item.type === 'cta') return `<span class="ticker-item"><a href="${item.href}" class="ticker-cta-link">${item.text} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></span>`;
-    return `<span class="ticker-item">${item.html}</span>`;
-  }
 
-  // Render items twice for seamless infinite scroll
-  const html = items.map(buildItem).join('');
-  track.innerHTML = html + html;
-})();
+<!-- INQUIRY FORM MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeForm()"></div>
+<div class="modal-card" id="modalCard">
+  <button class="modal-close" onclick="closeForm()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <div class="modal-title">Let’s scope your library</div>
+  <div class="modal-sub">15 minutes. We’ll map your service lines and walk through what your library would look like.</div>
+  <form action="https://formsubmit.co/hello@im-patient-focused.com" method="POST">    <div class="m-field"><label>Your name</label><input type="text" name="name" placeholder="First and last name" required></div>
+    <div class="m-field"><label>Practice name</label><input type="text" name="practice" placeholder="Your practice" required></div>
+    <div class="m-field"><label>Email</label><input type="email" name="email" placeholder="you@practice.com" required></div>
+    <div class="m-field"><label>Your role</label><select name="role" required><option value="">Select...</option><option>Practice Owner / Partner</option><option>Physician</option><option>Practice Manager</option><option>Office Manager</option><option>Marketing Director</option><option>Administrator</option><option>Other</option></select></div>
+    <div class="m-field"><label>What type of practice?</label><select name="practice_type" required><option value="">Select...</option><option>Vascular / Vein</option><option>Orthopedic</option><option>Dermatology / Mohs</option><option>Ophthalmology</option><option>Urology</option><option>Plastic Surgery</option><option>Pain Management</option><option>GI / Endoscopy</option><option>Fertility / IVF</option><option>Other</option></select></div>
+    <div class="m-field"><label>How many service lines?</label><select name="service_lines" required><option value="">Select...</option><option>1–2 procedures</option><option>3–5 procedures</option><option>6–10 procedures</option><option>10+</option></select></div>
+    <button type="submit" class="m-submit">Let’s Scope Your Library <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+  </form>
+  <div class="m-note">Or email directly: <a href="mailto:hello@im-patient-focused.com">hello@im-patient-focused.com</a></div>
+</div>
 
-// Engage sticky ticker when user has scrolled past the Founding Offer block
-(function(){
-  const ticker = document.querySelector('.offer-ribbon-section');
-  const founding = document.querySelector('.founding-offer-section');
-  if (!ticker || !founding) return;
 
-  function onScroll(){
-    const foundingBottom = founding.getBoundingClientRect().bottom;
-    // Engage ticker once user has scrolled past the founding block
-    const isActive = foundingBottom < 72; // 72 = nav height
-    ticker.classList.toggle('is-active', isActive);
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('load', onScroll);
-})();
+<script>
+function openForm(){document.getElementById("modalOverlay").classList.add("open");document.getElementById("modalCard").classList.add("open");document.body.style.overflow="hidden"}
+function closeForm(){document.getElementById("modalOverlay").classList.remove("open");document.getElementById("modalCard").classList.remove("open");document.body.style.overflow=""}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeForm()});
 </script>
 
 </body>
