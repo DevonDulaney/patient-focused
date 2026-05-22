@@ -183,9 +183,10 @@ footer{padding:32px 2rem;border-top:1px solid var(--border)}.footer-inner{max-wi
 </div>
 
 <!-- SAVE -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <div class="save-card"><div class="save-title">Download your personalized impact report</div><div class="save-sub">Enter your details to generate a branded report with your practice's numbers and the research behind each calculation.</div>
 <form class="save-form" id="reportForm" action="#" method="POST" onsubmit="simpleReportDownload(event);return false"><input type="hidden" name="_subject" value="New Impact Calculator Report"><input type="hidden" name="_template" value="table"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="calculator_results" id="calcR"><input type="hidden" name="calculator_mode" id="calcM" value="cancellations"><input type="text" class="save-input" name="name" id="reportName" placeholder="Your name" required><input type="email" class="save-input" name="email" id="reportEmail" placeholder="you@practice.com" required><button type="button" class="save-btn" id="reportBtn" onclick="simpleReportDownload(event);return false">Download My Report →</button></form>
-<div class="save-note" id="reportStatus">Downloads a styled HTML report. Open it and choose Print / Save as PDF if you want a PDF copy.</div></div>
+<div class="save-note" id="reportStatus">Your report will download as a PDF.</div></div>
 <script>
 function simpleReportDownload(e){
   if(e){e.preventDefault();e.stopPropagation&&e.stopPropagation()}
@@ -205,7 +206,7 @@ function simpleReportDownload(e){
     var url=downloadImpactReport(report,fileName,status);
     sendReportLead(name,email,data,function(sent){
       var note=sent?' Your details were sent.':' If the form send fails, email hello@im-patient-focused.com.';
-      status.innerHTML='Report ready. If your download did not start, <a style="color:#0E6F8F;font-weight:600" download="'+fileName+'" target="_blank" rel="noopener" href="'+url+'">open or download it here</a>.'+note;
+      status.innerHTML='Your PDF report is downloading.'+note;
     });
   }catch(err){
     console.error(err);
@@ -280,19 +281,149 @@ function buildImpactReportHTML(name,email,data){
   return '<!DOCTYPE html>\n'+doc.documentElement.outerHTML;
 }
 function downloadImpactReport(report,fileName,status){
-  var blob=new Blob([report],{type:'text/html;charset=utf-8'});
-  var url=URL.createObjectURL(blob);
-  status.innerHTML='Report ready. If your download did not start, <a style="color:#0E6F8F;font-weight:600" download="'+fileName+'" target="_blank" rel="noopener" href="'+url+'">open or download it here</a>.';
-  var a=document.createElement('a');
-  a.href=url;
-  a.download=fileName;
-  a.target='_blank';
-  a.rel='noopener';
-  document.body.appendChild(a);
-  if(typeof a.click==='function')a.click();
-  else a.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,view:window}));
-  document.body.removeChild(a);
-  return url;
+  var pdfName=fileName.replace('.html','.pdf');
+  var data=JSON.parse(document.getElementById('calcR').value);
+  var name=document.getElementById('reportName').value.trim();
+  var email=document.getElementById('reportEmail').value.trim();
+  var active=data.mode==='acquisition';
+
+  // Build PDF content with inline styles
+  var c=document.createElement('div');
+  c.id='pdf-render';
+  c.style.cssText='width:800px;background:#fff;font-family:Inter,-apple-system,sans-serif;color:#0B1F33;line-height:1.45;padding:30px 36px';
+
+  function d(tag,styles,text){var e=document.createElement(tag);if(styles)e.style.cssText=styles;if(text)e.textContent=text;return e}
+
+
+  // Header
+  c.appendChild(d('div','font-family:Georgia,serif;font-style:italic;color:#0E6F8F;font-size:18px;margin-bottom:6px','Patient Focused'));
+  c.appendChild(d('div','font-family:Georgia,serif;font-size:28px;color:#0B1F33;margin-bottom:4px','Your Estimated Impact Report'));
+  c.appendChild(d('div','font-size:12px;color:#64748B;margin-bottom:18px','Personalized analysis based on your practice data and peer-reviewed research'));
+  c.appendChild(d('hr','border:none;border-top:2px solid #0E6F8F;margin-bottom:18px'));
+
+  // Meta
+  var meta=d('div','display:flex;gap:12px;margin-bottom:20px');
+  var m1=d('div','flex:1;background:#F4F9FC;border:1px solid #D8E3EC;border-radius:10px;padding:10px 12px');
+  m1.appendChild(d('div','font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#0E6F8F;font-weight:700;margin-bottom:2px','Prepared For'));
+  m1.appendChild(d('div','font-size:13px;color:#0B1F33',name));
+  var m2=d('div','flex:1;background:#F4F9FC;border:1px solid #D8E3EC;border-radius:10px;padding:10px 12px');
+  m2.appendChild(d('div','font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#0E6F8F;font-weight:700;margin-bottom:2px','Email'));
+  m2.appendChild(d('div','font-size:13px;color:#0B1F33',email));
+  var m3=d('div','flex:1;background:#F4F9FC;border:1px solid #D8E3EC;border-radius:10px;padding:10px 12px');
+  m3.appendChild(d('div','font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#0E6F8F;font-weight:700;margin-bottom:2px','Date'));
+  m3.appendChild(d('div','font-size:13px;color:#0B1F33',new Date().toLocaleDateString()));
+  meta.appendChild(m1);meta.appendChild(m2);meta.appendChild(m3);c.appendChild(meta);
+
+  // Inputs - compact grid right after meta
+  c.appendChild(d('div','font-size:12px;font-weight:600;color:#0B1F33;margin-bottom:6px','Your Practice'));
+  var ig=d('div','display:flex;flex-wrap:wrap;gap:6px 12px;margin-bottom:16px;padding:12px 14px;background:#F4F9FC;border:1px solid #D8E3EC;border-radius:10px');
+  function addInput(label,value){var item=d('span','font-size:11px;color:#64748B');item.appendChild(d('span','',label+': '));item.appendChild(d('strong','color:#0B1F33;font-weight:600',value));ig.appendChild(item)}
+  if(active){
+    addInput('Consultations/mo',String(data.consultations));addInput('Avg revenue',money(data.avg_revenue));addInput('Conversion',data.conversion_rate+'%');addInput('Marketing',money(data.marketing_spend));addInput('Medicare billing',money(data.medicare_billing));
+  } else {
+    addInput('Procedures/wk',String(data.procedures_per_week));addInput('Avg revenue',money(data.avg_revenue));addInput('Cancel rate',data.cancellation_rate+'%');addInput('Consent/wk',String(data.consent_encounters));addInput('Medicare billing',money(data.medicare_billing));
+  }
+  c.appendChild(ig);
+
+  // Total
+  var total=d('div','background:#0B1F33;border-radius:14px;padding:24px;text-align:center;margin-bottom:20px');
+  total.appendChild(d('div','font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:#67D6E8;font-weight:700;margin-bottom:6px','Estimated Annual Impact'));
+  total.appendChild(d('div','font-family:Georgia,serif;font-size:42px;color:#fff;line-height:1',money(data.total)));
+  total.appendChild(d('div','font-size:11px;color:rgba(255,255,255,.5);margin-top:4px','Based on your inputs and peer-reviewed clinical research'));
+  c.appendChild(total);
+
+  // Result breakdown - compact single-column cards
+  c.appendChild(d('div','font-size:14px;font-weight:600;color:#0B1F33;margin:4px 0 8px','Impact Breakdown'));
+
+  function addCard(label,mainText,deltaText,deltaColor,cite){
+    var card=d('div','border:1px solid #D8E3EC;border-radius:10px;padding:12px 16px;margin-bottom:6px;page-break-inside:avoid;display:flex;align-items:flex-start;gap:14px');
+    var left=d('div','min-width:120px;flex-shrink:0');
+    left.appendChild(d('div','font-size:8px;text-transform:uppercase;letter-spacing:.08em;color:#0E6F8F;font-weight:700;font-family:monospace;padding-top:2px',label));
+    var right=d('div','flex:1');
+    right.appendChild(d('div','font-size:13px;color:#0B1F33;line-height:1.45',mainText));
+    var badgeColor=deltaColor==='teal'?'rgba(14,111,143,':'rgba(16,185,129,';
+    var badgeText=deltaColor==='teal'?'#0E6F8F':'#10B981';
+    var badge=d('span','display:inline-block;padding:2px 8px;background:'+badgeColor+'.06);border:1px solid '+badgeColor+'.15);border-radius:4px;font-size:10px;font-weight:600;color:'+badgeText+';margin-top:3px',deltaText);
+    right.appendChild(badge);
+    if(cite){right.appendChild(d('div','font-size:8px;color:#64748B;font-style:italic;margin-top:3px;line-height:1.3',cite))}
+    card.appendChild(left);card.appendChild(right);c.appendChild(card);
+  }
+
+  if(!active){
+    addCard('Cancellation Recovery','Losing '+money(data.annual_loss)+'/yr \u2192 Recovering '+money(data.cancellation_recovery)+' with 65% reduction',money(data.cancellation_recovery)+' recovered','green','Ballon-Landa et al. (2019): 37.6% \u2192 13.2% across 14 practices.');
+    addCard('Consent Protection','Comprehension 65.4% \u2192 78.5% \u2014 inadequate consent = 114% higher payout odds','Avg claim prevented: $295K','teal','Folcarelli / Candello (2023). Rossi (2005): 78.5% vs 65.4%.');
+    addCard('Time Recovery','6.7 min saved per encounter \u2192 '+data.physician_hours+' hrs recovered annually',money(data.time_value)+' recovered capacity','green','Zhang et al. (2017): 12.3 \u2192 5.6 min. Satisfaction 65% \u2192 86%.');
+    addCard('Search Visibility','86% research before booking \u2014 video 53\u00d7 more likely to rank',data.search_patients+' additional patients/month','green','Javidan (2024). Forrester: 53\u00d7 ranking lift.');
+    if(data.medicare_billing>0){
+      addCard('MIPS Protection','Medicare billing '+money(data.medicare_billing)+' \u00d7 9% = '+money(data.mips_protection)+' at risk',money(data.mips_protection)+' protected','green','CMS MIPS (2026): \u00b19% adjustment. Zhang (2017): satisfaction 65% \u2192 86%.');
+    }
+  } else {
+    addCard('Conversion','Rate '+data.conversion_rate+'% \u2192 '+data.improved_rate+'% with pre-consultation video','+'+data.added_procedures+' procedures/month','green','Healthcare video converts 4.8% vs 2.9% (Forrester).');
+    addCard('Organic Growth','Video SEO: '+data.organic_patients+' new patients/month \u2192 '+money(data.organic_monthly_value)+'/mo value','patients you didn\'t pay to acquire','green','86% research before booking. 53\u00d7 ranking lift.');
+    addCard('Cost Per Acquisition',data.current_cpa>0?'CPA '+money(data.current_cpa)+' \u2192 '+money(data.projected_cpa)+' with organic supplementing paid':'Set marketing spend to calculate',data.current_cpa>0?Math.round((1-data.projected_cpa/data.current_cpa)*100)+'% lower CPA':'','green','Organic video: zero marginal cost per view.');
+    addCard('Consent Protection','Comprehension 65.4% \u2192 78.5% \u2014 cosmetic malpractice claims rising','Avg claim prevented: $295K','teal','Folcarelli / Candello (2023): 114% higher payout odds.');
+    if(data.medicare_billing>0){
+      addCard('MIPS Protection','Medicare billing '+money(data.medicare_billing)+' \u00d7 9% = '+money(data.mips_protection)+' at risk',money(data.mips_protection)+' protected','green','CMS MIPS (2026): \u00b19% adjustment. Zhang (2017): satisfaction 65% \u2192 86%.');
+    }
+  }
+
+
+
+  // Evidence - wrapped together
+  var evidenceWrap=d('div','page-break-inside:avoid');
+  evidenceWrap.appendChild(d('div','font-size:14px;font-weight:600;color:#0B1F33;margin:16px 0 6px','Evidence Notes'));
+  var notes=['Ballon-Landa et al. (2019): surgical non-completion dropped from 37.6% to 13.2%.','Folcarelli / Candello (2023): inadequate informed consent = 114% higher payout odds.','Zhang et al. (2017): consent time 12.3 \u2192 5.6 min. Satisfaction 65% \u2192 86%.','Javidan et al. (2024): 53% of vascular YouTube content rated poor quality.','Stacey et al. (2024): Cochrane review of 209 RCTs and 107,698 patients.','CMS MIPS (2026): patient experience affects Medicare reimbursement by up to \u00b19%.'];
+  var ul=d('ul','font-size:11px;color:#64748B;padding-left:18px;line-height:1.7');
+  notes.forEach(function(t){ul.appendChild(d('li','margin-bottom:3px',t))});
+  evidenceWrap.appendChild(ul);
+  c.appendChild(evidenceWrap);
+
+  // CTA
+  var cta=d('div','margin-top:20px;padding:18px;background:#EEF6FB;border:1px solid #D8E3EC;border-radius:10px;text-align:center');
+  cta.appendChild(d('div','font-weight:600;font-size:14px;color:#0B1F33;margin-bottom:4px','Ready to scope your education library?'));
+  cta.appendChild(d('div','font-size:13px;color:#334155','15 minutes. We\u2019ll map your service lines and walk through what your library would look like.'));
+  cta.appendChild(d('div','font-size:13px;color:#0E6F8F;font-weight:600;margin-top:6px','hello@im-patient-focused.com \u00b7 im-patient-focused.com'));
+  c.appendChild(cta);
+
+  // Footer
+  c.appendChild(d('div','text-align:center;color:#64748B;font-size:10px;margin-top:16px;padding-top:12px;border-top:1px solid #D8E3EC','Patient Focused \u00b7 im-patient-focused.com \u00b7 Estimates based on user inputs and published research. Individual results may vary.'));
+
+  document.body.appendChild(c);
+
+  // Show overlay while generating
+  var overlay=document.createElement('div');
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(255,255,255,.95);z-index:99999;display:flex;align-items:center;justify-content:center;font-family:Inter,sans-serif;font-size:18px;color:#0B1F33';
+  overlay.textContent='Generating your PDF report...';
+  document.body.appendChild(overlay);
+
+  // Scroll to top for capture
+  var savedScroll=window.scrollY;
+  window.scrollTo(0,0);
+
+  // Generate PDF
+  setTimeout(function(){
+    html2pdf().set({
+      margin:[8,8,8,8],
+      filename:pdfName,
+      image:{type:'jpeg',quality:.98},
+      html2canvas:{scale:2,useCORS:true,width:800,scrollY:0,windowWidth:800,y:0,x:0},
+      jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
+      pagebreak:{mode:['avoid-all','css','legacy']}
+    }).from(c).save().then(function(){
+      if(c.parentNode)document.body.removeChild(c);
+      if(overlay.parentNode)document.body.removeChild(overlay);
+      window.scrollTo(0,savedScroll);
+    }).catch(function(err){
+      console.error('PDF failed:',err);
+      if(c.parentNode)document.body.removeChild(c);
+      if(overlay.parentNode)document.body.removeChild(overlay);
+      window.scrollTo(0,savedScroll);
+      var blob=new Blob([report],{type:'text/html;charset=utf-8'});
+      var url=URL.createObjectURL(blob);
+      var a=document.createElement('a');a.href=url;a.download=fileName;document.body.appendChild(a);a.click();document.body.removeChild(a);
+    });
+  },200);
+  return '';
 }
 function sendReportLead(name,email,data,done){
   var fd=new FormData();
