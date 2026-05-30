@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="description" content="What is the lack of video education costing your practice? Input your numbers. See the impact in real time.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="apple-touch-icon" sizes="57x57" href="assets/822a55614dae5f12ab2343dd547536a7.ico/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="assets/822a55614dae5f12ab2343dd547536a7.ico/apple-icon-60x60.png">
@@ -22,6 +23,21 @@
 <meta name="msapplication-TileImage" content="assets/822a55614dae5f12ab2343dd547536a7.ico/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
 <title>Impact Calculator — Patient Focused</title>
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://im-patient-focused.com/calculator.html">
+<meta property="og:title" content="Impact Calculator — Patient Focused">
+<meta property="og:description" content="What is the lack of video education costing your practice? Input your numbers. See the impact in real time.">
+<meta property="og:image" content="https://im-patient-focused.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Patient Focused">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Impact Calculator — Patient Focused">
+<meta name="twitter:description" content="What is the lack of video education costing your practice? Input your numbers. See the impact in real time.">
+<meta name="twitter:image" content="https://im-patient-focused.com/og-image.png">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -125,16 +141,35 @@ footer{padding:32px 2rem;border-top:1px solid var(--border)}.footer-inner{max-wi
 
 .nav-logo-img{height:44px;width:auto;object-fit:contain}
 .nav-menu{display:flex;align-items:center;gap:32px}.nav-toggle{display:none;width:42px;height:42px;border:1.5px solid var(--border);border-radius:10px;background:var(--white);align-items:center;justify-content:center;flex-direction:column;gap:5px;cursor:pointer}.nav-toggle span{display:block;width:18px;height:2px;background:var(--navy);border-radius:2px;transition:all .2s}nav.open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}nav.open .nav-toggle span:nth-child(2){opacity:0}nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}@media(max-width:900px){.nav-toggle{display:flex}.nav-menu{display:flex;position:absolute;top:calc(100% + 8px);left:20px;right:20px;z-index:1000;flex-direction:column;align-items:stretch;gap:14px;max-height:0;padding:0 18px;overflow:hidden;background:var(--white);border:1px solid transparent;border-radius:16px;box-shadow:0 16px 40px rgba(11,31,51,0);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-8px) scale(.98);transform-origin:top center;transition:max-height .28s ease,padding .28s ease,opacity .2s ease,transform .28s ease,visibility .28s ease,border-color .28s ease,box-shadow .28s ease}nav.open .nav-menu{max-height:360px;padding:18px;border-color:var(--border);box-shadow:0 16px 40px rgba(11,31,51,.12);opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0) scale(1)}nav.open .nav-links{display:flex}.nav-links{flex-direction:column;gap:4px}.nav-link{justify-content:center;padding:10px 0}.nav-right{flex-direction:column;width:100%;gap:10px}.nav-right a{width:100%;text-align:center;box-sizing:border-box}}
+/* DROPDOWN */
+.nav-dropdown{position:relative}
+.nav-dropdown>.nav-link{display:inline-flex;align-items:center;gap:4px;cursor:pointer}
+.nav-dropdown>.nav-link::after{content:'';border-left:4px solid transparent;border-right:4px solid transparent;border-top:4px solid var(--slate);transition:transform .2s}
+.nav-dropdown:hover>.nav-link::after{transform:rotate(180deg)}
+.nav-dropdown-menu{position:absolute;top:100%;left:-16px;min-width:280px;background:var(--white);border:1px solid var(--border);border-radius:12px;box-shadow:0 12px 40px rgba(11,31,51,.1);padding:8px 0;opacity:0;pointer-events:none;transform:translateY(8px);transition:all .2s ease;z-index:1001}
+.nav-dropdown:hover .nav-dropdown-menu{opacity:1;pointer-events:all;transform:translateY(0)}
+.nav-dropdown-menu a{display:block;padding:10px 20px;font-size:13px;color:var(--slate);text-decoration:none;font-weight:400;letter-spacing:0;text-transform:none;transition:all .15s}
+.nav-dropdown-menu a:first-child{font-weight:600;color:var(--navy);border-bottom:1px solid var(--border);margin-bottom:4px;padding-bottom:12px}
+.nav-dropdown-menu a:hover{color:var(--teal);background:var(--ice)}
+@media(max-width:900px){
+  nav.open .nav-menu{max-height:760px}
+  .nav-dropdown{width:100%}
+  .nav-dropdown>.nav-link{display:flex;justify-content:center;padding:10px 0}
+  .nav-dropdown>.nav-link::after{display:none}
+  .nav-dropdown-menu{position:static;opacity:1;pointer-events:auto;transform:none;min-width:0;width:100%;border:none;border-top:1px solid var(--border);border-radius:0;box-shadow:none;padding:6px 0 2px;margin:2px 0 0;background:transparent}
+  .nav-dropdown-menu a{text-align:center;padding:9px 0;font-size:12px}
+  .nav-dropdown-menu a:first-child{border-bottom:none;margin-bottom:0;padding-bottom:9px}
+}
 </style>
 </head>
 <body>
-<nav><a href="index.html" class="nav-brand"><picture><source media="(max-width: 600px)" srcset="assets/Patient%20Focused%20Logomark.png"><img src="assets/Patient Focused_transparent.png" alt="Patient Focused" class="nav-logo-img"></picture></a><button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" onclick="var n=this.closest('nav');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))"><span></span><span></span><span></span></button><div class="nav-menu"><div class="nav-links"><a href="solutions.html" class="nav-link">Solutions</a><a href="who-we-serve.html" class="nav-link">Who We Serve</a><a href="results.html" class="nav-link">Results</a></div><div class="nav-right">
+<nav><a href="index.html" class="nav-brand"><picture><source media="(max-width: 600px)" srcset="assets/Patient%20Focused%20Logomark.png"><img src="assets/Patient Focused_transparent.png" alt="Patient Focused" class="nav-logo-img"></picture></a><button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" onclick="var n=this.closest('nav');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))"><span></span><span></span><span></span></button><div class="nav-menu"><div class="nav-links"><a href="solutions.html" class="nav-link">Solutions</a><a href="who-we-serve.html" class="nav-link">Who We Serve</a><div class="nav-dropdown"><a href="results.html" class="nav-link">Results</a><div class="nav-dropdown-menu"><a href="results.html">Results Overview</a><a href="brief-cancellations.html">The Cost of Day-of Cancellations</a><a href="brief-consent.html">The Informed Consent Documentation Gap</a><a href="brief-time.html">How Video Education Recovers Physician Time</a><a href="brief-visibility.html">The Search Visibility Problem</a><a href="brief-mips.html">MIPS, Patient Satisfaction &amp; Video Education</a></div></div></div><div class="nav-right">
     <a href="#" class="nav-btn-secondary" style="opacity:.4;pointer-events:none">See Your Impact</a>
     <a href="#" onclick="openForm();return false" class="nav-cta">Inquire</a>
   </div></div>
 </nav>
 
-<section class="calc-hero"><div style="max-width:680px;margin:0 auto;padding:0 2rem"><div style="font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:16px">Impact Calculator</div><h1>What is your practice <em>leaving on the table?</em></h1><p>Adjust the sliders. Watch the numbers update in real time.</p></div></section>
+<section class="calc-hero"><div style="max-width:680px;margin:0 auto;padding:0 2rem"><div style="font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:16px">Impact Calculator</div><h1>What is the lack of video education  <em>costing your practice?</em></h1><p>Adjust the sliders. See the impact in real time. Read the peer reviewed data below.</p></div></section>
 
 <div class="calc-wrap">
 <div class="toggle-section"><div class="toggle-label">What challenge are you facing?</div><div class="toggle-row">
@@ -496,7 +531,7 @@ cCalc();
     <div class="m-field"><label>Email</label><input type="email" name="email" placeholder="you@practice.com" required></div>
     <div class="m-field"><label>Your role</label><select name="role" required><option value="">Select...</option><option>Practice Owner / Partner</option><option>Physician</option><option>Practice Manager</option><option>Office Manager</option><option>Marketing Director</option><option>Administrator</option><option>Other</option></select></div>
     <div class="m-field"><label>What type of practice?</label><select name="practice_type" required><option value="">Select...</option><option>Vascular / Vein</option><option>Orthopedic</option><option>Dermatology / Mohs</option><option>Ophthalmology</option><option>Urology</option><option>Plastic Surgery</option><option>Pain Management</option><option>GI / Endoscopy</option><option>Fertility / IVF</option><option>Other</option></select></div>
-    <div class="m-field"><label>How many service lines?</label><select name="service_lines" required><option value="">Select...</option><option>1–2 procedures</option><option>3–5 procedures</option><option>6–10 procedures</option><option>10+</option></select></div>
+    <div class="m-field"><label>How many unique procedures do you offer?</label><select name="service_lines" required><option value="">Select...</option><option>1–2 procedures</option><option>3–5 procedures</option><option>6–10 procedures</option><option>10+</option></select></div>
     <button type="submit" class="m-submit">Let’s Scope Your Library <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
   </form>
   <div class="m-note">Or email directly: <a href="mailto:hello@im-patient-focused.com">hello@im-patient-focused.com</a></div>
