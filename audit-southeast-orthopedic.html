@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A free 30-day cancellation audit for independent orthopedic practices in the Southeast. Five spots. No cost.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://im-patient-focused.com/audit-southeast-orthopedic.html">
+<meta property="og:title" content="The Southeast Orthopedic Practice Cancellation Audit — Patient Focused">
+<meta property="og:description" content="Orthopedics is one of the most-cancelled surgical specialties — U.S. elective rates run 9–39%. We're auditing 5 orthopedic practices for free.">
+<meta property="og:image" content="https://im-patient-focused.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Patient Focused">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Southeast Orthopedic Practice Cancellation Audit — Patient Focused">
+<meta name="twitter:description" content="Orthopedics is one of the most-cancelled surgical specialties — U.S. elective rates run 9–39%. We're auditing 5 orthopedic practices for free.">
+<meta name="twitter:image" content="https://im-patient-focused.com/assets/og-image.png">
+<title>The Southeast Orthopedic Practice Cancellation Audit — Patient Focused</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#0B1F33;--navy-mid:#1A3450;--slate:#334155;--muted:#64748B;--teal:#0E6F8F;--teal-light:#67D6E8;--border:#D8E3EC;--soft-blue:#EEF6FB;--ice:#F4F9FC;--white:#FFFFFF;--serif:'Source Serif 4',Georgia,serif;--sans:'Inter',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+body{font-family:var(--sans);color:var(--navy);background:var(--white);overflow-x:hidden}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:1000;height:72px;padding:0 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-brand{display:flex;align-items:center;text-decoration:none}
+.nav-logo-img{height:44px;width:auto;object-fit:contain}
+.nav-links{display:flex;gap:32px}
+.nav-link{font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--slate);text-decoration:none}
+.nav-link:hover{color:var(--teal)}
+.nav-right{display:flex;gap:10px;align-items:center}
+.nav-btn-secondary{padding:10px 18px;border-radius:8px;font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--teal);text-decoration:none;border:1.5px solid var(--border)}
+.nav-btn-secondary:hover{border-color:var(--teal);background:var(--ice)}
+.nav-cta{padding:10px 20px;border:1.5px solid var(--navy);border-radius:8px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);text-decoration:none}
+.nav-cta:hover{background:var(--navy);color:var(--white)}
+.nav-menu{display:flex;align-items:center;gap:32px}
+.nav-toggle{display:none;width:42px;height:42px;border:1.5px solid var(--border);border-radius:10px;background:var(--white);align-items:center;justify-content:center;flex-direction:column;gap:5px;cursor:pointer}
+.nav-toggle span{display:block;width:18px;height:2px;background:var(--navy);border-radius:2px;transition:all .2s}
+nav.open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+nav.open .nav-toggle span:nth-child(2){opacity:0}
+nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* SECTIONS */
+.container{max-width:680px;margin:0 auto;padding:0 2rem}
+.section{padding:56px 0}
+.section+.section{border-top:1px solid var(--border)}
+.section-label{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.section-title{font-family:var(--serif);font-size:clamp(22px,3vw,28px);font-weight:400;color:var(--navy);margin-bottom:16px}
+
+/* HERO */
+.hero{padding:100px 0 56px;background:linear-gradient(180deg,var(--ice),var(--white));text-align:center}
+.hero-inner{max-width:640px;margin:0 auto;padding:0 2rem}
+
+/* EVIDENCE STRIP */
+.ev-strip{background:var(--navy);padding:36px 2rem}
+.ev-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;text-align:center}
+.ev-num{font-family:var(--serif);font-size:clamp(32px,5vw,44px);color:var(--white);line-height:1}
+.ev-label{font-size:13px;color:rgba(255,255,255,.55);margin-top:4px;line-height:1.4}
+.ev-src{font-size:10px;color:rgba(255,255,255,.25);margin-top:6px;font-style:italic}
+
+/* AUDIT INCLUDES */
+.includes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+.inc-card{background:var(--ice);border:1px solid var(--border);border-radius:12px;padding:20px}
+.inc-num{font-family:var(--mono);font-size:10px;color:var(--teal);font-weight:700;letter-spacing:.08em;margin-bottom:8px}
+.inc-title{font-family:var(--serif);font-size:17px;color:var(--navy);margin-bottom:4px}
+.inc-desc{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* QUALIFIER */
+.qual{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:20px}
+.qual-col h3{font-family:var(--serif);font-size:18px;font-weight:400;margin-bottom:12px}
+.qual-item{font-size:14px;color:var(--slate);line-height:1.8;padding-left:20px;position:relative}
+.qual-item::before{position:absolute;left:0;font-weight:600}
+.qual-yes .qual-item::before{content:'✓';color:var(--teal)}
+.qual-no .qual-item::before{content:'✗';color:#E8725C}
+
+/* CTA */
+.cta-section{padding:64px 0;background:var(--ice)}
+.cta-card{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:32px;max-width:540px;margin:0 auto;position:relative;overflow:hidden}
+.cta-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--teal)}
+.cta-spots{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:12px}
+.cta-title{font-family:var(--serif);font-size:22px;color:var(--navy);margin-bottom:4px;font-style:italic}
+.cta-badge{display:inline-block;font-family:var(--mono);font-size:10px;color:var(--teal);background:rgba(14,111,143,.08);border:1px solid rgba(14,111,143,.15);padding:3px 8px;border-radius:4px;margin-bottom:12px}
+.cta-body{font-size:14px;color:var(--slate);line-height:1.6;margin-bottom:16px}
+.cta-toggle{color:var(--teal);font-size:15px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;background:none;border:none;font-family:var(--sans)}
+.cta-toggle svg{width:14px;height:14px;transition:transform .2s}
+.cta-toggle.open svg{transform:rotate(90deg)}
+.cta-form{display:none;margin-top:20px;padding-top:20px;border-top:1px solid var(--border)}
+.cta-form.open{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.f-field{margin-bottom:12px}
+.f-field label{display:block;font-size:12px;font-weight:500;color:var(--slate);margin-bottom:4px}
+.f-field input,.f-field select{width:100%;padding:10px 14px;background:var(--ice);border:1px solid var(--border);border-radius:8px;font-family:var(--sans);font-size:14px;color:var(--navy);outline:none}
+.f-field input:focus,.f-field select:focus{border-color:var(--teal)}
+.f-btn{width:100%;padding:14px;border:none;border-radius:10px;font-family:var(--sans);font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;margin-top:4px;background:var(--navy);color:var(--white)}
+.f-btn:hover{background:var(--navy-mid)}
+.f-btn.secondary{background:var(--ice);color:var(--slate);border:1.5px solid var(--border);font-size:14px;padding:11px}
+.f-btn.secondary:hover{border-color:var(--teal);color:var(--teal)}
+.f-success{display:none;text-align:center;padding:20px;color:var(--teal);font-weight:500;font-size:15px}
+
+/* FAQ */
+.faq-item{padding:16px 0;border-bottom:1px solid var(--border)}
+.faq-item:last-child{border-bottom:none}
+.faq-q{font-weight:600;color:var(--navy);font-size:15px;margin-bottom:4px}
+.faq-a{font-size:14px;color:var(--slate);line-height:1.6}
+
+/* FOOTER */
+footer{padding:32px 2rem;border-top:1px solid var(--border);background:var(--white)}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+
+@media(max-width:900px){nav{padding:0 20px}.nav-toggle{display:flex}.nav-menu{display:flex;position:absolute;top:calc(100% + 8px);left:20px;right:20px;z-index:1000;flex-direction:column;align-items:stretch;gap:14px;max-height:0;padding:0 18px;overflow:hidden;background:var(--white);border:1px solid transparent;border-radius:16px;box-shadow:0 16px 40px rgba(11,31,51,0);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-8px) scale(.98);transform-origin:top center;transition:max-height .28s ease,padding .28s ease,opacity .2s ease,transform .28s ease,visibility .28s ease,border-color .28s ease,box-shadow .28s ease}nav.open .nav-menu{max-height:360px;padding:18px;border-color:var(--border);box-shadow:0 16px 40px rgba(11,31,51,.12);opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0) scale(1)}nav.open .nav-links{display:flex}.nav-links{flex-direction:column;gap:4px}.nav-link{justify-content:center;padding:10px 0}.nav-right{flex-direction:column;width:100%;gap:10px}.nav-right a{width:100%;text-align:center;box-sizing:border-box}.hero{padding:80px 0 40px}.ev-inner{grid-template-columns:1fr;gap:20px}.includes{grid-template-columns:1fr}.qual{grid-template-columns:1fr;gap:16px}}
+@media(max-width:600px){nav{height:60px}.nav-logo-img{height:36px}}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(11,31,51,.5);backdrop-filter:blur(6px);z-index:9999;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-card{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.95);z-index:10000;background:var(--white);border:1px solid var(--border);border-radius:24px;padding:40px;width:90%;max-width:480px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(11,31,51,.2);opacity:0;pointer-events:none;transition:all .35s cubic-bezier(.22,1,.36,1)}
+.modal-card.open{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border:none;background:var(--ice);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all .2s}
+.modal-close:hover{background:var(--border);color:var(--navy)}
+.modal-close svg{width:16px;height:16px}
+.modal-title{font-family:var(--serif);font-size:24px;color:var(--navy);margin-bottom:6px}
+.modal-sub{font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.5}
+.m-field{margin-bottom:14px}
+.m-field label{display:block;font-size:13px;font-weight:500;color:var(--slate);margin-bottom:5px}
+.m-field input,.m-field select{width:100%;padding:11px 14px;background:var(--ice);border:1px solid var(--border);border-radius:10px;font-family:var(--sans);font-size:14px;color:var(--navy);outline:none;transition:border-color .2s;appearance:none}
+.m-field input:focus,.m-field select:focus{border-color:var(--teal)}
+.m-field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.m-submit{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px;margin-top:6px;background:var(--navy);color:var(--white);border:none;border-radius:12px;font-family:var(--sans);font-size:15px;font-weight:600;cursor:pointer;transition:all .3s;box-shadow:0 4px 16px rgba(11,31,51,.15)}
+.m-submit:hover{background:var(--navy-mid);transform:translateY(-1px);box-shadow:0 8px 24px rgba(11,31,51,.2)}
+.m-submit svg{width:16px;height:16px}
+.m-note{text-align:center;font-size:12px;color:var(--muted);margin-top:10px}
+.m-note a{color:var(--teal);text-decoration:none}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand"><picture><source media="(max-width: 600px)" srcset="assets/Patient%20Focused%20Logomark.png"><img src="assets/Patient Focused_transparent.png" alt="Patient Focused" class="nav-logo-img"></picture></a>
+  <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" onclick="var n=this.closest('nav');n.classList.toggle('open');this.setAttribute('aria-expanded',n.classList.contains('open'))"><span></span><span></span><span></span></button>
+  <div class="nav-menu">
+    <div class="nav-links">
+      <a href="solutions.html" class="nav-link">Solutions</a>
+      <a href="who-we-serve.html" class="nav-link">Who We Serve</a>
+      <a href="results.html" class="nav-link">Results</a>
+    </div>
+    <div class="nav-right">
+      <a href="calculator.html" class="nav-btn-secondary">See Your Impact</a>
+      <a href="#" onclick="openForm();return false" class="nav-cta">Inquire</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div style="font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:20px">Free &middot; 5 Spots &middot; The Southeast</div>
+    <h1 style="font-family:var(--serif);font-size:clamp(32px,5vw,46px);font-weight:400;line-height:1.1;letter-spacing:-.02em;color:var(--navy);margin-bottom:14px">The Southeast Orthopedic<br><em style="font-style:italic;color:var(--teal)">Cancellation Audit</em></h1>
+    <p style="font-size:17px;color:var(--slate);line-height:1.7;max-width:520px;margin:0 auto 16px">We want to help 5 orthopedic practices in the Southeast track their day-of cancellation rates. Orthopedics is consistently one of the most-cancelled surgical specialties &mdash; and research shows that practices who begin tracking cancellations see rates improve. Measurement itself is the first intervention.</p>
+    <a href="#reserve" onclick="scrollAndOpen(event)" style="display:inline-flex;align-items:center;gap:10px;padding:14px 28px;background:var(--navy);color:var(--white);border-radius:10px;font-size:15px;font-weight:600;text-decoration:none;box-shadow:0 4px 16px rgba(11,31,51,.15)">Reserve My Spot <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  </div>
+</section>
+
+<!-- EVIDENCE -->
+<section class="ev-strip">
+  <div class="ev-inner">
+    <div>
+      <div class="ev-num">9&ndash;39%</div>
+      <div class="ev-label">Reported elective orthopedic<br>cancellation rate &mdash; one of the highest of any specialty</div>
+      <div class="ev-src">Gruson et al., JAAOS Glob Res Rev, 2022. U.S. practice: ~13.4% over 3 years.</div>
+    </div>
+    <div>
+      <div class="ev-num">84%</div>
+      <div class="ev-label">Drop in patient-related same-day cancellations<br>after a structured pre-op touchpoint (10% &rarr; 1.6%)</div>
+      <div class="ev-src">Elective orthopaedic cohort, UK. PubMed 24855716.</div>
+    </div>
+    <div>
+      <div class="ev-num">&gt;50%</div>
+      <div class="ev-label">Of spinal surgery malpractice suits<br>cite inadequate informed consent</div>
+      <div class="ev-src">Reviews of cervical spine malpractice claims.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY ORTHO -->
+<div class="section">
+  <div class="container">
+    <div class="section-label">Why Orthopedics, Specifically</div>
+    <div class="section-title">Your cancellations are mostly preventable &mdash; and mostly about preparation.</div>
+    <p style="font-size:15px;color:var(--slate);line-height:1.7;margin-bottom:16px">Orthopedic surgery is repeatedly identified as one of the specialties with the highest elective cancellation rates, with reported figures ranging from 9% to as high as 39%. A retrospective study of a U.S. elective orthopedic practice put the real-world number at roughly 13.4% over three years.</p>
+    <p style="font-size:15px;color:var(--slate);line-height:1.7">The reasons cluster around the patient: missing medical clearance, NPO violations, anxiety the night before, and confusion about what to expect. These are information problems. When one UK orthopedic unit added a single structured pre-op contact to confirm patients understood their preparation, patient-related same-day cancellations fell from 10% to 1.6%. The audit starts by telling you which of these is happening in <em>your</em> practice.</p>
+  </div>
+</div>
+
+<!-- WHAT YOUR AUDIT INCLUDES -->
+<div class="section">
+  <div class="container">
+    <div class="section-label">What Your Audit Includes</div>
+    <div class="section-title">Everything you need to see the full picture.</div>
+    <div class="includes">
+      <div class="inc-card">
+        <div class="inc-num">01</div>
+        <div class="inc-title">Your cancellation rate</div>
+        <div class="inc-desc">Calculated from 30 days of your actual data. Not an estimate &mdash; your real number.</div>
+      </div>
+      <div class="inc-card">
+        <div class="inc-num">02</div>
+        <div class="inc-title">Peer benchmark</div>
+        <div class="inc-desc">How your rate compares to other orthopedic practices in the Southeast.</div>
+      </div>
+      <div class="inc-card">
+        <div class="inc-num">03</div>
+        <div class="inc-title">Revenue impact estimate</div>
+        <div class="inc-desc">What your cancellation rate is costing you annually, in dollars.</div>
+      </div>
+      <div class="inc-card">
+        <div class="inc-num">04</div>
+        <div class="inc-title">30-minute readout</div>
+        <div class="inc-desc">Your numbers, the peer benchmark, and the peer-reviewed orthopedic research on what prevents cancellations.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="section">
+  <div class="container">
+    <div class="section-label">What We Ask of You</div>
+    <div class="section-title">Two minutes a day for 30 days.</div>
+    <p style="font-size:15px;color:var(--slate);line-height:1.7;margin-bottom:16px">Your front desk logs four data points daily &mdash; date, scheduled cases, cancellations, and reason code. One sheet. Two minutes. Research shows this step alone begins reducing cancellations &mdash; awareness changes behavior.</p>
+    <p style="font-size:15px;color:var(--slate);line-height:1.7">We handle everything else. We compile the data, run the analysis, build the peer comparison, and deliver the readout. No obligation after the 30 days.</p>
+  </div>
+</div>
+
+<!-- WHO THIS IS FOR -->
+<div class="section">
+  <div class="container">
+    <div class="section-label">Is This for You?</div>
+    <div class="qual">
+      <div class="qual-yes">
+        <h3 style="color:var(--teal)">This is for you if&hellip;</h3>
+        <div class="qual-item">You&rsquo;re an independent orthopedic, sports medicine, or spine practice</div>
+        <div class="qual-item">You&rsquo;re in the Southeast</div>
+        <div class="qual-item">You perform 10+ surgical cases per week</div>
+        <div class="qual-item">You don&rsquo;t currently track your cancellation rate</div>
+        <div class="qual-item">You want data, not a sales pitch</div>
+      </div>
+      <div class="qual-no">
+        <h3 style="color:#E8725C">This is not for you if&hellip;</h3>
+        <div class="qual-item">You&rsquo;re a hospital system or academic center</div>
+        <div class="qual-item">You&rsquo;re outside the Southeast</div>
+        <div class="qual-item">You already track and actively manage cancellations</div>
+        <div class="qual-item">You&rsquo;re looking for a quick fix, not real data</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY FREE -->
+<div class="section" style="border-top:none;padding-top:0">
+  <div class="container" style="text-align:center;max-width:560px">
+    <p style="font-family:var(--serif);font-size:18px;color:var(--navy);font-style:italic;line-height:1.65">&ldquo;Why is this free?&rdquo;</p>
+    <p style="font-size:15px;color:var(--slate);line-height:1.7;margin-top:8px">Because we believe the data speaks for itself. If your numbers reveal an opportunity, you&rsquo;ll want to have that conversation. If they don&rsquo;t, you walk away knowing exactly where you stand. Either way, you win.</p>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section" id="reserve">
+  <div style="max-width:540px;margin:0 auto;padding:0 2rem">
+    <div class="cta-card">
+      <div class="cta-spots">5 spots available</div>
+      <div class="cta-title">Reserve your spot</div>
+      <div class="cta-badge">~2 min/day &middot; 30 days &middot; no cost</div>
+      <div class="cta-body">Your cancellation rate, calculated. Your peer benchmark, delivered. The research on what fixes it, explained. Two minutes a day for 30 days.</div>
+      <button class="cta-toggle" onclick="toggleForm('form1',this)">Claim my audit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+      <div class="cta-form" id="form1">
+        <form action="https://formsubmit.co/hello@im-patient-focused.com" method="POST" onsubmit="return handleStudyForm(event,'form1')">
+          <input type="hidden" name="_subject" value="Orthopedic Cancellation Audit Application">
+          <input type="hidden" name="form_type" value="audit_participant">
+          <div class="f-field"><label>Your name</label><input type="text" name="name" placeholder="First and last name" required></div>
+          <div class="f-field"><label>Practice name</label><input type="text" name="practice" placeholder="Your practice" required></div>
+          <div class="f-field"><label>Email</label><input type="email" name="email" placeholder="you@practice.com" required></div>
+          <div class="f-field"><label>Your role</label><select name="role" required><option value="">Select...</option><option>Practice Owner / Partner</option><option>Physician</option><option>Practice Manager</option><option>Office Manager</option><option>Marketing Director</option><option>Administrator</option><option>Other</option></select></div>
+          <div class="f-field"><label>What type of practice?</label><select name="practice_type" required><option value="">Select...</option><option>Vascular / Vein</option><option selected>Orthopedic</option><option>Sports Medicine</option><option>Spine</option><option>Dermatology / Mohs</option><option>Ophthalmology</option><option>Urology</option><option>Plastic Surgery</option><option>Pain Management</option><option>GI / Endoscopy</option><option>Fertility / IVF</option><option>Other</option></select></div>
+          <div class="f-field"><label>How many unique procedures do you offer?</label><select name="unique_procedures" required><option value="">Select...</option><option>1–2 procedures</option><option>3–5 procedures</option><option>6–10 procedures</option><option>10+</option></select></div>
+          <button type="submit" class="f-btn">Reserve My Spot</button>
+        </form>
+        <div class="f-success" id="success1">&check; Application received. We&rsquo;ll be in touch within 48 hours.</div>
+      </div>
+    </div>
+
+    <!-- TIER 2: EXIT CAPTURE -->
+    <div style="text-align:center;margin-top:20px">
+      <p style="font-size:13px;color:var(--muted)">Not ready to participate? <button onclick="toggleForm('form2',this)" style="color:var(--teal);font-weight:500;background:none;border:none;cursor:pointer;font-family:var(--sans);font-size:13px;text-decoration:underline">Get the report</button> when the audit completes.</p>
+      <div class="cta-form" id="form2" style="max-width:360px;margin:12px auto 0">
+        <form action="https://formsubmit.co/hello@im-patient-focused.com" method="POST" onsubmit="return handleStudyForm(event,'form2')">
+          <input type="hidden" name="_subject" value="Orthopedic Cancellation Audit - Report Subscriber">
+          <input type="hidden" name="form_type" value="report_subscriber">
+          <div class="f-field"><label>Email address</label><input type="email" name="email" required></div>
+          <button type="submit" class="f-btn secondary">Send Me the Report</button>
+        </form>
+        <div class="f-success" id="success2">&check; You&rsquo;re on the list.</div>
+      </div>
+    </div>
+
+    <div style="text-align:center;padding-top:20px;font-size:12px;color:var(--muted)">Applications close <strong style="color:var(--navy)">July 31, 2026</strong>. Limited to independent orthopedic practices in the Southeast.</div>
+    <div style="text-align:center;padding-top:8px;font-size:11px;color:var(--muted);font-style:italic">All participant data is anonymized in published findings.</div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<div class="section">
+  <div class="container">
+    <div class="section-label">Common Questions</div>
+    <div class="faq-item">
+      <div class="faq-q">How much time does this actually take?</div>
+      <div class="faq-a">Two minutes a day. Your front desk fills in one row on a tracking sheet &mdash; date, scheduled cases, number cancelled, reason code. That&rsquo;s it.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What happens after the 30 days?</div>
+      <div class="faq-a">We schedule a 30-minute readout where we walk through your numbers, the peer benchmark, and the research. No obligation. If the data reveals an opportunity, we can discuss what a solution looks like. If it doesn&rsquo;t, you still have your data.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What do you do with my data?</div>
+      <div class="faq-a">Your individual data is yours. In any published findings, all practice data is anonymized &mdash; no names, no identifying details.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Who is behind this?</div>
+      <div class="faq-a">Patient Focused is a healthcare content studio that builds physician-on-camera education libraries for private procedural practices. This audit is how we learn your practice &mdash; and how you learn your numbers.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div style="font-family:var(--serif);font-style:italic;color:var(--muted);font-size:15px">Patient Focused</div>
+    <div style="display:flex;gap:24px"><a href="solutions.html" style="color:var(--muted);text-decoration:none;font-size:13px">Solutions</a><a href="who-we-serve.html" style="color:var(--muted);text-decoration:none;font-size:13px">Who We Serve</a><a href="results.html" style="color:var(--muted);text-decoration:none;font-size:13px">Results</a><a href="calculator.html" style="color:var(--muted);text-decoration:none;font-size:13px">Impact Calculator</a></div>
+    <div style="font-size:12px;color:var(--muted)">&copy; 2026 Patient Focused</div>
+  </div>
+  <div style="max-width:1200px;margin:24px auto 0;padding-top:24px;border-top:1px solid var(--border)">
+    <div style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);margin-bottom:14px">Research Briefs</div>
+    <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start">
+      <a href="brief-cancellations.html" style="color:var(--muted);text-decoration:none;font-size:13px">Day-of Cancellations</a>
+      <a href="brief-consent.html" style="color:var(--muted);text-decoration:none;font-size:13px">Informed Consent Gap</a>
+      <a href="brief-time.html" style="color:var(--muted);text-decoration:none;font-size:13px">Physician Time Recovery</a>
+      <a href="brief-visibility.html" style="color:var(--muted);text-decoration:none;font-size:13px">Search Visibility</a>
+      <a href="brief-mips.html" style="color:var(--muted);text-decoration:none;font-size:13px">MIPS &amp; Reimbursement</a>
+    </div>
+  </div>
+</footer>
+
+<!-- INQUIRY FORM MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeForm()"></div>
+<div class="modal-card" id="modalCard">
+  <button class="modal-close" onclick="closeForm()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <div class="modal-title">Let’s scope your library</div>
+  <div class="modal-sub">15 minutes. We’ll map your service lines and walk through what your library would look like.</div>
+  <form action="https://formsubmit.co/hello@im-patient-focused.com" method="POST">
+    <input type="hidden" name="_subject" value="New Inquiry from Patient Focused">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <div class="m-field"><label>Your name</label><input type="text" name="name" placeholder="First and last name" required></div>
+    <div class="m-field"><label>Practice name</label><input type="text" name="practice" placeholder="Your practice" required></div>
+    <div class="m-field"><label>Email</label><input type="email" name="email" placeholder="you@practice.com" required></div>
+    <div class="m-field"><label>Your role</label><select name="role" required><option value="">Select...</option><option>Practice Owner / Partner</option><option>Physician</option><option>Practice Manager</option><option>Office Manager</option><option>Marketing Director</option><option>Administrator</option><option>Other</option></select></div>
+    <div class="m-field"><label>What type of practice?</label><select name="practice_type" required><option value="">Select...</option><option>Vascular / Vein</option><option selected>Orthopedic</option><option>Sports Medicine</option><option>Spine</option><option>Dermatology / Mohs</option><option>Ophthalmology</option><option>Urology</option><option>Plastic Surgery</option><option>Pain Management</option><option>GI / Endoscopy</option><option>Fertility / IVF</option><option>Other</option></select></div>
+    <div class="m-field"><label>How many unique procedures do you offer?</label><select name="service_lines" required><option value="">Select...</option><option>1–2 procedures</option><option>3–5 procedures</option><option>6–10 procedures</option><option>10+</option></select></div>
+    <button type="submit" class="m-submit">Let’s Scope Your Library <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+  </form>
+  <div class="m-note">Or email directly: <a href="mailto:hello@im-patient-focused.com">hello@im-patient-focused.com</a></div>
+</div>
+
+<script>
+function openForm(){document.getElementById("modalOverlay").classList.add("open");document.getElementById("modalCard").classList.add("open");document.body.style.overflow="hidden"}
+function closeForm(){document.getElementById("modalOverlay").classList.remove("open");document.getElementById("modalCard").classList.remove("open");document.body.style.overflow=""}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeForm()});
+function scrollAndOpen(e){
+  e.preventDefault();
+  var el=document.getElementById('reserve');
+  el.scrollIntoView({behavior:'smooth'});
+  setTimeout(function(){
+    var form=document.getElementById('form1');
+    if(!form.classList.contains('open')){
+      form.classList.add('open');
+      var btn=form.previousElementSibling;
+      if(btn)btn.classList.add('open');
+    }
+  },600);
+}
+function toggleForm(id,btn){var f=document.getElementById(id);f.classList.toggle('open');if(btn)btn.classList.toggle('open')}
+function handleStudyForm(e,formId){
+  e.preventDefault();
+  var form=e.target;
+  fetch(form.action,{method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}})
+    .then(function(){form.style.display='none';document.getElementById('success'+formId.replace('form','')).style.display='block'})
+    .catch(function(){form.style.display='none';document.getElementById('success'+formId.replace('form','')).style.display='block'});
+  return false;
+}
+</script>
+
+</body>
+</html>
