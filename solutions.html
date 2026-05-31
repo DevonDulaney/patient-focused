@@ -86,6 +86,13 @@ nav{position:sticky;top:0;z-index:1000;height:72px;padding:0 56px;display:flex;a
 .sol-btn.secondary:hover{border-color:var(--teal);color:var(--teal)}
 .sol-btn svg{width:16px;height:16px}
 
+/* EVIDENCE CARDS */
+.sol-ev-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.sol-ev-card{display:block;background:var(--white);border:1px solid var(--border);border-radius:16px;padding:22px 20px;text-decoration:none;transition:transform .2s,box-shadow .2s,border-color .2s}
+.sol-ev-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(11,31,51,.08);border-color:var(--teal)}
+@media(max-width:900px){.sol-ev-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.sol-ev-grid{grid-template-columns:1fr}}
+
 /* BRIDGE */
 .bridge{padding:60px 0;text-align:center}
 .bridge p{font-family:var(--serif);font-size:clamp(18px,2.5vw,24px);font-weight:300;font-style:italic;color:var(--muted);line-height:1.5;max-width:600px;margin:0 auto}
@@ -355,6 +362,48 @@ nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
   </div>
 </section>
 
+<!-- EVIDENCE: PATIENT JOURNEY -->
+<section style="padding:80px 0;background:var(--soft-blue);border-top:1px solid var(--border)">
+  <div style="max-width:1100px;margin:0 auto;padding:0 2rem">
+    <div style="text-align:center;max-width:740px;margin:0 auto 44px">
+      <div style="font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:12px">The Evidence</div>
+      <h2 style="font-family:var(--serif);font-size:clamp(26px,3.5vw,38px);font-weight:400;color:var(--navy);line-height:1.15;margin-bottom:16px">Video education, delivered at the right moments, moves the numbers that <em style="font-style:italic;color:var(--teal)">matter most.</em></h2>
+      <p style="font-size:16px;color:var(--slate);line-height:1.7">Across 209 randomized controlled trials and 107,698 patients, physician-on-camera education delivered at the right points in the patient journey has a measurable, peer-reviewed effect on five outcomes.</p>
+    </div>
+    <div class="sol-ev-grid">
+      <a href="brief-cancellations.html" class="sol-ev-card">
+        <div style="font-family:var(--serif);font-size:30px;color:var(--navy);line-height:1;margin-bottom:8px">65%</div>
+        <div style="font-size:13px;color:var(--slate);line-height:1.45;margin-bottom:16px">fewer day-of cancellations with pre-procedure video</div>
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)">Cancellations &rarr;</div>
+      </a>
+      <a href="brief-consent.html" class="sol-ev-card">
+        <div style="font-family:var(--serif);font-size:30px;color:var(--navy);line-height:1;margin-bottom:8px">114%</div>
+        <div style="font-size:13px;color:var(--slate);line-height:1.45;margin-bottom:16px">higher malpractice payout odds when consent is inadequate</div>
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)">Consent &rarr;</div>
+      </a>
+      <a href="brief-time.html" class="sol-ev-card">
+        <div style="font-family:var(--serif);font-size:30px;color:var(--navy);line-height:1;margin-bottom:8px">6.7<span style="font-size:16px"> min</span></div>
+        <div style="font-size:13px;color:var(--slate);line-height:1.45;margin-bottom:16px">saved per consent encounter with video education</div>
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)">Physician Time &rarr;</div>
+      </a>
+      <a href="brief-mips.html" class="sol-ev-card">
+        <div style="font-family:var(--serif);font-size:30px;color:var(--navy);line-height:1;margin-bottom:8px">&plusmn;9%</div>
+        <div style="font-size:13px;color:var(--slate);line-height:1.45;margin-bottom:16px">Medicare reimbursement swing tied to MIPS performance</div>
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)">MIPS &rarr;</div>
+      </a>
+      <a href="brief-visibility.html" class="sol-ev-card">
+        <div style="font-family:var(--serif);font-size:30px;color:var(--navy);line-height:1;margin-bottom:8px">53&times;</div>
+        <div style="font-size:13px;color:var(--slate);line-height:1.45;margin-bottom:16px">more likely to reach Google page one with video</div>
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)">Search Visibility &rarr;</div>
+      </a>
+    </div>
+    <div style="display:flex;gap:16px 24px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:40px">
+      <a href="results.html" style="display:inline-flex;align-items:center;gap:8px;color:var(--teal);font-size:15px;font-weight:600;text-decoration:none">Explore the full evidence base <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="calculator.html" style="display:inline-flex;align-items:center;gap:10px;padding:14px 26px;background:var(--navy);color:var(--white);border-radius:10px;font-size:15px;font-weight:500;text-decoration:none;box-shadow:0 4px 16px rgba(11,31,51,.15)">See your estimated impact <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
 <!-- DELIVERY PROTOCOL -->
 <section style="padding:80px 0;background:var(--white);border-top:1px solid var(--border)">
   <div style="max-width:1100px;margin:0 auto;padding:0 2rem">
@@ -423,26 +472,6 @@ nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
   </div>
 </section>
 
-
-<!-- EVIDENCE STRIP -->
-<section style="padding:72px 0;background:var(--navy)">
-  <div style="max-width:820px;margin:0 auto;padding:0 2rem;text-align:center">
-    <div style="font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal-light);margin-bottom:16px">The Evidence</div>
-    <h2 style="font-family:var(--serif);font-size:clamp(23px,3vw,32px);font-weight:400;color:var(--white);line-height:1.3;margin-bottom:20px">Every recommendation backed by peer-reviewed evidence. <em style="font-style:italic;color:var(--teal-light)">209 RCTs. 107,698 patients.</em></h2>
-    <a href="results.html" style="display:inline-flex;align-items:center;gap:8px;color:var(--teal-light);font-size:15px;font-weight:600;text-decoration:none">Results Overview <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-    <div style="display:flex;justify-content:center;align-items:center;gap:8px 16px;flex-wrap:wrap;margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14)">
-      <a href="brief-cancellations.html" style="color:rgba(255,255,255,.85);font-size:14px;text-decoration:none;font-weight:500">Cancellations</a>
-      <span style="color:rgba(255,255,255,.3)">&middot;</span>
-      <a href="brief-consent.html" style="color:rgba(255,255,255,.85);font-size:14px;text-decoration:none;font-weight:500">Consent</a>
-      <span style="color:rgba(255,255,255,.3)">&middot;</span>
-      <a href="brief-time.html" style="color:rgba(255,255,255,.85);font-size:14px;text-decoration:none;font-weight:500">Time</a>
-      <span style="color:rgba(255,255,255,.3)">&middot;</span>
-      <a href="brief-visibility.html" style="color:rgba(255,255,255,.85);font-size:14px;text-decoration:none;font-weight:500">Visibility</a>
-      <span style="color:rgba(255,255,255,.3)">&middot;</span>
-      <a href="brief-mips.html" style="color:rgba(255,255,255,.85);font-size:14px;text-decoration:none;font-weight:500">MIPS</a>
-    </div>
-  </div>
-</section>
 
 <!-- CTA -->
 <section class="page-cta">
