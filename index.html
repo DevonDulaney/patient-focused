@@ -533,8 +533,9 @@ nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
       <div class="hero-rule"></div>
       <p class="hero-sub">Reduce cancellations, strengthen informed consent, and grow your bottom line with physician-on-camera video education delivered at the right time in the patient journey. Built for private procedural practices. Backed by peer reviewed data.</p>
       <div class="hero-ctas">
-        <a href="#" onclick="openForm();return false" class="btn-fill">Let’s Scope Your Library <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-        <a href="#" class="btn-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg> See Your Estimated Impact</a>
+        <a href="audit.html" class="btn-fill">Start With a Free Audit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="#" class="btn-ghost" onclick="openForm();return false">Let’s Scope Your Library</a>
+        <a href="calculator.html" class="btn-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg> See Your Impact</a>
       </div>
     </div>
 
@@ -734,7 +735,35 @@ nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
   </div>
 </section>
 
+<!-- THE AUDIT -->
+<section style="padding:100px 0;background:var(--ice)">
+  <div style="max-width:760px;margin:0 auto;padding:0 2rem;text-align:center">
+    <div style="font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:16px">Start With a Diagnostic</div>
+    <h2 style="font-family:var(--serif);font-size:clamp(28px,4vw,42px);font-weight:400;color:var(--navy);line-height:1.15;letter-spacing:-.02em;margin-bottom:16px">Which of these is costing <em style="font-style:italic;color:var(--teal)">your practice?</em></h2>
+    <p style="font-size:17px;color:var(--slate);line-height:1.7;max-width:560px;margin:0 auto 36px">Before we recommend anything, we measure. Our free 30-day Cancellation Audit shows you exactly where your practice is losing money &mdash; your real numbers, the peer benchmark, and the research behind every recommendation. No cost. No commitment.</p>
 
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:left;margin-bottom:40px">
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:14px;padding:24px">
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:10px">01 &middot; Diagnose</div>
+        <p style="font-size:14px;color:var(--slate);line-height:1.6;margin:0">Your team tracks four data points daily for 30 days. Two minutes a day.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:14px;padding:24px">
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:10px">02 &middot; Baseline</div>
+        <p style="font-size:14px;color:var(--slate);line-height:1.6;margin:0">We calculate your real cancellation rate and benchmark it against your peers.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:14px;padding:24px">
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:10px">03 &middot; Findings</div>
+        <p style="font-size:14px;color:var(--slate);line-height:1.6;margin:0">A 30-minute readout with your numbers and evidence-backed recommendations.</p>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a href="audit.html" style="display:inline-flex;align-items:center;gap:10px;padding:15px 28px;background:var(--navy);color:var(--white);border-radius:10px;font-size:15px;font-weight:500;text-decoration:none;box-shadow:0 4px 16px rgba(11,31,51,.15)">Start a Free Audit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="calculator.html" style="display:inline-flex;align-items:center;gap:10px;padding:15px 28px;background:var(--white);color:var(--slate);border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-weight:500;text-decoration:none">Or run your numbers yourself</a>
+    </div>
+    <p style="margin-top:18px;font-size:13px;color:var(--muted)">Want the full picture first? <a href="solutions.html" style="color:var(--teal);text-decoration:none;font-weight:500">Learn how the diagnostic works &rarr;</a></p>
+  </div>
+</section>
 
 <!-- THE EDUCATION LIBRARY -->
 <section style="padding:100px 0;background:var(--white)">
