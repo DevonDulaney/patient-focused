@@ -758,7 +758,7 @@ nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
     </div>
 
     <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-      <a href="audit.html" style="display:inline-flex;align-items:center;gap:10px;padding:15px 28px;background:var(--navy);color:var(--white);border-radius:10px;font-size:15px;font-weight:500;text-decoration:none;box-shadow:0 4px 16px rgba(11,31,51,.15)">Start a Free Audit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#" onclick="openAudit();return false" style="display:inline-flex;align-items:center;gap:10px;padding:15px 28px;background:var(--navy);color:var(--white);border-radius:10px;font-size:15px;font-weight:500;text-decoration:none;box-shadow:0 4px 16px rgba(11,31,51,.15)">Start a Free Audit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       <a href="calculator.html" style="display:inline-flex;align-items:center;gap:10px;padding:15px 28px;background:var(--white);color:var(--slate);border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-weight:500;text-decoration:none">Or run your numbers yourself</a>
     </div>
     <p style="margin-top:18px;font-size:13px;color:var(--muted)">Want the full picture first? <a href="solutions.html" style="color:var(--teal);text-decoration:none;font-weight:500">Learn how the diagnostic works &rarr;</a></p>
@@ -892,7 +892,7 @@ nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
     <div style="font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:12px">Start Here</div>
     <h2 style="font-family:var(--serif);font-size:clamp(28px,4vw,42px);font-weight:400;color:var(--navy);margin-bottom:16px;line-height:1.15">Find out where the <em style="font-style:italic;color:var(--teal)">money is going</em></h2>
     <p style="font-size:16px;color:var(--slate);line-height:1.7;max-width:480px;margin:0 auto 28px">Start with a free 30-day cancellation audit. We&rsquo;ll show you your real numbers, the peer benchmark, and the research behind every recommendation. No cost, no commitment &mdash; the findings are yours to keep.</p>
-    <a href="audit.html" style="display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:var(--navy);color:var(--white);border-radius:12px;font-size:16px;font-weight:500;text-decoration:none;transition:all .3s;box-shadow:0 4px 20px rgba(11,31,51,.15)">Start With a Free Audit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a href="#" onclick="openAudit();return false" style="display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:var(--navy);color:var(--white);border-radius:12px;font-size:16px;font-weight:500;text-decoration:none;transition:all .3s;box-shadow:0 4px 20px rgba(11,31,51,.15)">Start With a Free Audit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     <p style="margin-top:18px;font-size:14px;color:var(--slate)">Already know you want a library? <a href="#" onclick="openForm();return false" style="color:var(--teal);text-decoration:none;font-weight:500">Let&rsquo;s scope it &rarr;</a></p>
     <p style="margin-top:16px;font-size:13px;color:var(--muted)">Or email directly: <a href="mailto:hello@im-patient-focused.com" style="color:var(--teal);text-decoration:none">hello@im-patient-focused.com</a></p>
   </div>
@@ -974,11 +974,34 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="m-note">Or email directly: <a href="mailto:hello@im-patient-focused.com">hello@im-patient-focused.com</a></div>
 </div>
 
+<!-- AUDIT FORM MODAL -->
+<div class="modal-overlay" id="auditOverlay" onclick="closeAudit()"></div>
+<div class="modal-card" id="auditCard">
+  <button class="modal-close" onclick="closeAudit()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <div class="modal-title">Claim your free audit</div>
+  <div class="modal-sub">Two minutes a day for 30 days. We calculate your cancellation rate, benchmark it against peers, and deliver the research behind every fix &mdash; in a custom video you keep, free.</div>
+  <form action="https://formsubmit.co/hello@im-patient-focused.com" method="POST">
+    <input type="hidden" name="_subject" value="Cancellation Audit Application">
+    <input type="hidden" name="form_type" value="audit_participant">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <div class="m-field"><label>Your name</label><input type="text" name="name" placeholder="First and last name" required></div>
+    <div class="m-field"><label>Practice name</label><input type="text" name="practice" placeholder="Your practice" required></div>
+    <div class="m-field"><label>Email</label><input type="email" name="email" placeholder="you@practice.com" required></div>
+    <div class="m-field"><label>Your role</label><select name="role" required><option value="">Select...</option><option>Practice Owner / Partner</option><option>Physician</option><option>Practice Manager</option><option>Office Manager</option><option>Marketing Director</option><option>Administrator</option><option>Other</option></select></div>
+    <div class="m-field"><label>What type of practice?</label><select name="practice_type" required><option value="">Select...</option><option>Vascular / Vein</option><option>Orthopedic</option><option>Dermatology / Mohs</option><option>Ophthalmology</option><option>Urology</option><option>Plastic Surgery</option><option>Pain Management</option><option>GI / Endoscopy</option><option>Fertility / IVF</option><option>Other</option></select></div>
+    <button type="submit" class="m-submit">Reserve My Spot <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+  </form>
+  <div class="m-note">Want the full details first? <a href="audit.html">See how the audit works</a></div>
+</div>
+
 
 <script>
 function openForm(){document.getElementById("modalOverlay").classList.add("open");document.getElementById("modalCard").classList.add("open");document.body.style.overflow="hidden"}
 function closeForm(){document.getElementById("modalOverlay").classList.remove("open");document.getElementById("modalCard").classList.remove("open");document.body.style.overflow=""}
-document.addEventListener("keydown",function(e){if(e.key==="Escape")closeForm()});
+function openAudit(){document.getElementById("auditOverlay").classList.add("open");document.getElementById("auditCard").classList.add("open");document.body.style.overflow="hidden"}
+function closeAudit(){document.getElementById("auditOverlay").classList.remove("open");document.getElementById("auditCard").classList.remove("open");document.body.style.overflow=""}
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeForm();closeAudit()}});
 </script>
 
 </body>
