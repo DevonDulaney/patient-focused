@@ -70,6 +70,8 @@ nav{height:72px;padding:0 48px;display:flex;align-items:center;justify-content:s
 .hero-eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:20px}
 .hero-h1{font-family:var(--serif);font-size:clamp(42px,4.5vw,72px);font-weight:400;line-height:.98;letter-spacing:-.04em;color:var(--navy);margin-bottom:12px}
 .hero-h1 .dot{color:var(--teal)}
+.hero-h1-fix{display:block;margin-top:18px;font-size:.46em;line-height:1.2;letter-spacing:-.015em;font-style:italic;color:var(--teal)}
+@media(max-width:600px){.hero-h1-fix{font-size:.58em;margin-top:14px}}
 .hero-rule{width:40px;height:3px;background:var(--teal);border-radius:2px;margin:24px 0}
 .hero-sub{font-size:18px;line-height:1.65;color:var(--slate);max-width:400px;margin-bottom:32px}
 .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
@@ -352,6 +354,29 @@ nav{height:72px;padding:0 48px;display:flex;align-items:center;justify-content:s
 .how-step-num{width:32px;height:32px;border-radius:50%;background:var(--ice);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:14px;color:var(--teal);flex-shrink:0;margin-top:2px}
 .how-step strong{font-size:14px;color:var(--navy)}
 .how-step span{font-size:13px;color:var(--muted);line-height:1.5}
+.how-anim .how-step{align-items:center;transition:opacity .4s ease}
+.how-vis{position:relative;width:64px;height:64px;flex-shrink:0;border-radius:14px;background:var(--ice);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--navy);transition:border-color .3s ease}
+.how-vis svg{width:64px;height:64px}
+.how-rec{fill:#C43D3D}
+.how-mins{position:absolute;left:0;right:0;bottom:3px;text-align:center;font-size:9px;font-weight:600;color:var(--navy);font-variant-numeric:tabular-nums}
+.how-tiles{display:grid;grid-template-columns:repeat(2,18px);gap:5px}
+.how-tile{display:block;width:18px;height:13px;border-radius:3px;background:var(--teal);transition:opacity .3s ease,transform .3s ease}
+.how-phone{width:26px;height:42px;box-sizing:border-box;border:2px solid var(--navy);border-radius:6px;background:#fff;padding:4px 3px;display:flex;align-items:flex-end}
+.how-bubble{width:100%;border-radius:3px;background:var(--soft-blue);padding:2px;display:flex;flex-direction:column;gap:2px;transition:opacity .35s ease,transform .35s ease}
+.how-bubble i{display:block;height:2px;width:80%;background:var(--border)}
+.how-bubble b{display:block;height:8px;border-radius:2px;background:var(--teal)}
+.how-anim.is-running .how-step{opacity:.45}
+.how-anim.is-running .how-step.is-active,.how-anim.is-running .how-step.is-done{opacity:1}
+.how-anim .how-step.is-active .how-vis{border-color:var(--teal)}
+.how-anim.is-running .how-rec{opacity:0}
+.how-anim .how-step.is-active .how-rec{opacity:1;animation:howBlink 1s steps(2,start) infinite}
+.how-anim.is-running .how-step:not(.is-active):not(.is-done) .how-tile{opacity:0;transform:scale(.5)}
+.how-anim .how-step.is-active .how-tile:nth-child(2){transition-delay:.25s}
+.how-anim .how-step.is-active .how-tile:nth-child(3){transition-delay:.5s}
+.how-anim .how-step.is-active .how-tile:nth-child(4){transition-delay:.75s}
+.how-anim.is-running .how-step:not(.is-active):not(.is-done) .how-bubble{opacity:0;transform:translateY(6px)}
+@keyframes howBlink{to{opacity:0}}
+@media (prefers-reduced-motion:reduce){.how-anim .how-step,.how-tile,.how-bubble,.how-vis{transition:none}.how-anim .how-step.is-active .how-rec{animation:none}}
 .how-pricing-card{background:var(--ice);border:2px solid var(--teal);border-radius:24px;padding:36px;box-shadow:0 8px 32px rgba(14,111,143,.06);opacity:0;transform:translateY(16px);transition:all .7s cubic-bezier(.22,1,.36,1)}
 .how-pricing-card.visible{opacity:1;transform:translateY(0)}
 .how-includes{display:flex;flex-direction:column;gap:10px}
@@ -494,6 +519,7 @@ nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
 .diag-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media(max-width:600px){.diag-steps{grid-template-columns:1fr}}
 </style>
+<script src="assets/tracking.js" defer></script>
 </head>
 <body>
 
@@ -531,9 +557,9 @@ nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
     <!-- LEFT -->
     <div class="hero-text">
       <div class="hero-eyebrow">Backed by Peer Reviewed Data</div>
-      <h1 class="hero-h1">Find out where your practice is losing money<span class="dot">.</span></h1>
+      <h1 class="hero-h1">Find out where your practice is losing money<span class="dot">.</span><span class="hero-h1-fix">Then fix it with Patient Focused video education.</span></h1>
       <div class="hero-rule"></div>
-      <p class="hero-sub">One report from your scheduling system tells us where your cases are falling through. Then we fix it with physician-on-camera education, delivered at the moments patients actually cancel. Built for private procedural practices. Backed by peer reviewed data.</p>
+      <p class="hero-sub">One report from your scheduling system shows where your cases fall through. Then your physician, on camera, answers the questions patients cancel over, sent by your team at the moments patients usually cancel. Built for private procedural practices.</p>
       <div class="hero-ctas">
         <a href="audit.html" class="btn-fill">Start With a Free Diagnostic <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         <a href="calculator.html" style="align-self:center;color:var(--teal);font-size:14px;font-weight:500;text-decoration:none">Or estimate it yourself &rarr;</a>
@@ -646,25 +672,25 @@ nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
     <div>
       <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div>
       <div class="stat-num">65%</div>
-      <div class="stat-label">Increase in consults<br>from organic search</div>
+      <div class="stat-label">Fewer surgical<br>cancellations</div>
     </div>
     <div>
-      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 16l2 2 4-4"/></svg></div>
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
       <div class="stat-num">114%</div>
-      <div class="stat-label">Increase in show rate<br>with video education</div>
+      <div class="stat-label">Higher payout odds when<br>consent is inadequate</div>
     </div>
     <div>
-      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
       <div class="stat-num">53<span>&times;</span></div>
-      <div class="stat-label">More likely to convert<br>high-intent patients</div>
+      <div class="stat-label">More likely to reach Google<br>page one with video</div>
     </div>
     <div>
       <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
       <div class="stat-num">6.7<span> min</span></div>
-      <div class="stat-label">Average time spent<br>on education content</div>
+      <div class="stat-label">Saved per<br>consent conversation</div>
     </div>
   </div>
-  <div class="stats-source">Based on Peer-Reviewed Clinical Research</div>
+  <div class="stats-source">Sources for each number are cited below</div>
 </div>
 
 <!-- TRUST BAR -->
@@ -698,21 +724,21 @@ nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
         <div class="evidence-num">65%</div>
         <div class="evidence-label">fewer surgical cancellations</div>
         <p class="evidence-desc">Pre-procedure video education delivered via text <a href="brief-cancellations.html" style="color:var(--teal);text-decoration:none">cut non-completion from 37.6% to 13.2%</a> across 14 private practices. At $5,000 per cancelled case, the math is immediate.</p>
-        <p class="evidence-cite"><a href="https://journals.sagepub.com/doi/10.1177/1557988319893568" target="_blank" rel="noopener">Ballon-Landa E, et al. <em>Am J Mens Health.</em> 2019;13(6):1557988319892738.</a></p>
+        <p class="evidence-cite"><a href="https://journals.sagepub.com/doi/10.1177/1557988319893568" target="_blank" rel="noopener">Ballon-Landa E, et al. <em>Am J Mens Health.</em> 2019;13(6):1557988319893568.</a></p>
         <a href="brief-cancellations.html" style="display:inline-flex;align-items:center;gap:6px;margin-top:14px;color:var(--teal);font-size:13px;font-weight:600;text-decoration:none">Read the research <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
       <div class="evidence-card" id="consent">
         <div class="evidence-num">114%</div>
         <div class="evidence-label">higher payout odds with inadequate consent</div>
-        <p class="evidence-desc">Claims citing inadequate informed consent for procedures had <a href="brief-consent.html" style="color:var(--teal);text-decoration:none">114% higher odds of closing with payment</a> in an analysis of ~500,000 MPL cases. A signed form proves a signature was obtained. It does not prove understanding.</p>
+        <p class="evidence-desc">Claims citing inadequate informed consent for procedures had <a href="brief-consent.html" style="color:var(--teal);text-decoration:none">114% higher odds of closing with payment</a> in malpractice claims data covering ~500,000 cases. A signed form proves a signature was obtained. It does not prove understanding.</p>
         <p class="evidence-cite"><a href="https://www.candello.com/Candello-Blog/Patient-Safety-Informed-Consent" target="_blank" rel="noopener">Folcarelli P. &ldquo;How a Robust Informed Consent Process Enhances Patient Safety.&rdquo; Candello Blog, Nov 16, 2023. Data: Adam Schaffer, MD, MPH, Candello Annual Community Summit, Sept 12, 2023.</a></p>
         <a href="brief-consent.html" style="display:inline-flex;align-items:center;gap:6px;margin-top:14px;color:var(--teal);font-size:13px;font-weight:600;text-decoration:none">Read the research <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
       <div class="evidence-card" id="visibility">
         <div class="evidence-num">53&times;</div>
         <div class="evidence-label">more likely to reach Google page one</div>
-        <p class="evidence-desc">86% of patients research providers before booking. <a href="brief-visibility.html" style="color:var(--teal);text-decoration:none">53% of vascular YouTube videos are rated poor quality</a>. Your physician on camera fills a gap no competitor in your market is filling.</p>
-        <p class="evidence-cite"><a href="https://pubmed.ncbi.nlm.nih.gov/38414727/" target="_blank" rel="noopener">Javidan A, et al. <em>EJVES Vasc Forum.</em> 2024;61:62-76.</a></p>
+        <p class="evidence-desc">Pages with video are 53 times more likely to reach Google&rsquo;s first page, according to Forrester. 86% of patients research providers before booking, and <a href="brief-visibility.html" style="color:var(--teal);text-decoration:none">53% of vascular YouTube videos are rated poor quality</a>. Your physician on camera fills a gap no competitor in your market is filling.</p>
+        <p class="evidence-cite">53&times;: Forrester Research, via Wyzowl, <em>Video Marketing Statistics</em>, 2023. Video quality: <a href="https://pubmed.ncbi.nlm.nih.gov/38414727/" target="_blank" rel="noopener">Javidan A, et al. <em>EJVES Vasc Forum.</em> 2024;61:62-76.</a></p>
         <a href="brief-visibility.html" style="display:inline-flex;align-items:center;gap:6px;margin-top:14px;color:var(--teal);font-size:13px;font-weight:600;text-decoration:none">Read the research <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
       <div class="evidence-card" id="time">
@@ -837,10 +863,19 @@ nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)
           <div style="font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);margin-bottom:12px">How It Works</div>
           <h3 style="font-family:var(--serif);font-size:clamp(24px,3vw,34px);font-weight:400;color:var(--navy);margin-bottom:16px;line-height:1.2">We come to you.<br><em style="font-style:italic;color:var(--teal)">Your physician never leaves the office.</em></h3>
           <p style="font-size:16px;color:var(--slate);line-height:1.7;margin-bottom:24px">We set up in an underutilized space at your practice for the day. Your physician steps in, records, and steps out. About 30 minutes of their time per procedure we cover. We handle everything before, during, and after.</p>
-          <div class="how-steps">
-            <div class="how-step"><div class="how-step-num">1</div><div><strong>We research &amp; script</strong><br><span>Custom scripts for your service lines, your patients, your physician&rsquo;s voice</span></div></div>
-            <div class="how-step"><div class="how-step-num">2</div><div><strong>We film on-site</strong><br><span>We set up at your practice, your physician steps in for about 30 minutes per procedure, and we&rsquo;re out</span></div></div>
-            <div class="how-step"><div class="how-step-num">3</div><div><strong>We edit &amp; deploy</strong><br><span>Full post-production, branding, YouTube optimization, and website integration</span></div></div>
+          <div class="how-steps how-anim" id="howAnim">
+            <div class="how-step" data-step="1">
+              <div class="how-vis" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M10 20V10h10M44 10h10v10M54 44v10H44M20 54H10V44" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="28" r="7" fill="var(--border)"/><path d="M20 50c0-9 5-13 12-13s12 4 12 13z" fill="var(--border)"/><circle class="how-rec" cx="16" cy="16" r="3"/></svg><span class="how-mins" id="howMins">30 min</span></div>
+              <div><strong>We script and film your physician at your office</strong><br><span>About 30 minutes of their time per procedure. We write the scripts first, set up in a spare room, and we&rsquo;re out.</span></div>
+            </div>
+            <div class="how-step" data-step="2">
+              <div class="how-vis" aria-hidden="true"><div class="how-tiles"><i class="how-tile"></i><i class="how-tile"></i><i class="how-tile"></i><i class="how-tile"></i></div></div>
+              <div><strong>We edit a library of short videos</strong><br><span>What to expect, prep, recovery and patient Q&amp;A, branded to your practice.</span></div>
+            </div>
+            <div class="how-step" data-step="3">
+              <div class="how-vis" aria-hidden="true"><div class="how-phone"><div class="how-bubble"><i></i><b></b></div></div></div>
+              <div><strong>Your team sends them before each procedure</strong><br><span>Through the texting or reminder system you already use. We train your staff on which video goes out when.</span></div>
+            </div>
           </div>
         </div>
         <div class="how-pricing-card">
@@ -951,6 +986,26 @@ document.addEventListener('DOMContentLoaded', function() {
     observer.observe(el);
   });
 });
+</script>
+
+<script>
+(function(){
+  var box=document.getElementById('howAnim');
+  if(!box||!('IntersectionObserver' in window))return;
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var steps=box.querySelectorAll('.how-step'),mins=document.getElementById('howMins'),ran=false;
+  function set(i){for(var k=0;k<steps.length;k++){steps[k].classList.toggle('is-active',k===i);steps[k].classList.toggle('is-done',k<i)}}
+  function run(){
+    ran=true;box.classList.add('is-running');set(0);
+    var t0=performance.now();
+    (function tick(now){var f=Math.min(1,Math.max(0,(now-t0)/1500));mins.textContent=Math.round(30*f)+' min';if(f<1)requestAnimationFrame(tick)})(t0);
+    setTimeout(function(){set(1)},1900);
+    setTimeout(function(){set(2)},3500);
+    setTimeout(function(){for(var k=0;k<steps.length;k++){steps[k].classList.remove('is-active');steps[k].classList.add('is-done')}},5200);
+  }
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!ran){run();io.disconnect()}})},{threshold:0.4});
+  io.observe(box);
+})();
 </script>
 
 
